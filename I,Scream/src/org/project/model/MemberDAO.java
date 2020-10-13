@@ -49,4 +49,24 @@ public class MemberDAO {
 		}
 		return vo;
 	}
+	public void register(MemberVO vo) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="INSERT INTO MEMBER values(?,?,?,?,?,?,?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, vo.getId());
+			pstmt.setString(2, vo.getPassword());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getTel());
+			pstmt.setString(5, vo.getAddress());
+			pstmt.setString(6, vo.getRegDate());
+			pstmt.setString(7, vo.getSex());
+			pstmt.setString(8, vo.getAge());
+			pstmt.executeQuery();
+		}finally {
+			closeAll(pstmt,con);
+		}
+	}
 }
