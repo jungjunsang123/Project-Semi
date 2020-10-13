@@ -8,7 +8,11 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
-		
+		if(command.contentEquals("login")) {
+			controller=new LoginController();
+		}else if(command.contentEquals("logout")) {
+			controller=new LogoutController();
+		}
 		return controller; 
 	}
 }
