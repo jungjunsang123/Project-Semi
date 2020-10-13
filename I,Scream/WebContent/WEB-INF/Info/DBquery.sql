@@ -15,7 +15,6 @@ CREATE TABLE MEMBER(
 drop sequence board_seq
 create sequence board_seq nocache
 
-
 SELECT * FROM BOARD
 DROP TABLE BOARD 
 //기존에 BOARD 테이블 있으면 삭제하고 새로 생성하기
@@ -31,5 +30,3 @@ CREATE TABLE BOARD(
 	Writer varchar2(100) not null, 
 	constraint board_fk foreign key(Writer) references MEMBER(ID)
 )
-
-

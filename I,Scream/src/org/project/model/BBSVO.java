@@ -80,6 +80,17 @@ public class BBSVO {
 		super();
 	}
 
+	
+	
+	public BBSVO(MemberVO vo, String title, String context, String category, String workTime) {
+		super();
+		this.vo = vo;
+		this.title = title;
+		this.context = context;
+		Category = category;
+		this.workTime = workTime;
+	}
+
 	public BBSVO(MemberVO vo, String title, String context, int hits, String createDate, String category,
 			String workTime, String bbs_no) {
 		super();
