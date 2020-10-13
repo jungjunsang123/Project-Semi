@@ -29,5 +29,6 @@ public class MemberDAO {
 		if(rs!=null)
 			rs.close();
 		closeAll(pstmt,con);
-	}	
+	}
+
 }

@@ -29,5 +29,40 @@ public class BBSDAO {
 		if(rs!=null)
 			rs.close();
 		closeAll(pstmt,con);
-	}	
+	}
+	public void name() {
+		
+	}
+	//SH : 글번호에 해당하는 게시물을 삭제하는 메서드
+	public void deletePosting(int no) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			pstmt=con.prepareStatement("DELETE FROM BOARD WHERE NO=?");
+			pstmt.setInt(1, no);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt, con);
+		}
+	}
+	//SH : 게시물 정보 업데이트하는 메서드
+	public void updatePosting(BBSVO vo) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			pstmt=con.prepareStatement("update BOARD set TITLE=?, CONTEXT=?, CATEGORY=?, WORKTIME WHERE BBS_NO=?");
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContext());
+			pstmt.setString(3, vo.getCategory());
+			pstmt.setString(4, vo.getWorkTime());
+			pstmt.setString(5, vo.getBbs_no());
+			pstmt.executeUpdate();
+			
+		} finally {
+			closeAll(pstmt, con);
+			
+		}
+	}
 }

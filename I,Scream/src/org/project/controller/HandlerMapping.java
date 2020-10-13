@@ -8,6 +8,11 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
+		if (command.equals("UpdatePost")) {
+			controller=new UpdatePostController();
+		}else if (command.contentEquals("DeletePost")) {
+			controller=new DeletePostController();
+		}
 		
 		return controller; 
 	}
