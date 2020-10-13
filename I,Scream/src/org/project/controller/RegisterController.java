@@ -19,6 +19,6 @@ public class RegisterController implements Controller {
 		String sex=request.getParameter("sex");
 		String age=request.getParameter("age");
 		MemberDAO.getInstance().register(new MemberVO(id,password,address,name,tel,regDate,sex,age));
-		return "redirect:front?command=registerResult&id="+id;
+		return "redirect:front?command=registerResult&id="+id; //리턴위치 조정필요함
 	}
 }

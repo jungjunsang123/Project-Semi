@@ -32,4 +32,4 @@ CREATE TABLE BOARD(
 	constraint board_fk foreign key(Writer) references MEMBER(ID)
 )
 
-
+INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',null,null,to_date('17-12-1980','dd-mm-yyyy'));
