@@ -31,7 +31,7 @@ public class DispatchServlet extends HttpServlet {
 				request.getRequestDispatcher(url).forward(request, response);
 			
 		}catch (Exception e) {
-			e.printStackTrace(); // ¿¹¿Ü ¸Ş¼¼Áö¿Í ¹ß»ı °æ·Î¸¦ ¸ğµÎ  ÄÜ¼Ö¿¡ Ãâ·ÂÇÑ´Ù 
+			e.printStackTrace(); // ì˜ˆì™¸ ë©”ì„¸ì§€ì™€ ë°œìƒ ê²½ë¡œë¥¼ ëª¨ë‘  ì½˜ì†”ì— ì¶œë ¥í•œë‹¤ 
 			response.sendRedirect("error.jsp");
 		}
 	}

@@ -1,7 +1,7 @@
 package org.project.model;
 
 /**
- * ÆäÀÌÂ¡ Ã³¸®¸¦ À§ÇÑ ºñÁî´Ï½º °èÃþÀÇ Å¬·¡½º PagingBean method ±¸Çö¼ø¼­<br>
+ * íŽ˜ì´ì§• ì²˜ë¦¬ë¥¼ ìœ„í•œ ë¹„ì¦ˆë‹ˆìŠ¤ ê³„ì¸µì˜ í´ëž˜ìŠ¤ PagingBean method êµ¬í˜„ìˆœì„œ<br>
  * getStartRowNumber()<br>
  * getEndRowNumber()<br> 
  * getTotalPage()<br> 
@@ -17,19 +17,19 @@ package org.project.model;
  */
 public class PagingBean {
  /**
-  * ÇöÀç ÆäÀÌÁö
+  * í˜„ìž¬ íŽ˜ì´ì§€
   */
  private int nowPage = 1;
  /**
-  * ÆäÀÌÁö´ç °Ô½Ã¹°¼ö
+  * íŽ˜ì´ì§€ë‹¹ ê²Œì‹œë¬¼ìˆ˜
   */
  private int postCountPerPage = 5;
  /**
-  * ÆäÀÌÁö ±×·ì´ç ÆäÀÌÁö¼ö
+  * íŽ˜ì´ì§€ ê·¸ë£¹ë‹¹ íŽ˜ì´ì§€ìˆ˜
   */
  private int pageCountPerPageGroup = 4;
  /**
-  * database¿¡ ÀúÀåµÈ ÃÑ°Ô½Ã¹°¼ö
+  * databaseì— ì €ìž¥ëœ ì´ê²Œì‹œë¬¼ìˆ˜
   */
  private int totalPostCount;
 
@@ -47,9 +47,9 @@ public class PagingBean {
  }
 
  /**
-  * ÇöÀç ÆäÀÌÁö¹øÈ£¿¡ ÇØ´çÇÏ´Â ½ÃÀÛ °Ô½Ã¹°ÀÇ row number¸¦ ¹ÝÈ¯ <br>
-  * hint : ÀÌÀüÆäÀÌÁöÀÇ ¸¶Áö¸· ¹øÈ£ + 1
-  * 2ÆäÀÌÁöÀÇ ½ÃÀÛ¹øÈ£´Â 1ÆäÀÌÁöÀÇ ¸¶Áö¸· ¹øÈ£(5) + 1 ÀÌ ½ÃÀÛ¹øÈ£ÀÌ´Ù 
+  * í˜„ìž¬ íŽ˜ì´ì§€ë²ˆí˜¸ì— í•´ë‹¹í•˜ëŠ” ì‹œìž‘ ê²Œì‹œë¬¼ì˜ row numberë¥¼ ë°˜í™˜ <br>
+  * hint : ì´ì „íŽ˜ì´ì§€ì˜ ë§ˆì§€ë§‰ ë²ˆí˜¸ + 1
+  * 2íŽ˜ì´ì§€ì˜ ì‹œìž‘ë²ˆí˜¸ëŠ” 1íŽ˜ì´ì§€ì˜ ë§ˆì§€ë§‰ ë²ˆí˜¸(5) + 1 ì´ ì‹œìž‘ë²ˆí˜¸ì´ë‹¤ 
   * @return
   */
  public int getStartRowNumber() {
@@ -57,13 +57,13 @@ public class PagingBean {
  }
 
  /**
-  * ÇöÀç ÆäÀÌÁö¿¡¼­ º¸¿©ÁÙ °Ô½Ã¹° Çà(row)ÀÇ ¸¶Áö¸· ¹øÈ£<br>
-  * ÇöÀçÆäÀÌÁö postNumberPerPage ¸¸¾à ÃÑ°Ô½Ã¹°¼öº¸´Ù<br>
-  * ¿¬»ê°á°úÀÇ ¹øÈ£°¡ Å¬ °æ¿ì ÃÑ°Ô½Ã¹°¼ö°¡ ¸¶Áö¸· ¹øÈ£°¡ µÇ¾î¾ß ÇÑ´Ù<br>
-  *  ex) ÃÑ°Ô½Ã¹°¼ö 7 °³ ÃÑÆäÀÌÁö´Â 2ÆäÀÌÁö : 1 2 3 4 5<br>
-  * | 6 7 | 1page 2page ÇöÀçÆäÀÌÁö´Â 2ÆäÀÌÁöÀÌ°í 2*5(ÆäÀÌÁö´ç °Ô½Ã¹°¼ö) ´Â 10 ÀÌ°í <br>
-  * ½ÇÁ¦ ¸¶Áö¸· ¹øÈ£ 7ÀÌ´Ù -><br>
-  * ¿¬»ê°á°ú°¡ ÃÑ°Ô½Ã¹°¼öº¸´Ù Å¬ °æ¿ì ÃÑ°Ô½Ã¹°¼ö°¡ ¸¶Áö¸·¹øÈ£°¡ µÇ¾î¾ß ÇÔ
+  * í˜„ìž¬ íŽ˜ì´ì§€ì—ì„œ ë³´ì—¬ì¤„ ê²Œì‹œë¬¼ í–‰(row)ì˜ ë§ˆì§€ë§‰ ë²ˆí˜¸<br>
+  * í˜„ìž¬íŽ˜ì´ì§€ postNumberPerPage ë§Œì•½ ì´ê²Œì‹œë¬¼ìˆ˜ë³´ë‹¤<br>
+  * ì—°ì‚°ê²°ê³¼ì˜ ë²ˆí˜¸ê°€ í´ ê²½ìš° ì´ê²Œì‹œë¬¼ìˆ˜ê°€ ë§ˆì§€ë§‰ ë²ˆí˜¸ê°€ ë˜ì–´ì•¼ í•œë‹¤<br>
+  *  ex) ì´ê²Œì‹œë¬¼ìˆ˜ 7 ê°œ ì´íŽ˜ì´ì§€ëŠ” 2íŽ˜ì´ì§€ : 1 2 3 4 5<br>
+  * | 6 7 | 1page 2page í˜„ìž¬íŽ˜ì´ì§€ëŠ” 2íŽ˜ì´ì§€ì´ê³  2*5(íŽ˜ì´ì§€ë‹¹ ê²Œì‹œë¬¼ìˆ˜) ëŠ” 10 ì´ê³  <br>
+  * ì‹¤ì œ ë§ˆì§€ë§‰ ë²ˆí˜¸ 7ì´ë‹¤ -><br>
+  * ì—°ì‚°ê²°ê³¼ê°€ ì´ê²Œì‹œë¬¼ìˆ˜ë³´ë‹¤ í´ ê²½ìš° ì´ê²Œì‹œë¬¼ìˆ˜ê°€ ë§ˆì§€ë§‰ë²ˆí˜¸ê°€ ë˜ì–´ì•¼ í•¨
   * 
   * @return
   */
@@ -75,16 +75,16 @@ public class PagingBean {
  }
 
  /**
-  * ÃÑ ÆäÀÌÁö ¼ö¸¦ returnÇÑ´Ù.<br>
-  * 1. ÀüÃ¼ µ¥ÀÌÅÍ(°Ô½Ã¹°) % ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ µ¥ÀÌÅÍ °³¼ö <br>
-  * => 0 ÀÌ¸é µÑÀ» / °ªÀÌ ÃÑ ÆäÀÌÁö ¼ö<br>
-  * 2. ÀüÃ¼ µ¥ÀÌÅÍ(°Ô½Ã¹°) % ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ µ¥ÀÌÅÍ °³¼ö <br>
-  * => 0º¸´Ù Å©¸é µÑÀ» / °ª¿¡ +1À» ÇÑ °ªÀÌ ÃÑ ÆäÀÌÁö ¼ö<br>
-  * °Ô½Ã¹°¼ö 1 2 3 4 5 6 7 8 9 10 11 12<br>
-  * 1ÆäÀÌÁö 1~5<br>
-  * 2ÆäÀÌÁö 6~10<br>
-  * 3ÆäÀÌÁö 11,12 <br>
-  * ex) °Ô½Ã¹° 32 °³ , ÆäÀÌÁö´ç °Ô½Ã¹°¼ö 5°³-> 7 ÆäÀÌÁö
+  * ì´ íŽ˜ì´ì§€ ìˆ˜ë¥¼ returní•œë‹¤.<br>
+  * 1. ì „ì²´ ë°ì´í„°(ê²Œì‹œë¬¼) % í•œ íŽ˜ì´ì§€ì— ë³´ì—¬ì¤„ ë°ì´í„° ê°œìˆ˜ <br>
+  * => 0 ì´ë©´ ë‘˜ì„ / ê°’ì´ ì´ íŽ˜ì´ì§€ ìˆ˜<br>
+  * 2. ì „ì²´ ë°ì´í„°(ê²Œì‹œë¬¼) % í•œ íŽ˜ì´ì§€ì— ë³´ì—¬ì¤„ ë°ì´í„° ê°œìˆ˜ <br>
+  * => 0ë³´ë‹¤ í¬ë©´ ë‘˜ì„ / ê°’ì— +1ì„ í•œ ê°’ì´ ì´ íŽ˜ì´ì§€ ìˆ˜<br>
+  * ê²Œì‹œë¬¼ìˆ˜ 1 2 3 4 5 6 7 8 9 10 11 12<br>
+  * 1íŽ˜ì´ì§€ 1~5<br>
+  * 2íŽ˜ì´ì§€ 6~10<br>
+  * 3íŽ˜ì´ì§€ 11,12 <br>
+  * ex) ê²Œì‹œë¬¼ 32 ê°œ , íŽ˜ì´ì§€ë‹¹ ê²Œì‹œë¬¼ìˆ˜ 5ê°œ-> 7 íŽ˜ì´ì§€
   * 
   * @return
   */
@@ -100,15 +100,15 @@ public class PagingBean {
  }
 
  /**
-  * ÃÑ ÆäÀÌÁö ±×·ìÀÇ ¼ö¸¦ returnÇÑ´Ù.<br>
-  * 1. ÃÑ ÆäÀÌÁö¼ö % Page Group ´ç Page ¼ö. <br>
-  * => 0 ÀÌ¸é µÑÀ» / °ªÀÌ ÃÑ ÆäÀÌÁö ¼ö<br>
-  * 2. ÃÑ ÆäÀÌÁö¼ö % Page Group ´ç Page ¼ö. <br>
-  * => 0º¸´Ù Å©¸é µÑÀ» / °ª¿¡ +1À» ÇÑ °ªÀÌ ÃÑ ÆäÀÌÁö ¼ö<br>
-  * ex) ÃÑ °Ô½Ã¹° ¼ö 23 °³ <br>
-  * ÃÑ ÆäÀÌÁö ? ÃÑ ÆäÀÌÁö ±×·ì¼ö ? <br>
-  * ÆäÀÌÁö 1 2 3 4 5<br>
-  * ÆäÀÌÁö±×·ì 1234(1±×·ì) 5(2±×·ì)<br>
+  * ì´ íŽ˜ì´ì§€ ê·¸ë£¹ì˜ ìˆ˜ë¥¼ returní•œë‹¤.<br>
+  * 1. ì´ íŽ˜ì´ì§€ìˆ˜ % Page Group ë‹¹ Page ìˆ˜. <br>
+  * => 0 ì´ë©´ ë‘˜ì„ / ê°’ì´ ì´ íŽ˜ì´ì§€ ìˆ˜<br>
+  * 2. ì´ íŽ˜ì´ì§€ìˆ˜ % Page Group ë‹¹ Page ìˆ˜. <br>
+  * => 0ë³´ë‹¤ í¬ë©´ ë‘˜ì„ / ê°’ì— +1ì„ í•œ ê°’ì´ ì´ íŽ˜ì´ì§€ ìˆ˜<br>
+  * ex) ì´ ê²Œì‹œë¬¼ ìˆ˜ 23 ê°œ <br>
+  * ì´ íŽ˜ì´ì§€ ? ì´ íŽ˜ì´ì§€ ê·¸ë£¹ìˆ˜ ? <br>
+  * íŽ˜ì´ì§€ 1 2 3 4 5<br>
+  * íŽ˜ì´ì§€ê·¸ë£¹ 1234(1ê·¸ë£¹) 5(2ê·¸ë£¹)<br>
   * 
   */
  private int getTotalPageGroup() {  
@@ -123,12 +123,12 @@ public class PagingBean {
  }
 
  /**
-  * ÇöÀç ÆäÀÌÁö°¡ ¼ÓÇÑ ÆäÀÌÁö ±×·ì ¹øÈ£(¸î ¹øÂ° ÆäÀÌÁö ±×·ìÀÎÁö) À» return ÇÏ´Â ¸Þ¼Òµå <br>
-  * 1. ÇöÀç ÆäÀÌÁö % Page Group ´ç Page ¼ö => 0 ÀÌ¸é <br>
-  * µÑÀ» / °ªÀÌ ÇöÀç ÆäÀÌÁö ±×·ì. <br>
-  * 2. ÇöÀç ÆäÀÌÁö % Page Group ´ç Page ¼ö => 0 Å©¸é <br>
-  * µÑÀ» / °ª¿¡ +1À» ÇÑ °ªÀÌ ÇöÀç ÆäÀÌÁö ±×·ì<br>
-  * ÆäÀÌÁö 1 2 3 4 /5 6 7 8/ 9 10 1±×·ì 2±×·ì 3±×·ì
+  * í˜„ìž¬ íŽ˜ì´ì§€ê°€ ì†í•œ íŽ˜ì´ì§€ ê·¸ë£¹ ë²ˆí˜¸(ëª‡ ë²ˆì§¸ íŽ˜ì´ì§€ ê·¸ë£¹ì¸ì§€) ì„ return í•˜ëŠ” ë©”ì†Œë“œ <br>
+  * 1. í˜„ìž¬ íŽ˜ì´ì§€ % Page Group ë‹¹ Page ìˆ˜ => 0 ì´ë©´ <br>
+  * ë‘˜ì„ / ê°’ì´ í˜„ìž¬ íŽ˜ì´ì§€ ê·¸ë£¹. <br>
+  * 2. í˜„ìž¬ íŽ˜ì´ì§€ % Page Group ë‹¹ Page ìˆ˜ => 0 í¬ë©´ <br>
+  * ë‘˜ì„ / ê°’ì— +1ì„ í•œ ê°’ì´ í˜„ìž¬ íŽ˜ì´ì§€ ê·¸ë£¹<br>
+  * íŽ˜ì´ì§€ 1 2 3 4 /5 6 7 8/ 9 10 1ê·¸ë£¹ 2ê·¸ë£¹ 3ê·¸ë£¹
   * 
   * @return
   */
@@ -144,10 +144,10 @@ public class PagingBean {
  }
 
  /**
-  * ÇöÀç ÆäÀÌÁö°¡ ¼ÓÇÑ ÆäÀÌÁö ±×·ìÀÇ ½ÃÀÛ ÆäÀÌÁö ¹øÈ£¸¦ return ÇÑ´Ù.<br>
-  * Page Group ³» Page ¼ö*(ÇöÀç ÆäÀÌÁö ±×·ì -1) + 1À» ÇÑ °ªÀÌ Ã¹ ÆäÀÌÁöÀÌ´Ù.<br>
-  * (ÆäÀÌÁö ±×·ì*ÆäÀÌÁö ±×·ì °³¼ö, ±×·ìÀÇ ¸¶Áö¸· ¹øÈ£ÀÌ¹Ç·Î) <br>
-  * ÆäÀÌÁö ±×·ì <br>
+  * í˜„ìž¬ íŽ˜ì´ì§€ê°€ ì†í•œ íŽ˜ì´ì§€ ê·¸ë£¹ì˜ ì‹œìž‘ íŽ˜ì´ì§€ ë²ˆí˜¸ë¥¼ return í•œë‹¤.<br>
+  * Page Group ë‚´ Page ìˆ˜*(í˜„ìž¬ íŽ˜ì´ì§€ ê·¸ë£¹ -1) + 1ì„ í•œ ê°’ì´ ì²« íŽ˜ì´ì§€ì´ë‹¤.<br>
+  * (íŽ˜ì´ì§€ ê·¸ë£¹*íŽ˜ì´ì§€ ê·¸ë£¹ ê°œìˆ˜, ê·¸ë£¹ì˜ ë§ˆì§€ë§‰ ë²ˆí˜¸ì´ë¯€ë¡œ) <br>
+  * íŽ˜ì´ì§€ ê·¸ë£¹ <br>
   * 1 2 3 4 -> 5 6 7 8 -> 9 10 <br>
   * 
   * @return
@@ -157,10 +157,10 @@ public class PagingBean {
  }
 
  /**
-  * ÇöÀç ÆäÀÌÁö°¡ ¼ÓÇÑ ÆäÀÌÁö ±×·ìÀÇ ¸¶Áö¸· ÆäÀÌÁö ¹øÈ£¸¦ return ÇÑ´Ù.<br>
-  * 1. ÇöÀç ÆäÀÌÁö ±×·ì * ÆäÀÌÁö ±×·ì °³¼ö °¡ ¸¶Áö¸· ¹øÈ£ÀÌ´Ù. <br>
-  * 2. ±× ±×·ìÀÇ ¸¶Áö¸· ÆäÀÌÁö ¹øÈ£°¡ ÀüÃ¼ ÆäÀÌÁöÀÇ ¸¶Áö¸· ÆäÀÌÁö ¹øÈ£º¸´Ù <br>
-  * Å« °æ¿ì´Â ÀüÃ¼ ÆäÀÌÁöÀÇ ¸¶Áö¸· ¹øÈ£¸¦ return ÇÑ´Ù.<br>
+  * í˜„ìž¬ íŽ˜ì´ì§€ê°€ ì†í•œ íŽ˜ì´ì§€ ê·¸ë£¹ì˜ ë§ˆì§€ë§‰ íŽ˜ì´ì§€ ë²ˆí˜¸ë¥¼ return í•œë‹¤.<br>
+  * 1. í˜„ìž¬ íŽ˜ì´ì§€ ê·¸ë£¹ * íŽ˜ì´ì§€ ê·¸ë£¹ ê°œìˆ˜ ê°€ ë§ˆì§€ë§‰ ë²ˆí˜¸ì´ë‹¤. <br>
+  * 2. ê·¸ ê·¸ë£¹ì˜ ë§ˆì§€ë§‰ íŽ˜ì´ì§€ ë²ˆí˜¸ê°€ ì „ì²´ íŽ˜ì´ì§€ì˜ ë§ˆì§€ë§‰ íŽ˜ì´ì§€ ë²ˆí˜¸ë³´ë‹¤ <br>
+  * í° ê²½ìš°ëŠ” ì „ì²´ íŽ˜ì´ì§€ì˜ ë§ˆì§€ë§‰ ë²ˆí˜¸ë¥¼ return í•œë‹¤.<br>
   * 1 2 3 4 -> 5 6 7 8 -> 9 10
   * 
   * @return
@@ -173,9 +173,9 @@ public class PagingBean {
  }
 
  /**
-  * ÀÌÀü ÆäÀÌÁö ±×·ìÀÌ ÀÖ´ÂÁö Ã¼Å©ÇÏ´Â ¸Þ¼­µå <br>
-  * ÇöÀç ÆäÀÌÁö°¡ ¼ÓÇÑ ÆäÀÌÁö ±×·ìÀÌ 1º¸´Ù Å©¸é true<br>
-  * ex ) ÆäÀÌÁö 1 2 3 4 / 5 6 7 8 / 9 10 <br>
+  * ì´ì „ íŽ˜ì´ì§€ ê·¸ë£¹ì´ ìžˆëŠ”ì§€ ì²´í¬í•˜ëŠ” ë©”ì„œë“œ <br>
+  * í˜„ìž¬ íŽ˜ì´ì§€ê°€ ì†í•œ íŽ˜ì´ì§€ ê·¸ë£¹ì´ 1ë³´ë‹¤ í¬ë©´ true<br>
+  * ex ) íŽ˜ì´ì§€ 1 2 3 4 / 5 6 7 8 / 9 10 <br>
   * 1 2 3 group
   * 
   * @return
@@ -188,10 +188,10 @@ public class PagingBean {
  }
 
  /**
-  * ´ÙÀ½ ÆäÀÌÁö ±×·ìÀÌ ÀÖ´ÂÁö Ã¼Å©ÇÏ´Â ¸Þ¼­µå <br>
-  * ÇöÀç ÆäÀÌÁö ±×·ìÀÌ ¸¶Áö¸· ÆäÀÌÁö ±×·ì(<br>
-  * ¸¶Áö¸· ÆäÀÌÁö ±×·ì == ÃÑ ÆäÀÌÁö ±×·ì ¼ö) º¸´Ù ÀÛÀ¸¸é true<br>
-  * * ex ) ÆäÀÌÁö <br>
+  * ë‹¤ìŒ íŽ˜ì´ì§€ ê·¸ë£¹ì´ ìžˆëŠ”ì§€ ì²´í¬í•˜ëŠ” ë©”ì„œë“œ <br>
+  * í˜„ìž¬ íŽ˜ì´ì§€ ê·¸ë£¹ì´ ë§ˆì§€ë§‰ íŽ˜ì´ì§€ ê·¸ë£¹(<br>
+  * ë§ˆì§€ë§‰ íŽ˜ì´ì§€ ê·¸ë£¹ == ì´ íŽ˜ì´ì§€ ê·¸ë£¹ ìˆ˜) ë³´ë‹¤ ìž‘ìœ¼ë©´ true<br>
+  * * ex ) íŽ˜ì´ì§€ <br>
   * 1 2 3 4 / 5 6 7 8 / 9 10 <br>
   * 1 2 3 group
   * 
@@ -206,30 +206,30 @@ public class PagingBean {
 
  public static void main(String args[]) {
   PagingBean p = new PagingBean(47, 10);
-  // ÇöÆäÀÌÁöÀÇ ½ÃÀÛ row number ¸¦ Á¶È¸ 46
+  // í˜„íŽ˜ì´ì§€ì˜ ì‹œìž‘ row number ë¥¼ ì¡°íšŒ 46
   System.out.println("getBeginRowNumber:" + p.getStartRowNumber());
-  // ÇöÆäÀÌÁöÀÇ ¸¶Áö¸· row number ¸¦ Á¶È¸ 47
+  // í˜„íŽ˜ì´ì§€ì˜ ë§ˆì§€ë§‰ row number ë¥¼ ì¡°íšŒ 47
   System.out.println("getEndRowNumber:" + p.getEndRowNumber());
-  // ÀüÃ¼ ÆäÀÌÁö ¼ö : 10
+  // ì „ì²´ íŽ˜ì´ì§€ ìˆ˜ : 10
   System.out.println("getTotalPage:" + p.getTotalPage());
-  // ÀüÃ¼ ÆäÀÌÁö ±×·ì ¼ö : 3
+  // ì „ì²´ íŽ˜ì´ì§€ ê·¸ë£¹ ìˆ˜ : 3
   System.out.println("getTotalPageGroup:" + p.getTotalPageGroup());
   System.out.println("////////////////////////////");
-  p = new PagingBean(31, 6);// °Ô½Ã¹°¼ö 31 ÇöÀç ÆäÀÌÁö 6
-  // ÇöÆäÀÌÁöÀÇ ½ÃÀÛ row number ¸¦ Á¶È¸ 26
+  p = new PagingBean(31, 6);// ê²Œì‹œë¬¼ìˆ˜ 31 í˜„ìž¬ íŽ˜ì´ì§€ 6
+  // í˜„íŽ˜ì´ì§€ì˜ ì‹œìž‘ row number ë¥¼ ì¡°íšŒ 26
   System.out.println("getStartRowNumber:" + p.getStartRowNumber());
-  // ÇöÆäÀÌÁöÀÇ ¸¶Áö¸· row number ¸¦ Á¶È¸ 30
+  // í˜„íŽ˜ì´ì§€ì˜ ë§ˆì§€ë§‰ row number ë¥¼ ì¡°íšŒ 30
   System.out.println("getEndRowNumber:" + p.getEndRowNumber());
-  // °Ô½Ã¹°¼ö 31 -> ÃÑÆäÀÌÁö¼ö 7 -> ÃÑÆäÀÌÁö±×·ì->2
- // ÇöÀç ÆäÀÌÁö ±×·ì : 2
+  // ê²Œì‹œë¬¼ìˆ˜ 31 -> ì´íŽ˜ì´ì§€ìˆ˜ 7 -> ì´íŽ˜ì´ì§€ê·¸ë£¹->2
+ // í˜„ìž¬ íŽ˜ì´ì§€ ê·¸ë£¹ : 2
   System.out.println("getNowPageGroup:" + p.getNowPageGroup());
-  // ÆäÀÌÁö ±×·ìÀÇ ½ÃÀÛ ÆäÀÌÁö : 5
+  // íŽ˜ì´ì§€ ê·¸ë£¹ì˜ ì‹œìž‘ íŽ˜ì´ì§€ : 5
   System.out.println("getStartPageOfPageGroup:" + p.getStartPageOfPageGroup());
-   // ÆäÀÌÁö ±×·ìÀÇ ¸¶Áö¸· ÆäÀÌÁö : 7
+   // íŽ˜ì´ì§€ ê·¸ë£¹ì˜ ë§ˆì§€ë§‰ íŽ˜ì´ì§€ : 7
   System.out.println("getEndPageOfPageGroup:" + p.getEndPageOfPageGroup());
-  // ÀÌÀü ÆäÀÌÁö ±×·ìÀÌ ÀÖ´Â Áö : true
+  // ì´ì „ íŽ˜ì´ì§€ ê·¸ë£¹ì´ ìžˆëŠ” ì§€ : true
   System.out.println("isPreviousPageGroup:" + p.isPreviousPageGroup());
-  // ´ÙÀ½ ÆäÀÌÁö ±×·ìÀÌ ÀÖ´Â Áö : false
+  // ë‹¤ìŒ íŽ˜ì´ì§€ ê·¸ë£¹ì´ ìžˆëŠ” ì§€ : false
   System.out.println("isNextPageGroup:" + p.isNextPageGroup());
  }
 }
