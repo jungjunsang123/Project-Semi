@@ -1,5 +1,5 @@
 SELECT * FROM MEMBER
-//±âÁ¸¿¡ MEMBER Å×ÀÌºí ÀÖÀ¸¸é »èÁ¦ÇÏ°í »õ·Î »ý¼ºÇÏ±â
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ MEMBER ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 DROP TABLE MEMBER 
 
 CREATE TABLE MEMBER(
@@ -18,7 +18,7 @@ create sequence board_seq nocache
 
 SELECT * FROM BOARD
 DROP TABLE BOARD 
-//±âÁ¸¿¡ BOARD Å×ÀÌºí ÀÖÀ¸¸é »èÁ¦ÇÏ°í »õ·Î »ý¼ºÇÏ±â
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ BOARD ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 
 CREATE TABLE BOARD(
 	BBS_NO VARCHAR2(100) PRIMARY KEY,
