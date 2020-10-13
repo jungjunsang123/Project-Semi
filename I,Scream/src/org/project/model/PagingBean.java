@@ -216,7 +216,7 @@ public class PagingBean {
   System.out.println("getTotalPageGroup:" + p.getTotalPageGroup());
   System.out.println("////////////////////////////");
   p = new PagingBean(31, 6);// 게시물수 31 현재 페이지 6
-  // 현페이지의 시작 row number 를 조회 26
+  // 현페이지의 시작 row number 를 조회 26*
   System.out.println("getStartRowNumber:" + p.getStartRowNumber());
   // 현페이지의 마지막 row number 를 조회 30
   System.out.println("getEndRowNumber:" + p.getEndRowNumber());
