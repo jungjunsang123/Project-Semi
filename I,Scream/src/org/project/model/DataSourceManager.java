@@ -6,7 +6,7 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 
 
-/**
+/***
  * 컨넥션 풀pool을 생성하여 공유하는 객체 
  * (컨넥션풀은 컨넥션 필요시 생성,소멸하는
  * 방식이 아니라 빌려오고 반납받는 형식으로

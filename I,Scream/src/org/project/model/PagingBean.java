@@ -206,7 +206,7 @@ public class PagingBean {
 
  public static void main(String args[]) {
   PagingBean p = new PagingBean(47, 10);
-  // 현페이지의 시작 row number 를 조회 46
+  // 현페이지의 시작 row number 를 조회 46*
   System.out.println("getBeginRowNumber:" + p.getStartRowNumber());
   // 현페이지의 마지막 row number 를 조회 47
   System.out.println("getEndRowNumber:" + p.getEndRowNumber());
