@@ -28,7 +28,18 @@
       }
       .row.content {height:auto;} 
     }
-
+	
+	.searchForm{
+		padding:15px;
+	}
+	
+	.categorybar{
+		background-color:#81DAF5;
+	}
+	.content-custom{
+		margin:0px;
+		background-color:yellow;
+	}
 
 
 

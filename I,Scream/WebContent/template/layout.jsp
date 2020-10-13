@@ -14,18 +14,19 @@
 </head>
 <body>
 <div class="container">
-<c:import url="header.jsp"></c:import>
-<div class="container-fluid text-center">    
-  <div class="row content">
+<c:import url="header.jsp"/>
+  <div class="row content content-custom">
     <div class="col-sm-10 text-left"> 
     	내용들어갈것
      <%--  <c:import url="${requestScope.url }"></c:import> --%>
     </div>
+    
     <div class="col-sm-2 sidenav">
-    	<c:import url="right.jsp"></c:import>
+    	<c:import url="right.jsp"/>
     </div>
+
+<c:import url="footer.jsp"/>
 </div>
-<c:import url="footer.jsp"></c:import>
 </div>
 
 </body>
