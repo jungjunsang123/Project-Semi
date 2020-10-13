@@ -19,7 +19,7 @@ public class LoginController implements Controller {
 		}else {
 			HttpSession session=request.getSession();
 			session.setAttribute("mvo", vo);
-			return "suc.jsp"; //로그인 성공 화면 홈으로 
+			return "redirect:front?command=home"; //로그인 성공 화면 홈으로 
 		}
 	}
 }

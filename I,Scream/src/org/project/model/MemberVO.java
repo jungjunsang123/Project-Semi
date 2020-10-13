@@ -105,6 +105,17 @@ public class MemberVO {
 
 
 
+	public MemberVO(String id, String password, String address, String name, String tel, String sex, String age) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.address = address;
+		this.name = name;
+		this.tel = tel;
+		this.sex = sex;
+		this.age = age;
+	}
+
 	public MemberVO(String id, String password, String address, String name, String tel, String regDate, String sex,
 			String age) {
 		super();
@@ -114,6 +125,16 @@ public class MemberVO {
 		this.name = name;
 		this.tel = tel;
 		this.regDate = regDate;
+		this.sex = sex;
+		this.age = age;
+	}
+
+	public MemberVO(String id, String address, String name, String tel, String sex, String age) {
+		super();
+		this.id = id;
+		this.address = address;
+		this.name = name;
+		this.tel = tel;
 		this.sex = sex;
 		this.age = age;
 	}
