@@ -8,10 +8,23 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
-		if(command.equals("getPostList")) {
+
+		if(command.contentEquals("login")) {
+			controller=new LoginController();
+		}else if(command.equals("addBBS"))
+			controller = new AddBBSController();
+		else if(command.contentEquals("logout")) {
+			controller=new LogoutController();
+		}else if(command.contentEquals("register")) {
+			controller=new RegisterController();
+		}else if(command.contentEquals("home")) {
+			controller=new HomeController();
+		}else if(command.contentEquals("registerForm")) {
+			controller=new RegisterFormController();
+		}else if(command.contentEquals("registerResult")) {
+			controller=new RegisterResultController();
+		}else if(command.equals("getPostList")) {
 			controller = new getPostListController();
-		}else if(command.equals("BBSDetail")) {
-			
 		}
 		return controller; 
 	}

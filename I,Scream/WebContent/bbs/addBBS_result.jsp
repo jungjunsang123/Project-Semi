@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
 
-<jsp:forward page="front">
-	<jsp:param name="command" value="home"/>
-</jsp:forward>
+<script type="text/javascript">
+alert("게시물 등록완료하였습니다.");
+location.href="front?command=home";
+</script>

@@ -8,7 +8,7 @@ public class MemberVO {
 	private String tel;
 	private String regDate;
 	private String sex;
-	private String age;
+	private String birth;
 	
 	
 	
@@ -78,14 +78,14 @@ public class MemberVO {
 	}
 
 
-	public String getAge() {
-		return age;
+	public String getBirth() {
+		return birth;
 	}
 
 
 
-	public void setAge(String age) {
-		this.age = age;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 
 
@@ -105,8 +105,19 @@ public class MemberVO {
 
 
 
+	public MemberVO(String id, String password, String address, String name, String tel, String sex, String birth) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.address = address;
+		this.name = name;
+		this.tel = tel;
+		this.sex = sex;
+		this.birth = birth;
+	}
+
 	public MemberVO(String id, String password, String address, String name, String tel, String regDate, String sex,
-			String age) {
+			String birth) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -115,7 +126,17 @@ public class MemberVO {
 		this.tel = tel;
 		this.regDate = regDate;
 		this.sex = sex;
-		this.age = age;
+		this.birth = birth;
+	}
+
+	public MemberVO(String id, String address, String name, String tel, String sex, String birth) {
+		super();
+		this.id = id;
+		this.address = address;
+		this.name = name;
+		this.tel = tel;
+		this.sex = sex;
+		this.birth = birth;
 	}
 	
 	
