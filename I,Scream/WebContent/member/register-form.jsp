@@ -1,13 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="false"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
-<div class="container-fluid ">
-    	<div class="col-sm-4 col-sm-offset-4">
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+    	<div class="col-sm-4 col-sm-offset-4" id="signinCss">
     			<a href="${pageContext.request.contextPath }/front?command=home">HOME</a>
    		</div>
 
 
-<!-- <div class="container-fluid"> -->
 <div class="col-sm-4 col-sm-offset-4">
 <form action="${pageContext.request.contextPath}/front" method="post" id="registerForm">
 		<input type="hidden" name="command" value="register"><br><br><br><br>
@@ -56,16 +67,5 @@
 </form>
 </div>
 </div>
-<!-- </div> -->
-<style type="text/css">
-.container-fluid{
-	border: 5px solid gray;
-	max-width: 700px;
-	margin: auto;
-	
-	height: auto;
-	display: flex;
-	algin-items:cneter;
-	justify-content: center;
-}
-</style>
+</body>
+</html>

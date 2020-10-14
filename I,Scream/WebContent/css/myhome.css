@@ -46,7 +46,17 @@
 		background-color:yellow;
 	}
 
-
+/*회원가입폼에서 가운데 정렬하기 위한 CSS*/
+#signinCss{
+	border: 5px solid gray;
+	max-width: 700px;
+	margin: auto;
+	
+	height: auto;
+	display: flex;
+	align-items:cneter;
+	justify-content: center;
+}
 
 
 
