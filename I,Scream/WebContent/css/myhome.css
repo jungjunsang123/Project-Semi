@@ -31,7 +31,7 @@
         height: auto;
         padding: 15px;
       }
-      .row.content {height:auto;} 
+     
     }
 	
 	.searchForm{
@@ -46,8 +46,26 @@
 		background-color:yellow;
 	}
 
+ .row.content {height:auto;} 
 
+.sidenav{
+	padding-left: 5px;
+    padding-left: 7px;
+}
+.bbs-custom{
+    margin-left: -3;
+    margin-right: 12px;
+	
+}
 
+.bbs-container{
+	padding:25px;
+	
+}
+td{
+	text-align: center;
+	vertical-align: middle;
+}
 
 
 

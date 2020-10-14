@@ -29,7 +29,8 @@ public class MemberDAO {
 		if(rs!=null)
 			rs.close();
 		closeAll(pstmt,con);
-	}	
+
+	}
 	public MemberVO login(String id, String password) throws SQLException {
 		MemberVO vo=null;
 		Connection con=null;
@@ -87,4 +88,5 @@ public class MemberDAO {
 		}
 		return vo;
 	}
+
 }

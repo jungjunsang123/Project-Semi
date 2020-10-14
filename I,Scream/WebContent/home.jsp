@@ -4,8 +4,12 @@
 <div class="container">
 	<!-- 1행 start -->
 	<div class="row">
-		<div class="col-sm-5 col-sm-offset-7">
-			asdfasdf
+		<div class="col-sm-5 col-sm-offset-7" style="background-color:#green;width:300px;height:300px;" >
+			<ul>
+				<li>all</li>
+				<li>all</li>
+				<li>all</li>
+			</ul>
 		</div>
 	</div>
 	<!-- 1행 end -->
@@ -13,7 +17,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-5 col-sm-offset-7">
-				asdfasdf
+				<ul>
+					<li>test</li>
+					<li>test</li>
+					<li>test</li>
+				</ul>
 			</div>
 		</div>
 		<!-- 1행 end -->
@@ -21,4 +29,5 @@
 
 
 </div>
+
 

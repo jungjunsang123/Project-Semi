@@ -4,5 +4,5 @@
 
 <script type="text/javascript">
 alert("게시물 등록완료하였습니다.");
-location.href="front?command=home";
+location.href="${pageContext.request.contextPath}/front?command=getPostList";
 </script>
