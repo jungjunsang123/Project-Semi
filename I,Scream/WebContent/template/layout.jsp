@@ -24,7 +24,7 @@
 	<hr>   
 		<div class="row content content-custom">
 		    <div class="col-sm-9 text-left"> 
-				<c:import url="${requestScope.url }"></c:import>
+				<c:import url="${requestScope.url}"></c:import>
 		    </div>
 		    <!-- 오른쪽 사이드바 start -->
 		    <div class="col-sm-3 sidenav">
