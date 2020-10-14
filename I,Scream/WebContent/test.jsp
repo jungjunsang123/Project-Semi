@@ -66,7 +66,7 @@
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-info text-center">
 												<h1 class="font-light text-white">
-												<%=request.getAttribute("total")%>
+												${requestScope.allCount}
 												</h1>
 												<h6 class="text-white">전체 게시글</h6>
 											</div>
@@ -76,8 +76,8 @@
 									<div class="col-md-6 col-lg-3 col-xlg-3">
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-primary text-center">
-												<h1 class="font-light text-white">1,738</h1>
-												<h6 class="text-white">구직 게시글</h6>
+												<h1 class="font-light text-white">${requestScope.youngCount}</h1>
+												<h6 class="text-white">아이돌봄 게시글</h6>
 											</div>
 										</div>
 									</div>
@@ -85,8 +85,8 @@
 									<div class="col-md-6 col-lg-3 col-xlg-3">
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-success text-center">
-												<h1 class="font-light text-white">1100</h1>
-												<h6 class="text-white">채용 게시글</h6>
+												<h1 class="font-light text-white">${requestScope.oldCount}</h1>
+												<h6 class="text-white">노인케어 게시글</h6>
 											</div>
 										</div>
 									</div>
@@ -94,8 +94,8 @@
 									<div class="col-md-6 col-lg-3 col-xlg-3">
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-dark text-center">
-												<h1 class="font-light text-white">912</h1>
-												<h6 class="text-white">진행 게시글</h6>
+												<h1 class="font-light text-white">${requestScope.petCount}</h1>
+												<h6 class="text-white">반려동물 게시글</h6>
 											</div>
 										</div>
 									</div>
