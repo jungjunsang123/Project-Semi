@@ -46,9 +46,15 @@ public class BBSDAO {
 			ResultSet rs = null;
 			ArrayList<BBSVO> list = new ArrayList<BBSVO>();
 			try {
-				String sql="select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer from board) B, MEMBER M where B.writer = M.ID and rnum between 1 and 10 ";
 				con = getConnection();
-				pstmt=con.prepareStatement(sql);
+				StringBuilder sql=new StringBuilder();		
+				sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO ");
+				sql.append("from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer from board) B, MEMBER M ");
+				sql.append("where B.writer = M.ID and rnum between ? and ?");
+				pstmt=con.prepareStatement(sql.toString());
+				pstmt.setInt(1, pagingBean.getStartRowNumber());
+				pstmt.setInt(2, pagingBean.getEndRowNumber());
+				
 				rs=pstmt.executeQuery();
 				while(rs.next()) {
 					BBSVO bbsvo = new BBSVO();
@@ -85,6 +91,56 @@ public class BBSDAO {
 			}
 			return total;
 		}	
+		
+		
+		
+		
+		public void updateBBSHit(String bbs_no) throws SQLException {
+		      Connection con=null;
+		      PreparedStatement pstmt=null;
+		      try {
+		         con=getConnection();
+		        String sql="update BOARD set HITS=HITS+1 where BBS_NO=?";
+		           pstmt=con.prepareStatement(sql);
+		             pstmt.setString(1,bbs_no);
+		            pstmt.executeUpdate();
+		      }finally {
+		         closeAll(pstmt,con);
+		      }
+		   }
+		   public BBSVO getPostDetail(String no) throws SQLException {
+		      BBSVO pvo=null;
+		      Connection con=null;
+		      PreparedStatement pstmt=null;
+		      ResultSet rs=null;
+		      try {
+		         con=getConnection();
+		         StringBuilder sql=new StringBuilder();
+		           sql.append("select b.bbs_no,b.title,b.context,b.hits,to_char(POSTEDDATE,'YYYY.MM.DD') as POSTEDDATE,m.id ");
+		           sql.append("from board b,member m  ");
+		           sql.append("where b.writer=m.id order by bbs_no desc");
+		           pstmt=con.prepareStatement(sql.toString());
+		           rs=pstmt.executeQuery();
+		           if(rs.next()) {
+		              pvo=new BBSVO();
+		              pvo.setBbs_no(rs.getString(1));
+		              pvo.setTitle(rs.getString(2));
+		              pvo.setContext(rs.getString(3));
+		              pvo.setHits(rs.getInt(4));
+		              pvo.setCreateDate(rs.getString(5));
+		              MemberVO mvo=new MemberVO();
+		              mvo.setId(rs.getString(6));
+		              pvo.setVo(mvo);
+		           }
+		      } finally {
+		         closeAll(rs, pstmt, con);
+		      }
+		      return pvo;
+		   }
+		
+		
+		
+		
 		
 		
 		

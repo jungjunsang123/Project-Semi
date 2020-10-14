@@ -25,7 +25,9 @@ public class HandlerMapping {
 			controller=new RegisterResultController();
 		}else if(command.equals("getPostList")) {
 			controller = new getPostListController();
-		}
+		}else if(command.contentEquals("TestBBSDetail")) {
+	         controller=new TestBBSDetailController();
+	      }
 		return controller; 
 	}
 }

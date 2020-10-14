@@ -16,7 +16,7 @@
 	 <c:forEach  var="pvo" items="${requestScope.lvo.list}" >
 			<tr>
 				<td>${pvo.bbs_no}</td>
-				<td><a href="${pageContext.request.contextPath}/front?command=BBSDetail&no=${pvo.bbs_no}">${pvo.title}</a></td>
+				<td><a href="${pageContext.request.contextPath}/front?command=TestBBSDetail&no=${pvo.bbs_no}">${pvo.title}</a></td>
 				<td>${pvo.vo.id}</td>
 				<td>${pvo.createDate}</td>
 				<td>${pvo.hits}</td>
