@@ -6,7 +6,7 @@
     	<div class="row">
     		<!-- 로고 -->
     		<div class="col-sm-3">
-    			<a class="navbar-brand" href="#">Logo</a>
+    			<a class="navbar-brand" href="${pageContext.request.contextPath }/front?command=home">HOME</a>
     		</div>
     		<!-- 검색창 start -->
     		<div class="col-sm-6">

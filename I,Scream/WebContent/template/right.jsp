@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="false"%>
+    pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
-${sessionScope.mvo.name}   ㅁㅎㄻㄴㅇㅎㄹㅇㄴ
-<c:import url="${requestScope.url}"/>
 <c:choose>
 <c:when test="${sessionScope.mvo==null}">
 <a href="${pageContext.request.contextPath}/front?command=registerForm">회원가입</a>
@@ -11,11 +9,11 @@ ${sessionScope.mvo.name}   ㅁㅎㄻㄴㅇㅎㄹㅇㄴ
 	<table>
 		<tr>
 			<td>아이디</td>
-			<td><input type="text" name="id" required="required"></td>
+			<td><input type="text" name="id" placeholder="아이디" required="required"></td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>
-			<td><input type="password" name="password" required="required"></td>
+			<td><input type="password" name="password" placeholder="비밀번호"required="required"></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="right"><input type="submit" value="로그인"></td>

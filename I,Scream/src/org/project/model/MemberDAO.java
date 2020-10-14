@@ -37,7 +37,7 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT address, name, tel, age, sex, regdate FROM MEMBER WHERE id=? and password=?";
+			String sql="SELECT address, name, tel, birth, sex, regdate FROM MEMBER WHERE id=? and password=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
@@ -52,7 +52,6 @@ public class MemberDAO {
 	public void register(MemberVO vo) throws SQLException {
 		Connection con=null;
 		PreparedStatement pstmt=null;
-		System.out.println(vo.getAge());
 		try {
 			con=dataSource.getConnection();
 			String sql="INSERT INTO MEMBER values(?,?,?,?,?,?,?,sysdate)";
@@ -62,7 +61,7 @@ public class MemberDAO {
 			pstmt.setString(3, vo.getAddress());
 			pstmt.setString(4, vo.getName());
 			pstmt.setString(5, vo.getTel());
-			pstmt.setString(6, vo.getAge());
+			pstmt.setString(6, vo.getBirth());
 			pstmt.setString(7, vo.getSex());
 
 			pstmt.executeQuery();
@@ -77,7 +76,7 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT address, name, tel, age, sex FROM MEMBER where id=?";
+			String sql="SELECT address, name, tel, birth, sex FROM MEMBER where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
