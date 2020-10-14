@@ -10,7 +10,10 @@ public class HandlerMapping {
 		Controller controller=null;
 		if(command.contentEquals("login")) {
 			controller=new LoginController();
-		}else if(command.contentEquals("logout")) {
+		}
+		else if(command.equals("addBBS"))
+			controller = new AddBBSController();
+		else if(command.contentEquals("logout")) {
 			controller=new LogoutController();
 		}else if(command.contentEquals("register")) {
 			controller=new RegisterController();

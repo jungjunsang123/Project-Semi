@@ -19,6 +19,25 @@ public class BBSDAO {
 	public Connection getConnection() throws SQLException{
 		return dataSource.getConnection();
 	}
+	//게시글 작성하는 메소드
+	public void addBBS(BBSVO bbsvo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql ="insert into BOARD(bbs_no,title,context,posteddate,category,worktime,writer) values(board_seq.nextval,?,?,sysdate,?,?,?)";
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bbsvo.getTitle());
+			pstmt.setString(2, bbsvo.getContext());
+			pstmt.setString(3, bbsvo.getCategory());
+			pstmt.setString(4, bbsvo.getWorkTime());
+			pstmt.setString(5, bbsvo.getVo().getId());
+			pstmt.execute();
+		} finally {
+			closeAll(pstmt, con);
+		}
+	}
+	
 	public void closeAll(PreparedStatement pstmt,Connection con) throws SQLException{
 		if(pstmt!=null)
 			pstmt.close();
@@ -29,5 +48,6 @@ public class BBSDAO {
 		if(rs!=null)
 			rs.close();
 		closeAll(pstmt,con);
-	}	
+	}
+		
 }

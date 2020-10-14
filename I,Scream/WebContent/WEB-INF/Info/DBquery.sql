@@ -29,7 +29,6 @@ CREATE TABLE BOARD(
 	CATEGORY VARCHAR2(100) NOT NULL,
 	WORKTIME VARCHAR2(100),
 	Writer varchar2(100) not null, 
-	constraint board_fk foreign key(Writer) references MEMBER(ID)
-)
-
+	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
+	)
 INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate);
