@@ -5,3 +5,4 @@
 <jsp:forward page="front">
 	<jsp:param name="command" value="home"/>
 </jsp:forward>
+
