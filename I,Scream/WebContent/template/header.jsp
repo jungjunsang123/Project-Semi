@@ -23,24 +23,28 @@
     		</div>
     		<!-- 검색창 end -->
    		</div>
+  		</div>
+ </nav>
    		<!-- 카테고리 start -->
+<nav class="navbar">
+  <div class="container-fluid">
     	<div class="row categorybar">
-    		<div class="navbar-header">
 	    		<div class="collapse navbar-collapse">
-			      <ul class="nav navbar-nav">
-			        <li><a href="#">채용정보</a></li>
-			        <li><a href="#">인재정보</a></li>
-			        <li><a href="#">이용안내</a></li>
-			      </ul>
+ 			      <ul class="nav navbar-nav">
+		 			 <li>
+		 			 	<a href="#" class="burger collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+        				<span></span>
+      					</a>
+		 			 </li> 
+			        <li><a href="#" class="nav-item nav-link">채용정보</a></li>
+			        <li><a href="#" class="nav-item nav-link">인재정보</a></li>
+			        <li><a href="#" class="nav-item nav-link">이용안내</a></li>
+			      </ul>			      
 			    </div>
 			 </div>
 		 </div>
 		 <!-- 카테고리 end -->
-    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-    	</div>
+
+    	</nav>
+    	
   
-</nav>

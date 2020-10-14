@@ -8,7 +8,7 @@ CREATE TABLE MEMBER(
 	ADDRESS VARCHAR2(100),
 	NAME VARCHAR2(100),
 	TEL VARCHAR2(100),
-	AGE NUMBER DEFAULT 0,
+	BIRTH date,
 	SEX VARCHAR2(50) DEFAULT 'MALE',
 	REGDATE DATE NOT NULL
 )
@@ -28,5 +28,5 @@ CREATE TABLE BOARD(
 	CATEGORY VARCHAR2(100) NOT NULL,
 	WORKTIME VARCHAR2(100),
 	Writer varchar2(100) not null, 
-	constraint board_fk foreign key(Writer) references MEMBER(ID)
+	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 )
