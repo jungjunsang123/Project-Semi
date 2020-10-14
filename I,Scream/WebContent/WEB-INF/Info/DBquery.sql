@@ -8,13 +8,14 @@ CREATE TABLE MEMBER(
 	ADDRESS VARCHAR2(100),
 	NAME VARCHAR2(100),
 	TEL VARCHAR2(100),
-	BIRTH date,
+	BIRTH DATE,
 	SEX VARCHAR2(50) DEFAULT 'MALE',
 	REGDATE DATE NOT NULL
 )
 drop sequence board_seq
 create sequence board_seq nocache
-
+SELECT*FROM MEMBER;
+COMMIT
 SELECT * FROM BOARD
 DROP TABLE BOARD 
 //기존에 BOARD 테이블 있으면 삭제하고 새로 생성하기
@@ -29,4 +30,5 @@ CREATE TABLE BOARD(
 	WORKTIME VARCHAR2(100),
 	Writer varchar2(100) not null, 
 	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
-)
+	)
+INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate);

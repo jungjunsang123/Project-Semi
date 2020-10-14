@@ -15,10 +15,9 @@ public class RegisterController implements Controller {
 		String name=request.getParameter("name");
 		String tel=request.getParameter("tel");
 		String address=request.getParameter("address");
-		String regDate=request.getParameter("regDate");
 		String sex=request.getParameter("sex");
-		String age=request.getParameter("age");
-		MemberDAO.getInstance().register(new MemberVO(id,password,address,name,tel,regDate,sex,age));
+		String birth=request.getParameter("birth");
+		MemberDAO.getInstance().register(new MemberVO(id,password,address,name,tel,sex,birth));
 		return "redirect:front?command=registerResult&id="+id; //리턴위치 조정필요함
 	}
 }

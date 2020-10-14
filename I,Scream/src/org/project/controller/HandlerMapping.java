@@ -17,7 +17,14 @@ public class HandlerMapping {
 			controller=new LogoutController();
 		}else if(command.contentEquals("register")) {
 			controller=new RegisterController();
+		}else if(command.contentEquals("home")) {
+			controller=new HomeController();
+		}else if(command.contentEquals("registerForm")) {
+			controller=new RegisterFormController();
+		}else if(command.contentEquals("registerResult")) {
+			controller=new RegisterResultController();
 		}
+			
 		return controller; 
 	}
 }

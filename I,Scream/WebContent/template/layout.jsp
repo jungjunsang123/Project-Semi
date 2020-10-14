@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
+	pageEncoding="UTF-8" session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,17 +21,18 @@
 <body>
 <div class="container">
 	<c:import url="header.jsp"/>
+	<hr>   
 		<div class="row content content-custom">
-		    <div class="col-sm-10 text-left"> 
-		    	내용들어갈것ddd
-		     <%--  <c:import url="${requestScope.url }"></c:import> --%>
+		    <div class="col-sm-9 text-left"> 
+				<c:import url="${requestScope.url }"></c:import>
 		    </div>
 		    <!-- 오른쪽 사이드바 start -->
-		    <div class="col-sm-2 sidenav">
+		    <div class="col-sm-3 sidenav">
 		    	<c:import url="right.jsp"/>
 		    </div>
 		     <!-- 오른쪽 사이드바 end -->
 		</div>
+	<hr>   
 	<c:import url="footer.jsp"/>
 </div>
 

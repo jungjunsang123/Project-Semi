@@ -37,7 +37,7 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT address, name, tel, age, sex, regdate FROM MEMBER WHERE id=? and password=?";
+			String sql="SELECT address, name, tel, birth, sex, regdate FROM MEMBER WHERE id=? and password=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
@@ -54,19 +54,37 @@ public class MemberDAO {
 		PreparedStatement pstmt=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="INSERT INTO MEMBER values(?,?,?,?,?,?,?,?)";
+			String sql="INSERT INTO MEMBER values(?,?,?,?,?,?,?,sysdate)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPassword());
-			pstmt.setString(3, vo.getName());
-			pstmt.setString(4, vo.getTel());
-			pstmt.setString(5, vo.getAddress());
-			pstmt.setString(6, vo.getRegDate());
+			pstmt.setString(3, vo.getAddress());
+			pstmt.setString(4, vo.getName());
+			pstmt.setString(5, vo.getTel());
+			pstmt.setString(6, vo.getBirth());
 			pstmt.setString(7, vo.getSex());
-			pstmt.setString(8, vo.getAge());
+
 			pstmt.executeQuery();
 		}finally {
 			closeAll(pstmt,con);
 		}
+	}
+	public MemberVO findMemberById(String id) throws SQLException {
+		MemberVO vo=null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="SELECT address, name, tel, birth, sex FROM MEMBER where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				vo=new MemberVO(id,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
+		}finally {
+			closeAll(rs,pstmt,con);
+		}
+		return vo;
 	}
 }
