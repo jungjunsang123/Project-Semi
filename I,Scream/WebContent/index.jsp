@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,4 +16,7 @@
 
 </div>
 </body>
-</html>
+</html> -->
+<jsp:forward page="front">
+	<jsp:param name="command" value="getPostList"/>
+</jsp:forward>

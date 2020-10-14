@@ -12,6 +12,9 @@ CREATE TABLE MEMBER(
 	SEX VARCHAR2(50) DEFAULT 'MALE',
 	REGDATE DATE NOT NULL
 )
+
+insert into member values('java', '1234', '서울', '홍길동','01012345678', 20, 'male', sysdate)
+
 drop sequence board_seq
 create sequence board_seq nocache
 
@@ -33,3 +36,9 @@ CREATE TABLE BOARD(
 )
 
 
+insert into board values(board_seq.NEXTVAL, '제목1', '내용1', 1, SYSDATE, '카테고리', '10시', 'java' )
+select TITLE, Writer, to_char(POSTEDDATE,'yyyy.mm.dd'), HITS from  board 
+
+select row_number() over(order by no desc)
+
+select count(*) from board
