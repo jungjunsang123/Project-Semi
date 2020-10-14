@@ -40,10 +40,15 @@ insert into member values('java', '1234', '서울', '홍길동','01012345678', s
 
 INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate);
 
-insert into board values(board_seq.NEXTVAL, '제목1', '내용1', 1, SYSDATE, '카테고리', '10시', 'java' )
+insert into board values(board_seq.NEXTVAL, '제목1', '내용1', 1, SYSDATE, '반려동물', '10시', 'java' )
+insert into board values(board_seq.NEXTVAL, '제목2', '내용2', 1, SYSDATE, '노인케어', '11시', 'java' )
+insert into board values(board_seq.NEXTVAL, '제목3', '내용3', 1, SYSDATE, '아이돌봄', '12시', 'java' )
+insert into board values(board_seq.NEXTVAL, '제목4', '내용4', 1, SYSDATE, '노인케어', '13시', 'java' )
+insert into board values(board_seq.NEXTVAL, '제목5', '내용5', 1, SYSDATE, '반려동물', '14시', 'java' )
 select TITLE, Writer, to_char(POSTEDDATE,'yyyy.mm.dd'), HITS from  board 
 
 select row_number() over(order by no desc)
 
 select count(*) from board
 
+select count(*) from board where category='반려동물' 

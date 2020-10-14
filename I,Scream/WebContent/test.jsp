@@ -65,7 +65,9 @@
 									<div class="col-md-6 col-lg-3 col-xlg-3">
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-info text-center">
-												<h1 class="font-light text-white">2,064</h1>
+												<h1 class="font-light text-white">
+												<%=request.getAttribute("total")%>
+												</h1>
 												<h6 class="text-white">전체 게시글</h6>
 											</div>
 										</div>
@@ -92,7 +94,7 @@
 									<div class="col-md-6 col-lg-3 col-xlg-3">
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-dark text-center">
-												<h1 class="font-light text-white">964</h1>
+												<h1 class="font-light text-white">912</h1>
 												<h6 class="text-white">진행 게시글</h6>
 											</div>
 										</div>

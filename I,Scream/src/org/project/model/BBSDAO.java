@@ -85,12 +85,6 @@ public class BBSDAO {
 			}
 			return total;
 		}	
-		
-		
-		
-		
-		
-		
 //클로즈 메소드	
 	public void closeAll(PreparedStatement pstmt,Connection con) throws SQLException{
 		if(pstmt!=null)
@@ -133,7 +127,81 @@ public class BBSDAO {
 			
 		} finally {
 			closeAll(pstmt, con);
-			
 		}
 	}
+	//SH : 전체게시물 수량 세는 메서드
+	public int countAllPosting() throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int total=0;
+		try {
+			con=getConnection();
+			pstmt=con.prepareStatement("select count(*) from board");
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				total=rs.getInt(1);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return total;
+	}
+	//SH : 아이돌봄게시물 수량 세는 메서드
+	public int countYoungPosting() throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int total=0;
+		try {
+			con=getConnection();
+			pstmt=con.prepareStatement("select count(*) from board where category='아이돌봄' ");
+
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				total=rs.getInt(1);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return total;
+	}
+	//SH : 노인케어게시물 수량 세는 메서드
+	public int countOldPosting() throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int total=0;
+		try {
+			con=getConnection();
+			pstmt=con.prepareStatement("select count(*) from board where category='노인케어' ");
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				total=rs.getInt(1);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return total;
+	}
+	//SH : 반려동물게시물 수량 세는 메서드
+	public int countPetPosting() throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int total=0;
+		try {
+			con=getConnection();
+			pstmt=con.prepareStatement("select count(*) from board where category='반려동물' ");
+
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				total=rs.getInt(1);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return total;
+	}
+
 }

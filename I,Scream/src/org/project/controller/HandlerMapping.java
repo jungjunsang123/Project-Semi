@@ -28,6 +28,14 @@ public class HandlerMapping {
 			controller=new UpdatePostController();
 		}else if (command.contentEquals("DeletePost")) {
 			controller=new DeletePostController();
+		}else if (command.contentEquals("AllPostCount")) {
+			controller=new AllPostCountController();
+		}else if (command.contentEquals("YoungPostCount")) {
+			controller=new YoungPostCountController();
+		}else if (command.contentEquals("OldPostCount")) {
+			controller=new OldPostCountController();
+		}else if (command.contentEquals("PetPostCount")) {
+			controller=new PetPostCountController();
 		}
 		return controller; 
 	}
