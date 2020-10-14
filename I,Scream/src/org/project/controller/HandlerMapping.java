@@ -8,7 +8,11 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
-		
+		if(command.equals("getPostList")) {
+			controller = new getPostListController();
+		}else if(command.equals("BBSDetail")) {
+			
+		}
 		return controller; 
 	}
 }
