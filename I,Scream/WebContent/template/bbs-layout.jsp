@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" session="false"%>
+	pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -13,9 +13,27 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	${document}.ready(function(){
-		
-	})
+	function deletePost() {
+		if (confirm("게시글을 삭제하시겠습니까?")) {
+			document.deletePost.submit();
+		}
+	}
+	function updatePost() {
+		if (confirm("게시글을 수정하시겠습니까?")) {
+			document.updatePost.submit();
+		}
+	}
+	function updatePostForm() {
+			document.updateForm.submit();
+	}
+	function addPost() {
+		if (confirm("게시글을 수정하시겠습니까?")) {
+			document.updateForm.submit();
+		}
+	}
+	function postBack(){
+		location.href="front?command=getPostList";
+	}
 
 
 </script>

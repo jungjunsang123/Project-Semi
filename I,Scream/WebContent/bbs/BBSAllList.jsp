@@ -84,7 +84,7 @@
 											<%-- 게시글 데이터 --%>
 											<c:forEach var="pvo" items="${requestScope.lvo.list}">
 												<tr>
-													<td>${pvo.bbs_no }</span></td>
+													<td><span>${pvo.bbs_no}</span></td>
 													<td><c:choose>
 															<c:when test="${pvo.category eq '카테고리'}">
 																<span class="label label-success">${pvo.category}</span>
@@ -94,12 +94,10 @@
 																<span class="label label-warning">${pvo.category}</span>
 															</c:otherwise>
 														</c:choose></td>
-													<td>${pvo.title }</td>
+													<td><a href="${pageContext.request.contextPath}/front?command=DetailPost&&bbs_no=${pvo.bbs_no}">${pvo.title}<a></td>
 													<td>${pvo.vo.name }</td>
 													<td>${pvo.createDate }</td>
 													<td>${pvo.hits }</td>
-
-													<%-- <td>${pvo.memberVO.name }</td> --%>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -110,7 +108,7 @@
 									<div class="row bbs-custom">
 										<div class="col-sm-1 col-sm-offset-11">
 										<div class="btn-group">
-										  <a href="${pageContext.request.contextPath}/front?command=addBBSForm"><button type="button" class="btn btn-primary">글쓰기</button></a>
+										  <a href="${pageContext.request.contextPath}/front?command=AddPostForm"><button type="button" class="btn btn-primary">글쓰기</button></a>
 										</div>
 										</div>
 									</div>
