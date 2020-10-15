@@ -14,11 +14,14 @@ public class DeatilPostController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession(false);
 		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-		String LoginId=mvo.getId();
+		String LoginId="";
+		if(mvo!=null) {
+			LoginId= mvo.getId();
+		}
 		String bbs_no = request.getParameter("bbs_no");
 		BBSVO vo = BBSDAO.getInstance().detailPostingByNo(bbs_no);
 		
-		if(!LoginId.equals(vo.getVo().getId())) {
+		if(!LoginId.equals(vo.getVo().getId()) || LoginId=="") {
             BBSDAO.getInstance().updateBBSHit(bbs_no);
               vo=BBSDAO.getInstance().detailPostingByNo(bbs_no);
           }

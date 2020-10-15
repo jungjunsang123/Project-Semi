@@ -50,7 +50,7 @@ select row_number() over(order by no desc)
 
 select count(*) from board
 
-insert into board values(board_seq.NEXTVAL, '제목2', '내용1', 0, SYSDATE, '카테고리', '10시', 'test' )
+insert into board values(board_seq.NEXTVAL, '제목2', '내용1', 0, SYSDATE, '베이비시터', '10시', 'test' )
 insert into board values(board_seq.NEXTVAL, '제목2', '내용1', 0, SYSDATE, '카테고리', '10시', 'test2' )
 
 select b.* , M.id from board b, member m where b.writer = m.id

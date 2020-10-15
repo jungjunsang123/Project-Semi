@@ -94,8 +94,8 @@
 																<span class="label label-warning">${pvo.category}</span>
 															</c:otherwise>
 														</c:choose></td>
-													<td><a href="${pageContext.request.contextPath}/front?command=DetailPost&&bbs_no=${pvo.bbs_no}">${pvo.title}<a></td>
-													<td>${pvo.vo.name }</td>
+													<td><a href="${pageContext.request.contextPath}/front?command=DetailPost&&bbs_no=${pvo.bbs_no}">${pvo.title}</a></td>
+													<td>${pvo.vo.id }</td>
 													<td>${pvo.createDate }</td>
 													<td>${pvo.hits }</td>
 												</tr>
@@ -118,14 +118,14 @@
 										<ul class="pagination">
 											<c:if test="${pb.previousPageGroup}">
 												<li><a
-													href="front?command=List&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
+													href="front?command=getPostList&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
 												</li>
 											</c:if>
 											<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
 												end="${pb.endPageOfPageGroup}">
 												<c:choose>
 													<c:when test="${pb.nowPage!=i}">
-														<li><a href="front?command=List&pageNo=${i}">${i}</a></li>
+														<li><a href="front?command=getPostList&pageNo=${i}">${i}</a></li>
 													</c:when>
 													<c:otherwise>
 														<li class="active"><a href="#">${i}</a></li>
@@ -134,7 +134,7 @@
 											</c:forEach>
 											<c:if test="${pb.nextPageGroup}">
 												<li><a
-													href="front?command=List&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
+													href="front?command=getPostList&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
 												</li>
 											</c:if>
 										</ul>
