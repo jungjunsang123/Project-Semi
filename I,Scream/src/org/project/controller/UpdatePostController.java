@@ -20,7 +20,7 @@ public class UpdatePostController implements Controller {
 		String category=request.getParameter("category");
 		String worktime=request.getParameter("worktime");
 		BBSVO vo=new BBSVO();
-		vo.setBbs_no(request.getParameter("no"));
+		vo.setBbs_no(request.getParameter("bbs_no"));
 		vo.setTitle(title);
 		vo.setContext(context);
 		vo.setCategory(category);

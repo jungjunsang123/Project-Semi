@@ -1,40 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div class="bbs-container">
 <table class="table table-bordered  table-hover boardlist" border="1px">
-	<%-- SH : 기존 샘플 주석처리 --%>
-	<%-- 	<thead>
-	
-		<tr class="success">
-			<th>번호</th>
-			<th class="title">제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회</th>
-		</tr>
-	</thead>
-	<tbody>
-	<tr>
-	 <c:forEach  var="pvo" items="${requestScope.lvo.list}" >
-			<tr>
-				<td>${pvo.bbs_no}</td>
-				<td><a href="${pageContext.request.contextPath}/front?command=TestBBSDetail&no=${pvo.bbs_no}">${pvo.title}</a></td>
-				<td>${pvo.vo.id}</td>
-				<td>${pvo.createDate}</td>
-				<td>${pvo.hits}</td>
-			</tr>
-		</c:forEach> 
-	</tbody> --%>
-	<%-- SH : 코드 시작 --%>
-	<!-- ============================================================== -->
-	<!-- Preloader - style you can find in spinners.css -->
-	<!-- ============================================================== -->
-	<div class="preloader" style="display: none;">
-		<div class="lds-ripple">
-			<div class="lds-pos"></div>
-			<div class="lds-pos"></div>
-		</div>
-	</div>
 	<!-- ============================================================== -->
 	<!-- Main wrapper - style you can find in pages.scss -->
 	<!-- ============================================================== -->
@@ -128,7 +96,7 @@
 																<span class="label label-warning">${pvo.category}</span>
 															</c:otherwise>
 														</c:choose></td>
-													<td><a href="${pageContext.request.contextPath}/front?command=TestBBSDetail&no=${pvo.bbs_no}">${pvo.title}</a></td>
+													<td><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${pvo.bbs_no}">${pvo.title}</a></td>
 													<td>${pvo.vo.name }</td>
 													<td>${pvo.createDate }</td>
 													<td>${pvo.hits }</td>
@@ -139,13 +107,22 @@
 										</tbody>
 										<%-- SH : 코드 끝 --%>
 									</table>
+									
+									<%-- 하단버튼 --%>
+									<div class="row bbs-custom">
+										<div class="col-sm-1 col-sm-offset-11">
+										<div class="btn-group">
+										  <a href="${pageContext.request.contextPath}/front?command=AddPostForm"><button type="button" class="btn btn-primary">글쓰기</button></a>
+										</div>
+										</div>
+									</div>
 									<%-- paging 처리  --%>
-
-									<c:set var="pb" value="${requestScope.lvo.pagingBean}" />
 									<div class="pagingArea">
+									<c:set var="pb" value="${requestScope.lvo.pagingBean}" />
 										<ul class="pagination">
 											<c:if test="${pb.previousPageGroup}">
-												<li><a href="front?command=List&pageNo=${pb.startPageOfPageGroup-1}">123&laquo;</a>
+												<li><a
+													href="front?command=List&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
 												</li>
 											</c:if>
 											<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
@@ -160,8 +137,16 @@
 												</c:choose>
 											</c:forEach>
 											<c:if test="${pb.nextPageGroup}">
-												<li><a href="front?command=List&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
+												<li><a
+													href="front?command=List&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
 												</li>
 											</c:if>
 										</ul>
 									</div>
+									<%-- paging 처리  --%>
+									</div>
+									
+									
+									
+									
+									
