@@ -77,15 +77,28 @@
 				return false;
 			}
 			else if(pw1 != pw2){
-				alert("패스워드  확인해주세요!");
+				alert("비밀번호를  확인해주세요!");
 				return false;
-				
+			
+			}else if(teltype.length !=11){
+				alert("휴대폰 번호를 확인해주세요!");
+				return false;
 			}else{
 				return true;
 			}
 		}); //		registerForm 기능 end
 		
-		 
+		 var teltype;
+		$("#teltype").keyup(function(){
+			var telValue=$(this).val();
+			teltype=$("#teltype").val();
+			if(telValue.length != 11){
+				$("#telInputTypeCheck").html("잘못된 번호 형식입니다.").css("color","red");
+				return
+			}else{
+				$("#telInputTypeCheck").html(" ");
+			}
+		});
 		
 	});
 
@@ -109,7 +122,8 @@
 			<b>주소</b><br>
 			<input type="text" name="address" required="required"><br><br>
 			<b>전화번호</b><br>
-			<input type="text" name="tel" required="required"><br><br>
+			<input type="text" pattern="[0-9]+" name="tel" id="teltype" placeholder="번호만 입력하세요. ex)01012345678 " required="required"><br>
+			<span id="telInputTypeCheck"></span><br>
 			<b>성별</b><br>
 			<select name="sex" class="sexSelect" required="required">
 			  <option value="남자">남자</option>
