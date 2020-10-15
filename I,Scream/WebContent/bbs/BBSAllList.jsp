@@ -33,7 +33,9 @@
 									<div class="col-md-6 col-lg-3 col-xlg-3">
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-info text-center">
-												<h1 class="font-light text-white">2,064</h1>
+												<h1 class="font-light text-white">
+												${requestScope.allCount}
+												</h1>
 												<h6 class="text-white">전체 게시글</h6>
 											</div>
 										</div>
@@ -42,8 +44,8 @@
 									<div class="col-md-6 col-lg-3 col-xlg-3">
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-primary text-center">
-												<h1 class="font-light text-white">1,738</h1>
-												<h6 class="text-white">구직 게시글</h6>
+												<h1 class="font-light text-white">${requestScope.youngCount}</h1>
+												<h6 class="text-white">아이돌봄 게시글</h6>
 											</div>
 										</div>
 									</div>
@@ -51,8 +53,8 @@
 									<div class="col-md-6 col-lg-3 col-xlg-3">
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-success text-center">
-												<h1 class="font-light text-white">1100</h1>
-												<h6 class="text-white">채용 게시글</h6>
+												<h1 class="font-light text-white">${requestScope.oldCount}</h1>
+												<h6 class="text-white">노인케어 게시글</h6>
 											</div>
 										</div>
 									</div>
@@ -60,8 +62,8 @@
 									<div class="col-md-6 col-lg-3 col-xlg-3">
 										<div class="card card-hover">
 											<div class="p-2 rounded bg-dark text-center">
-												<h1 class="font-light text-white">964</h1>
-												<h6 class="text-white">진행 게시글</h6>
+												<h1 class="font-light text-white">${requestScope.petCount}</h1>
+												<h6 class="text-white">반려동물 게시글</h6>
 											</div>
 										</div>
 									</div>
@@ -69,7 +71,7 @@
 								</div>
 								<div class="table-responsive">
 									<table id="zero_config"
-										class="table table-bordered">
+										class="table table-striped table-bordered">
 										<thead>
 											<tr>
 												<th>Number</th>
@@ -84,7 +86,7 @@
 											<%-- 게시글 데이터 --%>
 											<c:forEach var="pvo" items="${requestScope.lvo.list}">
 												<tr>
-													<td><span>${pvo.bbs_no}</span></td>
+													<td>${pvo.bbs_no }</span></td>
 													<td><c:choose>
 															<c:when test="${pvo.category eq '카테고리'}">
 																<span class="label label-success">${pvo.category}</span>
@@ -94,10 +96,12 @@
 																<span class="label label-warning">${pvo.category}</span>
 															</c:otherwise>
 														</c:choose></td>
-													<td><a href="${pageContext.request.contextPath}/front?command=DetailPost&&bbs_no=${pvo.bbs_no}">${pvo.title}</a></td>
-													<td>${pvo.vo.id }</td>
-													<td>${pvo.createDate }</td>
-													<td>${pvo.hits }</td>
+													<td><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${pvo.bbs_no}">${pvo.title}</a></td>
+													<td>${pvo.vo.id}</td>
+													<td>${pvo.createDate}</td>
+													<td>${pvo.hits}</td> 
+
+													<%-- <td>${pvo.memberVO.name }</td> --%>
 												</tr>
 											</c:forEach>
 										</tbody>

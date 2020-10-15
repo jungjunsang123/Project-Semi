@@ -31,6 +31,21 @@ public class getPostListController implements Controller {
 	      ListVO listVO = new ListVO(list, pagingBean);
 	      request.setAttribute("lvo", listVO);
 	      
+
+	      //SH : 게시판 수량 관련 
+	      int allCount=BBSDAO.getInstance().countAllPosting();
+	      request.setAttribute("allCount", allCount);
+	      int youngCount=BBSDAO.getInstance().countYoungPosting();
+	      request.setAttribute("youngCount", youngCount);
+	      int oldCount=BBSDAO.getInstance().countOldPosting();
+	      request.setAttribute("oldCount", oldCount);
+	      int petCount=BBSDAO.getInstance().countPetPosting();
+	      request.setAttribute("petCount", petCount);
+	      
+			/*
+			 * //임시로 test.jsp 로 이동함 request.setAttribute("url", "/test.jsp"); return
+			 * "/template/layout.jsp";
+			 */
 	      request.setAttribute("url", "/bbs/BBSAllList.jsp");      
 	      return "/template/bbs-layout.jsp";
 	}
