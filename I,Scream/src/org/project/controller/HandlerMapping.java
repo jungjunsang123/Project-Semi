@@ -26,9 +26,9 @@ public class HandlerMapping {
 			controller=new IdCheckController();
 		}else if(command.equals("getPostList")) {
 			controller = new getPostListController();
-		}else if (command.equals("UpdatePost")) {
+		}else if(command.equals("UpdatePost")) {
 			controller=new UpdatePostController();
-		}else if (command.contentEquals("DeletePost")) {
+		}else if(command.contentEquals("DeletePost")) {
 			controller=new DeletePostController();
 		}
 		return controller; 
