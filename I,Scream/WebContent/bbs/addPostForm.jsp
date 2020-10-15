@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>  
 <div class="bbs-container">  
-	<form action="${pageContext.request.contextPath}/front" method="post" >
+	<form action="${pageContext.request.contextPath}/front" method="post" id="addPost">
 			<div class="card-body">
 				<h4 class="card-title">게시글 작성</h4>
 				<div class="table-responsive">
