@@ -32,7 +32,6 @@ public class MemberVO {
 		return address;
 	}
 
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -102,9 +101,6 @@ public class MemberVO {
 		this.name = name;
 	}
 
-
-
-
 	public MemberVO(String id, String password, String address, String name, String tel, String sex, String birth) {
 		super();
 		this.id = id;
@@ -128,7 +124,7 @@ public class MemberVO {
 		this.sex = sex;
 		this.birth = birth;
 	}
-
+	
 	public MemberVO(String id, String address, String name, String tel, String sex, String birth) {
 		super();
 		this.id = id;
@@ -138,7 +134,8 @@ public class MemberVO {
 		this.sex = sex;
 		this.birth = birth;
 	}
-	
-	
 
+
+	
+	
 }

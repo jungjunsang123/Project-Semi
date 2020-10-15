@@ -11,12 +11,13 @@ public class DeletePostController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session=request.getSession(false);
+		System.out.println("하이");
 		if (session==null||request.getAttribute("mvo")==null||request.getMethod().equals("POST")==false) {
 			return "redirect:index.jsp";
 		}
-		String no=request.getParameter("no");
-		BBSDAO.getInstance().deletePosting(Integer.parseInt(no));
-		return "redirect:front?command=List";
+		String bbs_no=request.getParameter("bbs_no");
+		BBSDAO.getInstance().deletePosting(bbs_no);
+		return "redirect:front?command=getPostList";
 	}
 
 }

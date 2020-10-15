@@ -39,7 +39,7 @@ public class BBSDAO {
 		}
 	}
 	
-	// 게시글 목록 가져오기
+	// JS : 게시글 목록 가져오기
 		public ArrayList<BBSVO> getPostingList(PagingBean pagingBean) throws SQLException {
 			Connection con = null;
 			PreparedStatement pstmt= null;
@@ -91,10 +91,63 @@ public class BBSDAO {
 			}
 			return total;
 		}	
-		
-		
-		
-		
+
+		//상훈 : 게시물 상세보기
+		public BBSVO detailPostingByNo(String bbs_no) throws SQLException {
+			Connection con =null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			BBSVO vo = null;
+			String sql="select * from board where BBS_NO=?";
+			try {
+				con=getConnection();
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, bbs_no);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					//BBSVO(MemberVO vo, String title, String context, int hits, String createDate, String category,String workTime, String bbs_no)
+					vo = new BBSVO(new MemberVO(rs.getString(8), null, null), 
+							rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), bbs_no);
+				}
+			}finally {
+				closeAll(rs, pstmt, con);
+			}
+			return vo;
+		}	
+		//SH : 글번호에 해당하는 게시물을 삭제하는 메서드
+		public void deletePosting(String bbs_no) throws SQLException {
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			try {
+				con=getConnection();
+				pstmt=con.prepareStatement("DELETE FROM BOARD WHERE NO=?");
+				pstmt.setString(1, bbs_no);
+				pstmt.executeUpdate();
+			} finally {
+				closeAll(pstmt, con);
+			}
+		}
+		//SH : 게시물 정보 업데이트하는 메서드
+		public void updatePosting(BBSVO vo) throws SQLException {
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			try {
+				con=getConnection();
+				pstmt=con.prepareStatement("update BOARD set TITLE=?, CONTEXT=?, CATEGORY=?, WORKTIME WHERE BBS_NO=?");
+				pstmt.setString(1, vo.getTitle());
+				pstmt.setString(2, vo.getContext());
+				pstmt.setString(3, vo.getCategory());
+				pstmt.setString(4, vo.getWorkTime());
+				pstmt.setString(5, vo.getBbs_no());
+				pstmt.executeUpdate();
+				
+			} finally {
+				closeAll(pstmt, con);
+				
+			}
+		}
+
+		// 수민 : 게시물 조회수 +1 메소드
 		public void updateBBSHit(String bbs_no) throws SQLException {
 		      Connection con=null;
 		      PreparedStatement pstmt=null;
@@ -102,50 +155,12 @@ public class BBSDAO {
 		         con=getConnection();
 		        String sql="update BOARD set HITS=HITS+1 where BBS_NO=?";
 		           pstmt=con.prepareStatement(sql);
-		             pstmt.setString(1,bbs_no);
-		            pstmt.executeUpdate();
+		           pstmt.setString(1,bbs_no);
+		           pstmt.executeUpdate();
 		      }finally {
 		         closeAll(pstmt,con);
 		      }
 		   }
-		   public BBSVO getPostDetail(String no) throws SQLException {
-		      BBSVO pvo=null;
-		      Connection con=null;
-		      PreparedStatement pstmt=null;
-		      ResultSet rs=null;
-		      try {
-		         con=getConnection();
-		         StringBuilder sql=new StringBuilder();
-		           sql.append("select b.bbs_no,b.title,b.context,b.hits,to_char(POSTEDDATE,'YYYY.MM.DD') as POSTEDDATE,m.id ");
-		           sql.append("from board b,member m  ");
-		           sql.append("where b.writer=m.id order by bbs_no desc");
-		           pstmt=con.prepareStatement(sql.toString());
-		           rs=pstmt.executeQuery();
-		           if(rs.next()) {
-		              pvo=new BBSVO();
-		              pvo.setBbs_no(rs.getString(1));
-		              pvo.setTitle(rs.getString(2));
-		              pvo.setContext(rs.getString(3));
-		              pvo.setHits(rs.getInt(4));
-		              pvo.setCreateDate(rs.getString(5));
-		              MemberVO mvo=new MemberVO();
-		              mvo.setId(rs.getString(6));
-		              pvo.setVo(mvo);
-		           }
-		      } finally {
-		         closeAll(rs, pstmt, con);
-		      }
-		      return pvo;
-		   }
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 //클로즈 메소드	
 	public void closeAll(PreparedStatement pstmt,Connection con) throws SQLException{
@@ -160,36 +175,7 @@ public class BBSDAO {
 		closeAll(pstmt,con);
 	}
 
-	//SH : 글번호에 해당하는 게시물을 삭제하는 메서드
-	public void deletePosting(int no) throws SQLException {
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try {
-			con=getConnection();
-			pstmt=con.prepareStatement("DELETE FROM BOARD WHERE NO=?");
-			pstmt.setInt(1, no);
-			pstmt.executeUpdate();
-		} finally {
-			closeAll(pstmt, con);
-		}
-	}
-	//SH : 게시물 정보 업데이트하는 메서드
-	public void updatePosting(BBSVO vo) throws SQLException {
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		try {
-			con=getConnection();
-			pstmt=con.prepareStatement("update BOARD set TITLE=?, CONTEXT=?, CATEGORY=?, WORKTIME WHERE BBS_NO=?");
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(2, vo.getContext());
-			pstmt.setString(3, vo.getCategory());
-			pstmt.setString(4, vo.getWorkTime());
-			pstmt.setString(5, vo.getBbs_no());
-			pstmt.executeUpdate();
-			
-		} finally {
-			closeAll(pstmt, con);
-			
-		}
-	}
+	
+	
+	
 }

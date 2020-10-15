@@ -24,6 +24,33 @@
 					</form>
     		</div>
     		<!-- 검색창 end -->
+    		<!-- 로그인 start-->
+    		<div class="col-sm-3">
+    			<div class="container">
+    			<c:choose>
+					<c:when test="${sessionScope.mvo==null}">
+					<a href="${pageContext.request.contextPath}/front?command=registerForm">회원가입</a>
+					<form method="post" class="form-inline" action="${pageContext.request.contextPath}/front">
+						<input type="hidden" name="command" value="login">
+					    <div class="form-group">
+					      <input type="text" class="form-control"  name="id" size="5" placeholder="아이디" required="required">
+					    </div>
+					    <div class="form-group">
+					      <input type="password" class="form-control" name="password" placeholder="비밀번호"required="required">
+					    </div>
+					    <input type="submit" value="로그인">
+					  </form>
+					</c:when>
+					<c:otherwise>
+						${sessionScope.mvo.name} 님 로그인 상태<br>
+						<a href="${pageContext.request.contextPath}/front?command=logout">로그아웃</a><br>
+						회원정보수정
+					</c:otherwise>
+				</c:choose>
+				</div>
+    		</div>
+    		<!-- 로그인 end-->
+
    		</div><!-- /row  -->
 	</div>
  </nav>

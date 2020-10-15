@@ -24,9 +24,10 @@ public class getPostListController implements Controller {
 	      ArrayList<BBSVO> list=BBSDAO.getInstance().getPostingList(pagingBean);
 	      ListVO listVO = new ListVO(list, pagingBean);
 	      request.setAttribute("lvo", listVO);
-	      //임시로 test.jsp 로 이동함
-	      request.setAttribute("url", "/test.jsp");      
-	      return "/template/layout.jsp";
+	      
+	      request.setAttribute("url", "/bbs/BBSAllList.jsp");      
+	      return "/template/bbs-layout.jsp";
+
 	}
 
 }

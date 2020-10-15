@@ -88,5 +88,22 @@ public class MemberDAO {
 		}
 		return vo;
 	}
-
+	public boolean idcheck(String id) throws SQLException {
+		boolean flag=false;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="SELECT COUNT(*) FROM MEMBER WHERE ID=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()&&(rs.getInt(1)>0))
+				flag=true;
+		}finally {
+			closeAll(rs,pstmt,con);
+		}
+		return flag;
+	}
 }
