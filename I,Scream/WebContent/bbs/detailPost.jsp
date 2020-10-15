@@ -22,20 +22,20 @@
 							<select name="category">
 								<option>------------------------------</option>
 								<c:choose>
-									<c:when test="${requestScope.pvo.category == '베이비시터'} ">
-									  	<option value="베이비시터" selected="selected">베이비시터</option>
-										  <option value="펫시터">펫시터</option>
-										  <option value="방문교사">방문교사</option>
+									<c:when test="${requestScope.pvo.category == '아이돌봄'} ">
+									  	<option value="아이돌봄" selected="selected">아이돌봄</option>
+										  <option value="노인케어">노인케어</option>
+										  <option value="반려동물">반려동물</option>
 									</c:when>
-									<c:when test="${requestScope.pvo.category=='펫시터'} ">
-								  	<option value="베이비시터" >베이비시터</option>
-									  <option value="펫시터" selected="selected">펫시터</option>
-									  <option value="방문교사">방문교사</option>
+									<c:when test="${requestScope.pvo.category=='노인케어'} ">
+								  	<option value="아이돌봄" >아이돌봄</option>
+									  <option value="노인케어" selected="selected">노인케어</option>
+									  <option value="반려동물">반려동물</option>
 									</c:when>
 									<c:otherwise>
-								  	<option value="베이비시터" >베이비시터</option>
-									  <option value="펫시터">펫시터</option>
-									  <option value="방문교사" selected="selected">방문교사</option>
+								  	<option value="아이돌봄" >아이돌봄</option>
+									  <option value="노인케어">노인케어</option>
+									  <option value="반려동물" selected="selected">반려동물</option>
 									</c:otherwise>
 								</c:choose>
 							</select>  

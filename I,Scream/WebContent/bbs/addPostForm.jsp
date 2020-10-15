@@ -20,10 +20,12 @@
 						      		<td>category </td>
 						      		<td>
 						      			<select name="category">
+						      			<%-- SH: 카테고리 이름변경 시작--%>
 						      				  <option>------------------------------</option>
-											  <option value="베이비시터">베이비시터</option>
-											  <option value="펫시터">펫시터</option>
-											  <option value="방문교사">방문교사</option>
+											  <option value="아이돌봄">아이돌봄</option>
+											  <option value="노인케어">노인케어</option>
+											  <option value="반려동물">반려동물</option>
+											  <%-- SH: 카테고리 이름변경 끝 --%>
 										</select>
 									</td>
 						      	</tr>
