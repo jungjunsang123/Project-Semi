@@ -23,6 +23,8 @@ public class HandlerMapping {
 			controller=new RegisterFormController();
 		}else if(command.contentEquals("registerResult")) {
 			controller=new RegisterResultController();
+		}else if(command.contentEquals("idcheck")) {
+			controller=new IdCheckController();
 		}
 			
 		return controller; 

@@ -4,19 +4,17 @@
 <c:choose>
 <c:when test="${sessionScope.mvo==null}">
 <a href="${pageContext.request.contextPath}/front?command=registerForm">회원가입</a>
-<form method="post" action="${pageContext.request.contextPath}/front">
+<form method="post" action="${pageContext.request.contextPath}/front" id="cssforsignin">
 	<input type="hidden" name="command" value="login">
 	<table>
 		<tr>
-			<td>아이디</td>
 			<td><input type="text" name="id" placeholder="아이디" required="required"></td>
 		</tr>
 		<tr>
-			<td>비밀번호</td>
 			<td><input type="password" name="password" placeholder="비밀번호"required="required"></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="right"><input type="submit" value="로그인"></td>
+			<td align="right"><input type="submit" value="로그인"></td>
 		</tr>
 	</table>
 </form>
