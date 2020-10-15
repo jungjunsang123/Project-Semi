@@ -34,7 +34,6 @@ CREATE TABLE BOARD(
 	Writer varchar2(100) not null, 
 	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 	)
-
 -- DB test는 아래에서
 insert into member values('java', '1234', '서울', '홍길동','01012345678', sysdate, 'male', sysdate)
 

@@ -24,6 +24,8 @@ public class HandlerMapping {
 			controller=new RegisterFormController();
 		}else if(command.contentEquals("registerResult")) {
 			controller=new RegisterResultController();
+		}else if(command.contentEquals("idcheck")) {
+			controller=new IdCheckController();
 		}else if(command.equals("getPostList")) {
 			controller = new getPostListController();
 		}else if (command.equals("DetailPost")) {
