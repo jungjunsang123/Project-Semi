@@ -9,22 +9,26 @@ import java.util.*;
 import javax.sql.DataSource;
 
 public class BBSDAO {
-	private static BBSDAO dao=new BBSDAO();	
+	private static BBSDAO dao = new BBSDAO();
 	private DataSource dataSource;
-	private BBSDAO(){
-		dataSource=DataSourceManager.getInstance().getDataSource();
+
+	private BBSDAO() {
+		dataSource = DataSourceManager.getInstance().getDataSource();
 	}
-	public static BBSDAO getInstance(){
+
+	public static BBSDAO getInstance() {
 		return dao;
 	}
-	public Connection getConnection() throws SQLException{
+
+	public Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
 	}
-	//게시글 작성하는 메소드
+
+	// 게시글 작성하는 메소드
 	public void addBBS(BBSVO bbsvo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql ="insert into BOARD(bbs_no,title,context,posteddate,category,worktime,writer) values(board_seq.nextval,?,?,sysdate,?,?,?)";
+		String sql = "insert into BOARD(bbs_no,title,context,posteddate,category,worktime,writer) values(board_seq.nextval,?,?,sysdate,?,?,?)";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -38,102 +42,224 @@ public class BBSDAO {
 			closeAll(pstmt, con);
 		}
 	}
-	
-	// 게시글 목록 가져오기
-		public ArrayList<BBSVO> getPostingList(PagingBean pagingBean) throws SQLException {
-			Connection con = null;
-			PreparedStatement pstmt= null;
-			ResultSet rs = null;
-			ArrayList<BBSVO> list = new ArrayList<BBSVO>();
-			try {
-				String sql="select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer from board) B, MEMBER M where B.writer = M.ID and rnum between 1 and 10 ";
-				con = getConnection();
-				pstmt=con.prepareStatement(sql);
-				rs=pstmt.executeQuery();
-				while(rs.next()) {
-					BBSVO bbsvo = new BBSVO();
-					MemberVO mvo = new MemberVO();
-					mvo.setId(rs.getString(2));
-					bbsvo.setVo(mvo);
-					bbsvo.setTitle(rs.getNString(1));
-					bbsvo.setCreateDate(rs.getNString(3));
-					bbsvo.setHits(rs.getInt(4));
-					bbsvo.setBbs_no(rs.getString(5));
-					list.add(bbsvo);
-				}
-			}finally {
-				closeAll(rs, pstmt, con);
+
+	// JS : 게시글 목록 가져오기
+	public ArrayList<BBSVO> getPostingList(PagingBean pagingBean) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<BBSVO> list = new ArrayList<BBSVO>();
+		try {
+			con = getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO ");
+			sql.append(
+					"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer from board) B, MEMBER M ");
+			sql.append("where B.writer = M.ID and rnum between ? and ?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, pagingBean.getStartRowNumber());
+			pstmt.setInt(2, pagingBean.getEndRowNumber());
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				BBSVO bbsvo = new BBSVO();
+				MemberVO mvo = new MemberVO();
+				mvo.setId(rs.getString(2));
+				bbsvo.setVo(mvo);
+				bbsvo.setTitle(rs.getNString(1));
+				bbsvo.setCreateDate(rs.getNString(3));
+				bbsvo.setHits(rs.getInt(4));
+				bbsvo.setBbs_no(rs.getString(5));
+				list.add(bbsvo);
 			}
-			return list;
+		} finally {
+			closeAll(rs, pstmt, con);
 		}
-	//페이징을 위한 포스트 개수 
-		public int getTotalPostCount() throws SQLException {
-			int total = 0;
-			Connection con =null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			try {
-				String sql="select count(*) from board";
-				con=getConnection();
-				pstmt=con.prepareStatement(sql);
-				rs=pstmt.executeQuery();
-				if(rs.next()) {
-					total=rs.getInt(1);
-				}
-			}finally {
-				closeAll(rs, pstmt, con);
-			}
-			return total;
-		}	
-		
-		
-		
-		
-		
-		
-//클로즈 메소드	
-	public void closeAll(PreparedStatement pstmt,Connection con) throws SQLException{
-		if(pstmt!=null)
-			pstmt.close();
-		if(con!=null)
-			con.close(); 
-	}
-	public void closeAll(ResultSet rs,PreparedStatement pstmt,Connection con) throws SQLException{
-		if(rs!=null)
-			rs.close();
-		closeAll(pstmt,con);
+		return list;
 	}
 
-	//SH : 글번호에 해당하는 게시물을 삭제하는 메서드
-	public void deletePosting(int no) throws SQLException {
-		Connection con=null;
-		PreparedStatement pstmt=null;
+	// 페이징을 위한 포스트 개수
+	public int getTotalPostCount() throws SQLException {
+		int total = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
-			con=getConnection();
-			pstmt=con.prepareStatement("DELETE FROM BOARD WHERE NO=?");
-			pstmt.setInt(1, no);
+			String sql = "select count(*) from board";
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return total;
+	}
+
+	// 상훈 : 게시물 상세보기
+	public BBSVO detailPostingByNo(String bbs_no) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BBSVO vo = null;
+		String sql = "select * from board where BBS_NO=?";
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bbs_no);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				// BBSVO(MemberVO vo, String title, String context, int hits, String createDate,
+				// String category,String workTime, String bbs_no)
+				vo = new BBSVO(new MemberVO(rs.getString(8), null, null), rs.getString(2), rs.getString(3),
+						rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), bbs_no);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return vo;
+	}
+
+	// SH : 글번호에 해당하는 게시물을 삭제하는 메서드
+	public void deletePosting(String bbs_no) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement("DELETE FROM BOARD WHERE bbs_no=?");
+			pstmt.setString(1, bbs_no);
 			pstmt.executeUpdate();
 		} finally {
 			closeAll(pstmt, con);
 		}
 	}
-	//SH : 게시물 정보 업데이트하는 메서드
+
+	// SH : 게시물 정보 업데이트하는 메서드
 	public void updatePosting(BBSVO vo) throws SQLException {
-		Connection con=null;
-		PreparedStatement pstmt=null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
 		try {
-			con=getConnection();
-			pstmt=con.prepareStatement("update BOARD set TITLE=?, CONTEXT=?, CATEGORY=?, WORKTIME WHERE BBS_NO=?");
+			con = getConnection();
+			pstmt = con.prepareStatement("update BOARD set TITLE=?, CONTEXT=?, CATEGORY=?, WORKTIME=? WHERE BBS_NO=?");
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContext());
 			pstmt.setString(3, vo.getCategory());
 			pstmt.setString(4, vo.getWorkTime());
 			pstmt.setString(5, vo.getBbs_no());
 			pstmt.executeUpdate();
-			
+
 		} finally {
 			closeAll(pstmt, con);
-			
 		}
+	}
+
+	// 수민 : 게시물 조회수 +1 메소드
+	public void updateBBSHit(String bbs_no) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = getConnection();
+			String sql = "update BOARD set HITS=HITS+1 where BBS_NO=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bbs_no);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt, con);
+		}
+	}
+
+//클로즈 메소드	
+	public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
+		if (pstmt != null)
+			pstmt.close();
+		if (con != null)
+			con.close();
+	}
+
+	public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) throws SQLException {
+		if (rs != null)
+			rs.close();
+		closeAll(pstmt, con);
+	}
+
+	// SH : 전체게시물 수량 세는 메서드
+	public int countAllPosting() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int total = 0;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement("select count(*) from board");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return total;
+	}
+
+	// SH : 아이돌봄게시물 수량 세는 메서드
+	public int countYoungPosting() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int total = 0;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement("select count(*) from board where category='아이돌봄' ");
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return total;
+	}
+
+	// SH : 노인케어게시물 수량 세는 메서드
+	public int countOldPosting() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int total = 0;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement("select count(*) from board where category='노인케어' ");
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return total;
+	}
+
+	// SH : 반려동물게시물 수량 세는 메서드
+	public int countPetPosting() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int total = 0;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement("select count(*) from board where category='반려동물' ");
+
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				total = rs.getInt(1);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return total;
 	}
 }

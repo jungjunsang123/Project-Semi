@@ -8,7 +8,7 @@
     
     
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
+    .row.content {height: auto;}
     
     /* Set gray background color and 100% height */
     .sidenav {
@@ -31,7 +31,7 @@
         height: auto;
         padding: 15px;
       }
-      .row.content {height:auto;} 
+     
     }
 	
 	.searchForm{
@@ -44,45 +44,63 @@
 	.content-custom{
 		margin:0px;
 		background-color:yellow;
+		height:800px;
 	}
 
-/*회원가입폼에서 가운데 정렬하기 위한 CSS/네이버회원가입 벤치마킹*/
-#signinCss{
-	background-color: #F2F2F2;
-	align-items:center;
-	justify-content: center;
-	margin: auto;
-	height: auto;
-	display: flex;
-}
-
-/*회원가입폼 푸터*/
-#signinfooterCsds{
-	text-align:center;
-	background-color: #F2F2F2;
-}
-/*로그인 form의 길이 두께 CSS*/
-
-#cssforsignin input{
-	width:250px;
-	height: 30px;
-}
-
-/*registerForm text-area size*/
-#registerForm input[type=text],input[type=password],input[type=submit]{
-	width:460px;
-	height: 51px;
-}
-/*select class from register-form*/
-.sexSelect{
-	width:460px;
-	height: 51px;
-}
-/*birth date from register-form*/
-#birth{
-	width:460px;
-	height: 51px;
-}
+	.sidenav{
+		padding-left: 5px;
+	    padding-left: 7px;
+	}
+	.bbs-custom{
+	    margin-left: -3;
+	    margin-right: 12px;
+		
+	}
+	
+	.bbs-container{
+		padding:25px;
+		
+	}
+	 td{
+		text-align: center;
+	}
+	/*회원가입폼에서 가운데 정렬하기 위한 CSS/네이버회원가입 벤치마킹*/
+	#signinCss{
+		background-color: #F2F2F2;
+		align-items:center;
+		justify-content: center;
+		margin: auto;
+		height: auto;
+		display: flex;
+	}
+	
+	/*회원가입폼 푸터*/
+	#signinfooterCsds{
+		text-align:center;
+		background-color: #F2F2F2;
+	}
+	/*로그인 form의 길이 두께 CSS*/
+	
+	#cssforsignin input{
+		width:250px;
+		height: 30px;
+	}
+	
+	/*registerForm text-area size*/
+	#registerForm input[type=text],input[type=password],input[type=submit]{
+		width:460px;
+		height: 51px;
+	}
+	/*select class from register-form*/
+	.sexSelect{
+		width:460px;
+		height: 51px;
+	}
+	/*birth date from register-form*/
+	#birth{
+		width:460px;
+		height: 51px;
+	}
 
 	
 

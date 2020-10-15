@@ -10,8 +10,10 @@ public class HandlerMapping {
 		Controller controller=null;
 		if(command.contentEquals("login")) {
 			controller=new LoginController();
-		}else if(command.equals("addBBS"))
-			controller = new AddBBSController();
+		}else if(command.equals("AddPost"))
+			controller = new AddPostController();
+		else if(command.equals("AddPostForm"))
+			controller = new AddPostFormController();
 		else if(command.contentEquals("logout")) {
 			controller=new LogoutController();
 		}else if(command.contentEquals("register")) {
@@ -26,10 +28,22 @@ public class HandlerMapping {
 			controller=new IdCheckController();
 		}else if(command.equals("getPostList")) {
 			controller = new getPostListController();
-		}else if(command.equals("UpdatePost")) {
+		}else if (command.equals("DetailPost")) {
+			controller=new DeatilPostController();
+		}else if (command.equals("UpdatePost")) {
 			controller=new UpdatePostController();
-		}else if(command.contentEquals("DeletePost")) {
+		}else if (command.equals("UpdatePostForm")) {
+			controller=new UpdatePostFormController();
+		}else if (command.contentEquals("DeletePost")) {
 			controller=new DeletePostController();
+		}else if (command.contentEquals("AllPostCount")) {
+			controller=new AllPostCountController();
+		}else if (command.contentEquals("YoungPostCount")) {
+			controller=new YoungPostCountController();
+		}else if (command.contentEquals("OldPostCount")) {
+			controller=new OldPostCountController();
+		}else if (command.contentEquals("PetPostCount")) {
+			controller=new PetPostCountController();
 		}
 		return controller; 
 	}

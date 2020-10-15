@@ -69,6 +69,18 @@
 			}	
 		}) //비밀번호와 비밀번호 확인을 위한 pw2 keyup 기능 end
 		
+		 var teltype;
+		$("#teltype").keyup(function(){
+			var telValue=$(this).val();
+			teltype=$("#teltype").val();
+			if(telValue.length != 11){
+				$("#telInputTypeCheck").html("잘못된 번호 형식입니다.").css("color","red");
+				return
+			}else{
+				$("#telInputTypeCheck").html(" ");
+			}
+		});//휴대폰번호 등록 제한
+		
 		$("#registerForm").submit(function(){
 			pw1=$("#pw1").val();
 			pw2=$("#pw2").val();
@@ -87,18 +99,6 @@
 				return true;
 			}
 		}); //		registerForm 기능 end
-		
-		 var teltype;
-		$("#teltype").keyup(function(){
-			var telValue=$(this).val();
-			teltype=$("#teltype").val();
-			if(telValue.length != 11){
-				$("#telInputTypeCheck").html("잘못된 번호 형식입니다.").css("color","red");
-				return
-			}else{
-				$("#telInputTypeCheck").html(" ");
-			}
-		});
 		
 	});
 
