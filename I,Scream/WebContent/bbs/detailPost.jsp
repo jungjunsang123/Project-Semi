@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
-
 <div class="bbs-container">  
-	<form action="${pageContext.request.contextPath}/front" method="post" >
 			<div class="card-body">
 				<h4 class="card-title">게시글 확인</h4>
 				<div class="table-responsive">
@@ -49,23 +47,16 @@
 					<tr>
 						<td colspan="5" class="btnArea">
 						<c:if test="${requestScope.pvo.vo.id==sessionScope.mvo.id}">
-							
-								
-									<form name="deletePost"
-										action="${pageContext.request.contextPath}/front" method="post">
-										<input type="hidden" name="command" value="DeletePost"> <input
-											type="hidden" name="bbs_no" value="${requestScope.pvo.bbs_no}">
-									</form>				
-									<form name="updateForm"
-										action="${pageContext.request.contextPath}/front" method="post">
-										<input type="hidden" name="command" value="UpdatePostForm"> <input
-											type="hidden" name="bbs_no" value="${requestScope.pvo.bbs_no}">
-									</form>
-									<button type="button" class="btn" onclick="updatePostForm()">수정</button>
-									<button type="button" class="btn" onclick="deletePost()">삭제</button>
-									
-								
-							
+								<form name="deletePostForm" action="${pageContext.request.contextPath}/front" method="post">
+									<input type="hidden" name="command" value="DeletePost"> 
+									<input type="hidden" name="bbs_no" value="${requestScope.pvo.bbs_no}">
+								</form>				
+								<form name="updateForm" action="${pageContext.request.contextPath}/front" method="post">
+									<input type="hidden" name="command" value="UpdatePostForm"> 
+									<input type="hidden" name="bbs_no" value="${requestScope.pvo.bbs_no}">
+								</form>
+								<button type="button" class="btn" onclick="updatePostForm()">수정</button>
+								<button type="button" class="btn" onclick="deletePost()">삭제</button>	
 						</c:if>
 						<button type="button" class="btn" onclick="postBack()">뒤로</button>
 							</td>
@@ -78,7 +69,7 @@
 					
 				</div>
 			</div>
-	</form>
+
 	
 </div>
 

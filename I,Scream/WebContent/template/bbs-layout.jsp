@@ -15,12 +15,12 @@
 <script type="text/javascript">
 	function deletePost() {
 		if (confirm("게시글을 삭제하시겠습니까?")) {
-			document.deletePost.submit();
+			 document.deletePostForm.submit();
 		}
 	}
 	function updatePost() {
 		if (confirm("게시글을 수정하시겠습니까?")) {
-			document.updatePost.submit();
+			document.getElementById("updatePost").submit();
 		}
 	}
 	function updatePostForm() {
@@ -28,7 +28,7 @@
 	}
 	function addPost() {
 		if (confirm("게시글을 등록하시겠습니까?")) {
-			document.addPost.submit();
+			document.getElementById("addPost").submit();
 		}
 	}
 	function postBack(){

@@ -8,7 +8,7 @@
     
     
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
+    .row.content {height: auto;}
     
     /* Set gray background color and 100% height */
     .sidenav {
@@ -44,6 +44,7 @@
 	.content-custom{
 		margin:0px;
 		background-color:yellow;
+		height:800px;
 	}
 
 	.sidenav{
@@ -60,9 +61,8 @@
 		padding:25px;
 		
 	}
-	td{
+	 td{
 		text-align: center;
-		vertical-align: middle;
 	}
 	/*회원가입폼에서 가운데 정렬하기 위한 CSS/네이버회원가입 벤치마킹*/
 	#signinCss{

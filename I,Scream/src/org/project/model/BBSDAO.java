@@ -113,7 +113,7 @@ public class BBSDAO {
 			PreparedStatement pstmt=null;
 			try {
 				con=getConnection();
-				pstmt=con.prepareStatement("DELETE FROM BOARD WHERE NO=?");
+				pstmt=con.prepareStatement("DELETE FROM BOARD WHERE bbs_no=?");
 				pstmt.setString(1, bbs_no);
 				pstmt.executeUpdate();
 			} finally {
@@ -126,7 +126,7 @@ public class BBSDAO {
 			PreparedStatement pstmt=null;
 			try {
 				con=getConnection();
-				pstmt=con.prepareStatement("update BOARD set TITLE=?, CONTEXT=?, CATEGORY=?, WORKTIME WHERE BBS_NO=?");
+				pstmt=con.prepareStatement("update BOARD set TITLE=?, CONTEXT=?, CATEGORY=?, WORKTIME=? WHERE BBS_NO=?");
 				pstmt.setString(1, vo.getTitle());
 				pstmt.setString(2, vo.getContext());
 				pstmt.setString(3, vo.getCategory());

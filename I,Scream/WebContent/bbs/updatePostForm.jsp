@@ -2,11 +2,12 @@
     pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>  
 <div class="bbs-container">  
-	<form action="${pageContext.request.contextPath}/front" method="post" name="updatePost">
+	<form action="${pageContext.request.contextPath}/front" method="post" id="updatePost">
 			<div class="card-body">
 				<h4 class="card-title">게시글 수정</h4>
 				<div class="table-responsive">
 				<input type="hidden" name="command" value="UpdatePost">
+					<input type="hidden" name="bbs_no" value="${requestScope.updatePost.bbs_no}">
 					<table class="table table-bordered" style="width:800px;margin-left: auto; margin-right: auto;">
 								<tr>
 						      		<td>Title</td>
