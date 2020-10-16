@@ -55,12 +55,9 @@ public class HandlerMapping {
 		}//지원현황 클릭시 리스트 출력
 		else if (command.contentEquals("findApplyList")) {
 			controller=new findApplyListController();
+		}else if(command.contentEquals("ApplyForm")) {
+			controller=new ApplyFormController();
 		}
-		
-		
-		
-		
-		
 		return controller; 
 	}
 }

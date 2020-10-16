@@ -263,7 +263,4 @@ public class BBSDAO {
 		return total;
 	}
 	
-	
-	
-	
 }

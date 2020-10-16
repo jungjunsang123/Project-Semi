@@ -38,6 +38,7 @@ alter table [테이블명] add [컬럼명] [타입] [옵션];
 alter table MEMBER add avgstars NUMBER default 0; 
 //board 테이블에 컬럼 수정은 데이터 삭제 후에 가능하기에 테이블 전체 삭제 후 재생성
 DROP TABLE BOARD 
+
 CREATE TABLE BOARD(
 	BBS_NO VARCHAR2(100) PRIMARY KEY,
 	TITLE VARCHAR2(100) NOT NULL,
@@ -78,7 +79,19 @@ CREATE TABLE Apply(
 	HiredResult varchar2(50) default 'NO'
 )
 
+<<<<<<< HEAD
 
+=======
+ID VARCHAR2(100) PRIMARY KEY,
+	PASSWORD VARCHAR2(100) NOT NULL,
+	ADDRESS VARCHAR2(100),
+	NAME VARCHAR2(100),
+	TEL VARCHAR2(100),
+	BIRTH DATE,
+	SEX VARCHAR2(50) DEFAULT 'MALE',
+	REGDATE DATE NOT NULL
+	
+>>>>>>> branch 'main' of https://github.com/Minikanko/Kosta-semiProject-i-Scream.git
 -- DB test는 아래에서
 select * from board
 select b.bbs_no,b.title,b.context,b.hits,b.POSTEDDATE,b.category,
@@ -90,9 +103,8 @@ where m.id=a.id and a.bbs_no='15'
 
 
 insert into member values('test2', '1234', '서울', '홍길동','01012345678', sysdate, 'male', sysdate,0)
-
-INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate);
-
+select * from member
+INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate,0);
 
 
 insert into board values(board_seq.NEXTVAL, '제목1', '내용1', 1, SYSDATE, '카테고리', sysdate, 'a' )
@@ -111,5 +123,8 @@ select b.* , M.id from board b, member m where b.writer = m.id
 select * from board
 
 update BOARD set HITS=HITS+1 where BBS_NO='24'
-
-
+select * from apply
+select b.context,b.hits,b.posteddate,m.id
+from board b,member m
+where b.Writer=m.id 
+order by b.bbs_no asc;

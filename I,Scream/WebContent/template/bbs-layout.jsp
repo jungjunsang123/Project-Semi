@@ -39,6 +39,21 @@
 	function postBack(){
 		location.href="front?command=getPostList";
 	}
+<<<<<<< HEAD
+=======
+	function apply(){
+		var app=confirm("${requestScope.pvo.vo.id}에게 지원하시겠습니까?")
+		if(app){
+			alert("지원을 보냈습니다");
+			location.href="front?command=getPostList";
+		}else if(confirm("취소하시겠습니까?")){
+			location.href="front?command=home";
+		}else{
+			location.href="front?command=getPostList";
+		}
+	}
+
+>>>>>>> branch 'main' of https://github.com/Minikanko/Kosta-semiProject-i-Scream.git
 </script>
 </head>
 <body>
