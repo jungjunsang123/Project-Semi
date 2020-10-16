@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.project.model.BBSDAO;
 import org.project.model.BBSVO;
 import org.project.model.ListVO;
-import org.project.model.MemberVO;
 import org.project.model.PagingBean;
 
 public class getPostListController implements Controller {
