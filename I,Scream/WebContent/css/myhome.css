@@ -79,12 +79,6 @@
 		text-align:center;
 		background-color: #F2F2F2;
 	}
-	/*로그인 form의 길이 두께 CSS*/
-	
-	#cssforsignin input{
-		width:250px;
-		height: 30px;
-	}
 	
 	/*registerForm text-area size*/
 	#registerForm input[type=text],input[type=password],input[type=submit]{
@@ -101,9 +95,7 @@
 		width:460px;
 		height: 51px;
 	}
-
 	
-
 
 
 

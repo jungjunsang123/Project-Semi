@@ -106,7 +106,7 @@
 </script>
 <form action="${pageContext.request.contextPath}/front" method="post" id="registerForm">
 		<input type="hidden" name="command" value="register"><br>
-				<h1 align="center"><a href="${pageContext.request.contextPath }/front?command=home"><img src="css/Seeter_logo.png" width="200" height="100"></a></h1><br>
+				<h1 align="center"><a href="${pageContext.request.contextPath }/front?command=home"><img src="css/Seeter_logo_wo_background.png" width="200" height="100"></a></h1><br>
 			<font size= 4px >
 			<b>아이디</b><br>
 			<input type="text" name="id" id="memberId" required="required"><br>
@@ -138,7 +138,7 @@
 </div>
 <!-- footer -->
 <div id="signinfooterCsds">
-<a href="${pageContext.request.contextPath }/front?command=home"><img src="css/Seeter_logo.png" width="100" height="50"></a>&nbsp;&nbsp;For you. Seeter.
+<a href="${pageContext.request.contextPath }/front?command=home"><img src="css/Seeter_logo_wo_background.png" width="100" height="50"></a>&nbsp;&nbsp;For you. Seeter.
 <br><br><br><br>
 </div>
 </body>
