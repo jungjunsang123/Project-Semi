@@ -44,6 +44,8 @@ public class HandlerMapping {
 			controller=new OldPostCountController();
 		}else if (command.contentEquals("PetPostCount")) {
 			controller=new PetPostCountController();
+		}else if(command.contentEquals("ApplyForm")) {
+			controller=new ApplyFormController();
 		}
 		return controller; 
 	}

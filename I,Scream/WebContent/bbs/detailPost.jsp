@@ -56,9 +56,14 @@
 									<input type="hidden" name="bbs_no" value="${requestScope.pvo.bbs_no}">
 								</form>
 								<button type="button" class="btn" onclick="updatePostForm()">수정</button>
-								<button type="button" class="btn" onclick="deletePost()">삭제</button>	
+								<button type="button" class="btn" onclick="deletePost()">삭제</button>
+	
 						</c:if>
 						<button type="button" class="btn" onclick="postBack()">뒤로</button>
+						<c:if test="${requestScope.pvo.vo!=null}">
+						<input type="hidden" name="command" value="ApplyForm">
+						<button type="button" class="btn" onclick="apply()">지원하기</button>
+						</c:if>
 							</td>
 						</tr>
 					</table>

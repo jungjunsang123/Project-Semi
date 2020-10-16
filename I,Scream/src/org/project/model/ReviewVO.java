@@ -1,89 +1,114 @@
 package org.project.model;
 
 public class ReviewVO {
-	private BBSVO bVO;
-	private String review_context;
-	private int stars;
-	private boolean isReview;
-	private boolean rightForReview;
-	
-	
-	
-	public BBSVO getbVO() {
-		return bVO;
-	}
+   private BBSVO bVO;
+   private String review_context;
+   private int stars;
+   private boolean isReview;
+   private boolean rightForReview;
+   private String createDate;
+   private   MemberVO vo;
+   
+   
+   public String getCreateDate() {
+      return createDate;
+   }
 
 
 
-	public void setbVO(BBSVO bVO) {
-		this.bVO = bVO;
-	}
+   public void setCreateDate(String createDate) {
+      this.createDate = createDate;
+   }
 
 
 
-	public String getReview_context() {
-		return review_context;
-	}
+   public MemberVO getVo() {
+      return vo;
+   }
 
 
 
-	public void setReview_context(String review_context) {
-		this.review_context = review_context;
-	}
+   public void setVo(MemberVO vo) {
+      this.vo = vo;
+   }
 
 
 
-	public int getStars() {
-		return stars;
-	}
+   public BBSVO getbVO() {
+      return bVO;
+   }
 
 
 
-	public void setStars(int stars) {
-		this.stars = stars;
-	}
+   public void setbVO(BBSVO bVO) {
+      this.bVO = bVO;
+   }
 
 
 
-	public boolean isReview() {
-		return isReview;
-	}
+   public String getReview_context() {
+      return review_context;
+   }
 
 
 
-	public void setReview(boolean isReview) {
-		this.isReview = isReview;
-	}
+   public void setReview_context(String review_context) {
+      this.review_context = review_context;
+   }
 
 
 
-	public boolean isRightForReview() {
-		return rightForReview;
-	}
+   public int getStars() {
+      return stars;
+   }
 
 
 
-	public void setRightForReview(boolean rightForReview) {
-		this.rightForReview = rightForReview;
-	}
+   public void setStars(int stars) {
+      this.stars = stars;
+   }
 
 
 
-	public ReviewVO() {
-		super();
-	}
+   public boolean isReview() {
+      return isReview;
+   }
 
 
 
-	public ReviewVO(BBSVO bVO, String review_context, int stars, boolean isReview, boolean rightForReview) {
-		super();
-		this.bVO = bVO;
-		this.review_context = review_context;
-		this.stars = stars;
-		this.isReview = isReview;
-		this.rightForReview = rightForReview;
-	}
-	
-	
-	
+   public void setReview(boolean isReview) {
+      this.isReview = isReview;
+   }
+
+
+
+   public boolean isRightForReview() {
+      return rightForReview;
+   }
+
+
+
+   public void setRightForReview(boolean rightForReview) {
+      this.rightForReview = rightForReview;
+   }
+
+
+
+   public ReviewVO() {
+      super();
+   }
+
+
+
+   public ReviewVO(BBSVO bVO, String review_context, int stars, boolean isReview, boolean rightForReview) {
+      super();
+      this.bVO = bVO;
+      this.review_context = review_context;
+      this.stars = stars;
+      this.isReview = isReview;
+      this.rightForReview = rightForReview;
+   }
+   
+   
+   
 }

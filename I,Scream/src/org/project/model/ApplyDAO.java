@@ -31,4 +31,19 @@ public class ApplyDAO {
 		closeAll(pstmt,con);
 
 	}
+	//김수민 : 지원하기
+	public void apply(String bbs_no,String id) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=getConnection();
+			String sql="insert into apply(bbs_no,id) values(?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,bbs_no);
+			pstmt.setString(2,id);
+			pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt, con);
+		}
+	}
 }
