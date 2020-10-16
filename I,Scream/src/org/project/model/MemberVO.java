@@ -9,9 +9,18 @@ public class MemberVO {
 	private String regDate;
 	private String sex;
 	private String birth;
+	private float ratingStar;
 	
 	
 	
+	public float getRatingStar() {
+		return ratingStar;
+	}
+
+	public void setRatingStar(float ratingStar) {
+		this.ratingStar = ratingStar;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -133,6 +142,20 @@ public class MemberVO {
 		this.tel = tel;
 		this.sex = sex;
 		this.birth = birth;
+	}
+
+	public MemberVO(String id, String password, String address, String name, String tel, String regDate, String sex,
+			String birth, float ratingStar) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.address = address;
+		this.name = name;
+		this.tel = tel;
+		this.regDate = regDate;
+		this.sex = sex;
+		this.birth = birth;
+		this.ratingStar = ratingStar;
 	}
 
 

@@ -171,19 +171,19 @@ public class BBSDAO {
 		}
 	}
 
-//클로즈 메소드	
-	public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
-		if (pstmt != null)
-			pstmt.close();
-		if (con != null)
-			con.close();
-	}
-
-	public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) throws SQLException {
-		if (rs != null)
-			rs.close();
-		closeAll(pstmt, con);
-	}
+	//클로즈 메소드	
+		public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
+			if (pstmt != null)
+				pstmt.close();
+			if (con != null)
+				con.close();
+		}
+	
+		public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) throws SQLException {
+			if (rs != null)
+				rs.close();
+			closeAll(pstmt, con);
+		}
 
 	// SH : 전체게시물 수량 세는 메서드
 	public int countAllPosting() throws SQLException {
@@ -262,4 +262,8 @@ public class BBSDAO {
 		}
 		return total;
 	}
+	
+	
+	
+	
 }

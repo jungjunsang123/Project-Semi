@@ -15,6 +15,8 @@ CREATE TABLE MEMBER(
 
 
 
+
+
 drop sequence board_seq
 create sequence board_seq nocache
 SELECT*FROM MEMBER;
@@ -34,22 +36,53 @@ CREATE TABLE BOARD(
 	Writer varchar2(100) not null, 
 	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 	)
+	
+------2차 erd 적용--------------------
+alter table [테이블명] add [컬럼명] [타입] [옵션]; 
+//회원DB에 평균별점 컬럼 추가
+alter table MEMBER add avgstars NUMBER default 0; 
+//board 테이블에 컬럼 수정은 데이터 삭제 후에 가능하기에 테이블 전체 삭제 후 재생성
+DROP TABLE BOARD 
+CREATE TABLE BOARD(
+	BBS_NO VARCHAR2(100) PRIMARY KEY,
+	TITLE VARCHAR2(100) NOT NULL,
+	CONTEXT CLOB NOT NULL,
+	HITS NUMBER DEFAULT 0,
+	POSTEDDATE DATE NOT NULL,
+	CATEGORY VARCHAR2(100) NOT NULL,
+	WORKTIME date,
+	Writer varchar2(100) not null, 
+	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
+	)
+
+// review 테이블 생성
+CREATE TABLE Review(
+	BBS_NO VARCHAR2(100) PRIMARY KEY,
+	constraint bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+	stars NUMBER not null,
+	isReview varchar2(20) default 'no',
+	reviewContext CLOB not null,
+	rightForReview varchar2(50) default 'yes'
+	)
+// Apply 테이블 생성
+CREATE TABLE Apply(
+	BBS_NO VARCHAR2(100),
+	constraint apply_bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+	id VARCHAR2(100),
+	constraint apply_id_fk foreign key(id) references member(id) on delete cascade,
+	constraint pk_apply primary key(BBS_NO,id),
+	HiredResult varchar2(50) default 'NO'
+)
+
+g
 -- DB test는 아래에서
-insert into member values('test2', '1234', '서울', '홍길동','01012345678', sysdate, 'male', sysdate)
+insert into member values('test2', '1234', '서울', '홍길동','01012345678', sysdate, 'male', sysdate,0)
 
 INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate);
 
-<<<<<<< HEAD
-insert into board values(board_seq.NEXTVAL, '제목1', '내용1', 1, SYSDATE, '반려동물', '10시', 'test2' )
-insert into board values(board_seq.NEXTVAL, '제목2', '내용2', 1, SYSDATE, '노인케어', '11시', 'a' )
-insert into board values(board_seq.NEXTVAL, '제목3', '내용3', 1, SYSDATE, '아이돌봄', '12시', 'test2' )
-insert into board values(board_seq.NEXTVAL, '제목4', '내용4', 1, SYSDATE, '노인케어', '13시', 'a' )
-insert into board values(board_seq.NEXTVAL, '제목5', '내용5', 1, SYSDATE, '반려동물', '14시', 'a' )
-=======
 
-insert into board values(board_seq.NEXTVAL, '제목1', '내용1', 1, SYSDATE, '카테고리', '10시', 'a' )
->>>>>>> branch 'main' of https://github.com/Minikanko/Kosta-semiProject-i-Scream.git
->>>>>>> branch 'main' of https://github.com/Minikanko/Kosta-semiProject-i-Scream.git
+
+insert into board values(board_seq.NEXTVAL, '제목1', '내용1', 1, SYSDATE, '카테고리', sysdate, 'a' )
 select TITLE, Writer, to_char(POSTEDDATE,'yyyy.mm.dd'), HITS from  board 
 
 select 
@@ -58,15 +91,7 @@ select row_number() over(order by no desc)
 
 select count(*) from board
 
-<<<<<<< HEAD
-insert into board values(board_seq.NEXTVAL, '제목2', '내용1', 0, SYSDATE, '베이비시터', '10시', 'test' )
-=======
-<<<<<<< HEAD
-select count(*) from board where category='반려동물' 
-=======
 insert into board values(board_seq.NEXTVAL, '제목2', '내용1', 0, SYSDATE, '카테고리', '10시', 'test' )
->>>>>>> branch 'main' of https://github.com/Minikanko/Kosta-semiProject-i-Scream.git
-insert into board values(board_seq.NEXTVAL, '제목2', '내용1', 0, SYSDATE, '카테고리', '10시', 'test2' )
 
 select b.* , M.id from board b, member m where b.writer = m.id
 
