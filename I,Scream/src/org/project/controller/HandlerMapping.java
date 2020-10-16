@@ -44,7 +44,23 @@ public class HandlerMapping {
 			controller=new OldPostCountController();
 		}else if (command.contentEquals("PetPostCount")) {
 			controller=new PetPostCountController();
+		}//고용주 게시물에서 지원한 사람출력
+		else if (command.contentEquals("listApplyer")) {
+			controller=new ListApplyerController();
+		}//채용하기 버튼 클릭시 채용된 지원자 외에 모두에게 알람 및 고용주에게 알람 발생
+		else if (command.contentEquals("Recruit")) {
+			controller=new RecruitController();
+		}else if (command.contentEquals("RecuitResult")) {
+			controller=new RecruitResultController();
+		}//지원현황 클릭시 리스트 출력
+		else if (command.contentEquals("findApplyList")) {
+			controller=new findApplyListController();
 		}
+		
+		
+		
+		
+		
 		return controller; 
 	}
 }

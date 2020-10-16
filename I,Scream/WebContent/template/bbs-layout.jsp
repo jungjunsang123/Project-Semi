@@ -13,6 +13,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+	function Recruit() {
+		if (confirm("채용하시겠습니까?")) {
+			 document.recruitForm.submit();
+		}
+	}
 	function deletePost() {
 		if (confirm("게시글을 삭제하시겠습니까?")) {
 			 document.deletePostForm.submit();
@@ -34,8 +39,6 @@
 	function postBack(){
 		location.href="front?command=getPostList";
 	}
-
-
 </script>
 </head>
 <body>

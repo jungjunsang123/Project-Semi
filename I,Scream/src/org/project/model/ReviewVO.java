@@ -6,9 +6,34 @@ public class ReviewVO {
 	private int stars;
 	private boolean isReview;
 	private boolean rightForReview;
+	private String createDate;
+	private	MemberVO vo;
 	
 	
-	
+	public String getCreateDate() {
+		return createDate;
+	}
+
+
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+
+
+	public MemberVO getVo() {
+		return vo;
+	}
+
+
+
+	public void setVo(MemberVO vo) {
+		this.vo = vo;
+	}
+
+
+
 	public BBSVO getbVO() {
 		return bVO;
 	}

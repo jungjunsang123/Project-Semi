@@ -12,7 +12,6 @@ public class MemberVO {
 	private float ratingStar;
 	
 	
-	
 	public float getRatingStar() {
 		return ratingStar;
 	}
@@ -102,6 +101,13 @@ public class MemberVO {
 		super();
 	}
 	
+
+	public MemberVO(String id, String name, float ratingStar) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.ratingStar = ratingStar;
+	}
 
 	public MemberVO(String id, String password, String name) {
 		super();

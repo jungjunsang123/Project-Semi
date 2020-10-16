@@ -12,11 +12,6 @@ CREATE TABLE MEMBER(
 	SEX VARCHAR2(50) DEFAULT 'MALE',
 	REGDATE DATE NOT NULL
 )
-
-
-
-
-
 drop sequence board_seq
 create sequence board_seq nocache
 SELECT*FROM MEMBER;
@@ -60,10 +55,14 @@ CREATE TABLE Review(
 	BBS_NO VARCHAR2(100) PRIMARY KEY,
 	constraint bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
 	stars NUMBER not null,
-	isReview varchar2(20) default 'no',
+	isReview varchar2(20) default 'NO',
 	reviewContext CLOB not null,
-	rightForReview varchar2(50) default 'yes'
+	rightForReview varchar2(50) default 'YES',
+	POSTEDDATE date not null,
+	Writer varchar2(100) not null, 
+	constraint review_board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 	)
+	
 // Apply 테이블 생성
 CREATE TABLE Apply(
 	BBS_NO VARCHAR2(100),
@@ -74,8 +73,17 @@ CREATE TABLE Apply(
 	HiredResult varchar2(50) default 'NO'
 )
 
-g
+select 
 -- DB test는 아래에서
+select * from board
+select b.bbs_no,b.title,b.context,b.hits,b.POSTEDDATE,b.category,
+b.WORKTIME-SYSDATE as workTime,
+b.writer from board b, (select * from apply where id='a' and hiredResult='NO') a where b.writer=a.id;
+select m.id,m.name,m.avgstars,b.title
+from member m, apply a, (select * from board where bbs_no='15') b
+where m.id=a.id and a.bbs_no='15'
+
+
 insert into member values('test2', '1234', '서울', '홍길동','01012345678', sysdate, 'male', sysdate,0)
 
 INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate);
