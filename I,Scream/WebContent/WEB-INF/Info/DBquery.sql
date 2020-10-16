@@ -51,17 +51,22 @@ CREATE TABLE BOARD(
 	)
 
 // review 테이블 생성
+drop table review
 CREATE TABLE Review(
-	BBS_NO VARCHAR2(100) PRIMARY KEY,
-	constraint bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
-	stars NUMBER not null,
-	isReview varchar2(20) default 'NO',
-	reviewContext CLOB not null,
-	rightForReview varchar2(50) default 'YES',
-	POSTEDDATE date not null,
-	Writer varchar2(100) not null, 
-	constraint review_board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
-	)
+   BBS_NO VARCHAR2(100),
+   constraint review_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+   stars NUMBER not null,
+   isReview varchar2(20) default 'NO',
+   reviewContext CLOB not null,
+   rightForReview varchar2(50) default 'YES',
+   POSTEDDATE date not null,
+   giveReviewer varchar2(100) default 'NULL', 
+   constraint giveReviewer_fk foreign key(giveReviewer) references MEMBER(ID) on delete cascade,
+   getReviewer varchar2(100) default 'NULL', 
+   constraint getReviewer_fk foreign key(getReviewer) references MEMBER(ID) on delete cascade,
+   constraint pk_review primary key(BBS_NO,giveReviewer,getReviewer)
+   )
+
 	
 // Apply 테이블 생성
 CREATE TABLE Apply(
@@ -73,7 +78,7 @@ CREATE TABLE Apply(
 	HiredResult varchar2(50) default 'NO'
 )
 
-select 
+
 -- DB test는 아래에서
 select * from board
 select b.bbs_no,b.title,b.context,b.hits,b.POSTEDDATE,b.category,
