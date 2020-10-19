@@ -86,7 +86,7 @@
 											<%-- 게시글 데이터 --%>
 											<c:forEach var="pvo" items="${requestScope.lvo.list}">
 												<tr>
-													<td>${pvo.bbs_no }</span></td>
+													<td>${pvo.bbs_no}</span></td>
 													<td><c:choose>
 															<c:when test="${pvo.category eq '카테고리'}">
 																<span class="label label-success">${pvo.category}</span>
@@ -118,7 +118,7 @@
 									</div>
 									<%-- paging 처리  --%>
 									<div class="pagingArea">
-									<c:set var="pb" value="${requestScope.lvo.pagingBean}" />
+									<c:set var="pb" value="${requestScope.lvo.pagingBean}"/>
 										<ul class="pagination">
 											<c:if test="${pb.previousPageGroup}">
 												<li><a

@@ -26,8 +26,9 @@ public class ListApplyerController implements Controller {
 			request.setAttribute("ListApplyer", list);
 			request.setAttribute("pvo", vo);
 			url = "/bbs/detailPost_ListApplyer.jsp";
+			
 		} else {
-			url = "/member/IdNotLogin.jsp";
+			url = "/member/IsNotLogin.jsp";
 		}
 		request.setAttribute("url", url);
 		return "/template/bbs-layout.jsp";

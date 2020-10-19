@@ -50,9 +50,7 @@ CREATE TABLE BOARD(
 	Writer varchar2(100) not null, 
 	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 	)
-
 // review 테이블 생성
-drop table review
 CREATE TABLE Review(
    BBS_NO VARCHAR2(100),
    constraint review_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
@@ -79,31 +77,69 @@ CREATE TABLE Apply(
 	HiredResult varchar2(50) default 'NO'
 )
 
-<<<<<<< HEAD
+---------------------------------3차 db 구조변경작업---------------------------------------------
+delete from board 
+alter table board drop column worktime
+alter table board drop column writer
+alter table BOARD add STARTWORKTIME date not null; 
+alter table BOARD add ENDWORKTIME date not null; 
+alter table BOARD add Writer varchar2(100) not null;
+alter table BOARD add constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 
-=======
-ID VARCHAR2(100) PRIMARY KEY,
-	PASSWORD VARCHAR2(100) NOT NULL,
-	ADDRESS VARCHAR2(100),
-	NAME VARCHAR2(100),
-	TEL VARCHAR2(100),
-	BIRTH DATE,
-	SEX VARCHAR2(50) DEFAULT 'MALE',
-	REGDATE DATE NOT NULL
-	
->>>>>>> branch 'main' of https://github.com/Minikanko/Kosta-semiProject-i-Scream.git
--- DB test는 아래에서
-select * from board
+
+
+drop table review
+-- review 테이블 생성
+CREATE TABLE Review(
+   BBS_NO VARCHAR2(100),
+   constraint review_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+   stars NUMBER not null,
+   isReview varchar2(20) default 'NO',
+   reviewContext CLOB not null,
+   rightForReview varchar2(50) default 'YES',
+   POSTEDDATE date not null,
+   giveReviewer varchar2(100) default 'NULL', 
+   constraint giveReviewer_fk foreign key(giveReviewer) references MEMBER(ID) on delete cascade,
+   getReviewer varchar2(100) default 'NULL', 
+   constraint getReviewer_fk foreign key(getReviewer) references MEMBER(ID) on delete cascade,
+   constraint pk_review primary key(BBS_NO,giveReviewer,getReviewer)
+   )
+
+drop table apply
+-- Apply 테이블 생성
+CREATE TABLE Apply(
+	BBS_NO VARCHAR2(100),
+	constraint apply_bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+	id VARCHAR2(100),
+	constraint apply_id_fk foreign key(id) references member(id) on delete cascade,
+	constraint pk_apply primary key(BBS_NO,id),
+	HiredResult varchar2(50) default 'NO'
+)
+
+--profile 업로드를 위한 member테이블 컬럼 수정
+alter table member add profile_path varchar2(4000) default 'NULL'
+
+
+----------------------- DB test는 아래에서
+update apply set hiredResult = CASE when id='test2' then 'YES' ELSE 'Fail' end where bbs_no='18'
+
+update apply set hiredResult='YES','NO') where bbs_no='18'
+select * from apply
+insert into apply values('18','waooljagy','NO')
+
+select title,context,hits,to_char(posteddate,'yyyy-mm-dd hh24:mm'),category,to_char(startWorkTime,'yyyy-mm-dd'),to_char(endWorkTime,'yyyy-mm-dd'),writer from board where BBS_NO='18'
+select * from member
 select b.bbs_no,b.title,b.context,b.hits,b.POSTEDDATE,b.category,
 b.WORKTIME-SYSDATE as workTime,
 b.writer from board b, (select * from apply where id='a' and hiredResult='NO') a where b.writer=a.id;
 select m.id,m.name,m.avgstars,b.title
 from member m, apply a, (select * from board where bbs_no='15') b
 where m.id=a.id and a.bbs_no='15'
-
+select m.id,m.name,m.avgstars from member m, apply a where m.id=a.id and a.bbs_no='19'
 
 insert into member values('test2', '1234', '서울', '홍길동','01012345678', sysdate, 'male', sysdate,0)
 select * from member
+select * from apply
 INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate,0);
 
 
@@ -115,12 +151,16 @@ select
 select row_number() over(order by no desc)
 
 select count(*) from board
-
+select b.bbs_no,b.title,b.context,b.hits,b.POSTEDDATE,b.category, b.endWORKTIME-SYSDATE,b.writer from board b, (select * from apply where id='test2' and hiredResult='NO') a where b.bbs_no=a.bbs_no
+select b.bbs_no,b.title,b.context,b.hits,b..POSTEDDATE,b.category, b.endWORKTIME-SYSDATE,b.writer from board b, (select * from apply where id=? and hiredResult='NO') a where b.bbs_no=a.bbs_no
 insert into board values(board_seq.NEXTVAL, '제목2', '내용1', 0, SYSDATE, '카테고리', '10시', 'test' )
 
 select b.* , M.id from board b, member m where b.writer = m.id
 
 select * from board
+
+select m.id,m.name,m.avgstars from member m, apply a where a.bbs_no='19'
+
 
 update BOARD set HITS=HITS+1 where BBS_NO='24'
 select * from apply

@@ -18,8 +18,8 @@
 					<td colspan="5"><pre>${requestScope.pvo.context}</pre></td>
 				</tr>
 				<tr>
-					<td>category :${requestScope.pvo.category == '베이비시터'} <select
-						name="category">
+					<td>category :
+					<select name="category">
 							<option>------------------------------</option>
 							<c:choose>
 								<c:when test="${requestScope.pvo.category == '아이돌봄'} ">
@@ -41,7 +41,8 @@
 					</select>
 					</td>
 				<tr>
-					<td>workTime :${requestScope.pvo.workTime}</td>
+					<td>업무시작일 :${requestScope.pvo.startWorkTime}</td>
+					<td>업무종료일 :${requestScope.pvo.endWorkTime}</td>
 				</tr>
 				<%-- 하단버튼 --%>
 				<tr>
@@ -68,8 +69,7 @@
 			</table>
 			<hr>
 			<!-- 지원자 리스트 출력 -->
-			<table class="table table-bordered"
-				style="width: 800px; margin-left: auto; margin-right: auto;">
+			<table class="table table-bordered" style="width: 800px; margin-left: auto; margin-right: auto;">
 				<tr>
 					<td>no</td>
 					<td>지원자 ID</td>
@@ -77,8 +77,8 @@
 					<td>지원자 평점</td>
 					<td>비고</td>
 				</tr>
-				<c:forEach items="${requestScope.ListApplyer}" var="list"
-					varStatus="ApplyNumber">
+				
+				<c:forEach items="${requestScope.ListApplyer}" var="list" varStatus="ApplyNumber">
 					<tr>
 						<td>${ApplyNumber.count}</td>
 						<td>${list.id}</td>
@@ -86,12 +86,9 @@
 						<td>${list.ratingStar}</td>
 						<td>
 						<!-- 채용하기 -->
-							<form name="recruitForm" action="${pageContext.request.contextPath}/front" method="post">
-								<input type="hidden" name="command" value="Recruit">
-								<input type="hidden" name="bbs_no" value="${requestScope.pvo.bbs_no}">
-								<input type="hidden" name="applyID"  value="${list.id}">
-							</form>
-							<button type="button" class="btn" onclick="Recruit()">채용</button>
+							<input type="hidden" id="bbs_no" value="${requestScope.pvo.bbs_no}">
+							<input type="hidden" id="applyID"  value="${list.id}">
+							<button type="button" class="btn" id="Recruit">채용</button>
 						</td>
 					</tr>
 				</c:forEach>

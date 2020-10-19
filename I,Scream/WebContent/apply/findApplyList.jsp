@@ -13,15 +13,16 @@
 					<td>Date</td>
 					<td>Writer</td>
 				</tr>
-				<c:forEach items="ApplyList" var="list" varStatus="applyNo">
+				<c:forEach items="${requestScope.ApplyList}" var="list" varStatus="applyNo">
 					<tr>
 						<td>${applyNo.count}</td>
 						<td>${list.category}</td>
-						<td><a href="${pageContext.request.contextPath}/front?command=detailPost&bbs_no=${list.bbs_no}">${list.title}</a></td>
+						<td><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${list.bbs_no}">${list.title}</a></td>
 						<td>${list.createDate}</td>
 						<td>${list.vo.id}</td>
 					</tr>
 				</c:forEach>
+				</table>
 		</div>
 	</div>
 </div>

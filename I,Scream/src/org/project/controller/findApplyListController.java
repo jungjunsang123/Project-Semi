@@ -26,7 +26,7 @@ public class findApplyListController implements Controller {
 			url="/apply/findApplyList.jsp";
 		}
 		else {
-			url="/member/IdNotLogin.jsp";
+			url="/member/IsNotLogin.jsp";
 			return url;
 		}
 		request.setAttribute("url", url);

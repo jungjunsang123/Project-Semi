@@ -50,13 +50,12 @@ public class HandlerMapping {
 		}//채용하기 버튼 클릭시 채용된 지원자 외에 모두에게 알람 및 고용주에게 알람 발생
 		else if (command.contentEquals("Recruit")) {
 			controller=new RecruitController();
-		}else if (command.contentEquals("RecuitResult")) {
-			controller=new RecruitResultController();
 		}//지원현황 클릭시 리스트 출력
 		else if (command.contentEquals("findApplyList")) {
 			controller=new findApplyListController();
-		}else if(command.contentEquals("ApplyForm")) {
-			controller=new ApplyFormController();
+		}//지원하기
+		else if(command.contentEquals("Apply")) {
+			controller=new ApplyController();
 		}
 		return controller; 
 	}

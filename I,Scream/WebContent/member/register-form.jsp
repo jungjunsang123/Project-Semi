@@ -104,7 +104,7 @@
 
 	
 </script>
-<form action="${pageContext.request.contextPath}/front" method="post" id="registerForm">
+<form action="${pageContext.request.contextPath}/front" method="post" id="registerForm" enctype="multipart/form-data">
 		<input type="hidden" name="command" value="register"><br>
 				<h1 align="center"><a href="${pageContext.request.contextPath }/front?command=home"><img src="css/Seeter_logo_wo_background.png" width="200" height="100"></a></h1><br>
 			<font size= 4px >
@@ -132,6 +132,8 @@
 			</select><br><br>
 			<b>생년월일</b><br>
 			<input type="date" name="birth" id="birth" required="required"><br><br>
+			<b>프로필</b><br>
+			<input type="file" name="profileFile" ><br><br>
 			<input type="submit" value="회원가입"><br><br>
 			</font>
 </form>   	

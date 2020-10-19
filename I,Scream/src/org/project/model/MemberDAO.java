@@ -55,7 +55,7 @@ public class MemberDAO {
 		PreparedStatement pstmt=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="INSERT INTO MEMBER values(?,?,?,?,?,?,?,sysdate)";
+			String sql="INSERT INTO MEMBER(ID,PASSWORD,ADDRESS,NAME,TEL,BIRTH,SEX,REGDATE,PROFILE_PATH) values(?,?,?,?,?,?,?,sysdate)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPassword());

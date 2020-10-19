@@ -20,8 +20,9 @@ public class AddPostController implements Controller {
 			String title = request.getParameter("title");
 			String context = request.getParameter("context");
 			String category = request.getParameter("category");
-			String workTime = request.getParameter("workTime");
-			BBSVO bbsvo = new BBSVO(mvo, title, context, category, workTime);
+			String startWorkTime = request.getParameter("StartWorkTime");
+			String endWorkTime = request.getParameter("EndWorkTime");
+			BBSVO bbsvo = new BBSVO(title, context, category, startWorkTime, endWorkTime, mvo);
 			BBSDAO.getInstance().addBBS(bbsvo);
 		}
 		else {

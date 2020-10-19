@@ -10,8 +10,16 @@ public class MemberVO {
 	private String sex;
 	private String birth;
 	private float ratingStar;
+	private String profile_path;
 	
-	
+	public String getProfile_path() {
+		return profile_path;
+	}
+
+	public void setProfile_path(String profile_path) {
+		this.profile_path = profile_path;
+	}
+
 	public float getRatingStar() {
 		return ratingStar;
 	}
@@ -115,7 +123,7 @@ public class MemberVO {
 		this.password = password;
 		this.name = name;
 	}
-
+	
 	public MemberVO(String id, String password, String address, String name, String tel, String sex, String birth) {
 		super();
 		this.id = id;
@@ -162,6 +170,20 @@ public class MemberVO {
 		this.sex = sex;
 		this.birth = birth;
 		this.ratingStar = ratingStar;
+	}
+
+	public MemberVO(String id, String password, String address, String name, String tel, String regDate, String sex,
+			String birth, String profile_path) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.address = address;
+		this.name = name;
+		this.tel = tel;
+		this.regDate = regDate;
+		this.sex = sex;
+		this.birth = birth;
+		this.profile_path = profile_path;
 	}
 
 
