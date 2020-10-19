@@ -78,14 +78,19 @@ CREATE TABLE Apply(
 )
 
 ---------------------------------3차 db 구조변경작업---------------------------------------------
+--board 테이블에 컬럼을 추가해야하는데 db에 내용이 있으면 컬럼추가가 안됨, 그래서 테이블에 있는 내용삭제
 delete from board 
 alter table board drop column worktime
 alter table board drop column writer
+
 alter table BOARD add STARTWORKTIME date not null; 
 alter table BOARD add ENDWORKTIME date not null; 
 alter table BOARD add Writer varchar2(100) not null;
 alter table BOARD add constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 
+alter table member rename column avgstars to star
+alter table member modify star varchar2(100)
+//star값 보기 
 
 
 drop table review
@@ -93,17 +98,16 @@ drop table review
 CREATE TABLE Review(
    BBS_NO VARCHAR2(100),
    constraint review_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
-   stars NUMBER not null,
+   stars NUMBER default 0,
    isReview varchar2(20) default 'NO',
-   reviewContext CLOB not null,
-   rightForReview varchar2(50) default 'YES',
-   POSTEDDATE date not null,
+   reviewContext CLOB default 'NULL',
+   POSTEDDATE date,
    giveReviewer varchar2(100) default 'NULL', 
    constraint giveReviewer_fk foreign key(giveReviewer) references MEMBER(ID) on delete cascade,
    getReviewer varchar2(100) default 'NULL', 
    constraint getReviewer_fk foreign key(getReviewer) references MEMBER(ID) on delete cascade,
    constraint pk_review primary key(BBS_NO,giveReviewer,getReviewer)
-   )
+  )
 
 drop table apply
 -- Apply 테이블 생성
@@ -121,14 +125,19 @@ alter table member add profile_path varchar2(4000) default 'NULL'
 
 
 ----------------------- DB test는 아래에서
+select (TO_CHAR(endworktime, 'YYYYMMDD')) - (to_char(sysdate,'yyyymmdd')) from board where bbs_no='20'
 update apply set hiredResult = CASE when id='test2' then 'YES' ELSE 'Fail' end where bbs_no='18'
 
 update apply set hiredResult='YES','NO') where bbs_no='18'
-select * from apply
+select a.*,b.title from apply a, board b where b.bbs_no=a.bbs_no 
+INSERT INTO MEMBER VALUES('b','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),'남자',sysdate,0,'null');
+INSERT INTO review VALUES('19','4','YES','dfd','YES',sysdate,'a','b');
+INSERT INTO review VALUES('18','4','YES','dfd','YES',sysdate,'a','b');
+update member set avgstars=5 where id='b'
 insert into apply values('18','waooljagy','NO')
 
 select title,context,hits,to_char(posteddate,'yyyy-mm-dd hh24:mm'),category,to_char(startWorkTime,'yyyy-mm-dd'),to_char(endWorkTime,'yyyy-mm-dd'),writer from board where BBS_NO='18'
-select * from member
+select * from a
 select b.bbs_no,b.title,b.context,b.hits,b.POSTEDDATE,b.category,
 b.WORKTIME-SYSDATE as workTime,
 b.writer from board b, (select * from apply where id='a' and hiredResult='NO') a where b.writer=a.id;
@@ -139,7 +148,7 @@ select m.id,m.name,m.avgstars from member m, apply a where m.id=a.id and a.bbs_n
 
 insert into member values('test2', '1234', '서울', '홍길동','01012345678', sysdate, 'male', sysdate,0)
 select * from member
-select * from apply
+select * from review
 INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate,0);
 
 

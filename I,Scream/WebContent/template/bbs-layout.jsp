@@ -13,6 +13,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+	$(document).ready(function(){
 		$("#Recruit").click(function(){
 			if(confirm($("#applyID").val()+"를 채용하시겠습니까?")){
 				$.ajax({	
@@ -32,6 +33,9 @@
 				})//ajax
 			}
 		})
+		
+	})
+	
 	function deletePost() {
 		if (confirm("게시글을 삭제하시겠습니까?")) {
 			 document.deletePostForm.submit();

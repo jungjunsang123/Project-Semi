@@ -83,7 +83,7 @@
 						<td>${ApplyNumber.count}</td>
 						<td>${list.id}</td>
 						<td>${list.name}</td>
-						<td>${list.ratingStar}</td>
+						<td>${list.star}</td>
 						<td>
 						<!-- 채용하기 -->
 							<input type="hidden" id="bbs_no" value="${requestScope.pvo.bbs_no}">

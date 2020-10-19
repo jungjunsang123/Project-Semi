@@ -9,7 +9,7 @@ public class MemberVO {
 	private String regDate;
 	private String sex;
 	private String birth;
-	private float ratingStar;
+	private String star;
 	private String profile_path;
 	
 	public String getProfile_path() {
@@ -20,12 +20,12 @@ public class MemberVO {
 		this.profile_path = profile_path;
 	}
 
-	public float getRatingStar() {
-		return ratingStar;
+	public String getstar() {
+		return star;
 	}
 
-	public void setRatingStar(float ratingStar) {
-		this.ratingStar = ratingStar;
+	public void setstar(String star) {
+		this.star = star;
 	}
 
 	public String getId() {
@@ -109,19 +109,12 @@ public class MemberVO {
 		super();
 	}
 	
-
-	public MemberVO(String id, String name, float ratingStar) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.ratingStar = ratingStar;
-	}
-
-	public MemberVO(String id, String password, String name) {
+	public MemberVO(String id, String password, String name,String star) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
+		this.star = star;
 	}
 	
 	public MemberVO(String id, String password, String address, String name, String tel, String sex, String birth) {
@@ -158,22 +151,9 @@ public class MemberVO {
 		this.birth = birth;
 	}
 
-	public MemberVO(String id, String password, String address, String name, String tel, String regDate, String sex,
-			String birth, float ratingStar) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.address = address;
-		this.name = name;
-		this.tel = tel;
-		this.regDate = regDate;
-		this.sex = sex;
-		this.birth = birth;
-		this.ratingStar = ratingStar;
-	}
 
 	public MemberVO(String id, String password, String address, String name, String tel, String regDate, String sex,
-			String birth, String profile_path) {
+			String birth, String star,String profile_path) {
 		super();
 		this.id = id;
 		this.password = password;
@@ -183,6 +163,7 @@ public class MemberVO {
 		this.regDate = regDate;
 		this.sex = sex;
 		this.birth = birth;
+		this.star = star;
 		this.profile_path = profile_path;
 	}
 

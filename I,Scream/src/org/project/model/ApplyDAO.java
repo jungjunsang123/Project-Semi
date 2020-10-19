@@ -28,7 +28,7 @@ public class ApplyDAO {
 		ResultSet rs = null;
 		ArrayList<MemberVO> list = new ArrayList<MemberVO>();
 		//게시물에 대해서 지원한 사람의 아이디와 평점을 가져온다.
-		String sql = "select a.id,m.name,m.avgstars from member m,(select * from apply where bbs_no=?) a where a.id=m.id";
+		String sql = "select a.id,m.name from member m,(select * from apply where bbs_no=?) a where a.id=m.id";
 		try {
 			 con = getConnection();
 			 pstmt = con.prepareStatement(sql);
@@ -36,8 +36,9 @@ public class ApplyDAO {
 			 System.out.println(bbs_no);
 			 rs = pstmt.executeQuery();
 			 while(rs.next()){
-				 System.out.println("하잇");
-				 list.add(new MemberVO(rs.getString(1), rs.getString(2), rs.getFloat(3)));
+				 MemberVO vo = new MemberVO(rs.getString(1), rs.getString(2), null,null);
+				 vo.setstar(MemberDAO.getInstance().getRatingStar(vo.getId())); 
+				 list.add(vo);
 			 }
 		} finally {
 			closeAll(rs, pstmt, con);
@@ -62,6 +63,29 @@ public class ApplyDAO {
 			closeAll(pstmt, con);
 		}
 	}
+	// 채용여부 확인
+	public String recruitResultConfirm(String bbs_no, String id) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String hiredResult="";
+
+		String sql = "select hiredResult from apply where id=? and bbs_no=?";
+		try {
+			 con = getConnection();
+			 pstmt = con.prepareStatement(sql);
+			 pstmt.setString(1,id);
+			 pstmt.setString(2,bbs_no);
+			 rs=pstmt.executeQuery();
+			 if(rs.next()) {
+				 hiredResult = rs.getString(1);
+			 }
+		} finally {
+			closeAll(pstmt, con);
+		}
+		return hiredResult;
+	}
+	
 	//지원한 게시물 출력 리스트(채용된것과 기간지난건 제외)
 	public ArrayList<BBSVO> findApplyList(String id) throws SQLException {
 		Connection con = null;
@@ -75,18 +99,42 @@ public class ApplyDAO {
 			 pstmt = con.prepareStatement(sql.toString());
 			 pstmt.setString(1,id);
 			 rs = pstmt.executeQuery();
-			 
 			 while(rs.next()) {
-				 if(rs.getInt(7)>0) {
-					 list.add(new BBSVO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),new MemberVO(rs.getString(8), null, null),rs.getString(9)));
+				 String bbs_no=rs.getString(1);
+				 String bbs_writer=rs.getString(8);
+				 BBSVO vo = new BBSVO(bbs_no, rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),new MemberVO(bbs_writer, null, null,null),rs.getString(9));
+				 boolean isendwork_flag = ApplyDAO.getInstance().endWork(bbs_no);
+				//isendwork_flag 가 true면 업무가 종료됨, false면 업무진행중
+				 if(isendwork_flag) {
+						 RightForReview(bbs_no,bbs_writer,id);
+						 RightForReview(bbs_no,id,bbs_writer);
 				 }
+					 list.add(vo);
 			 }
+			 
 			 
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
 		return list;
 	}
+	//endwork시 review테이블에 데이터 입력
+	public void RightForReview(String bbs_no, String giveid, String getid) throws SQLException {
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      try {
+	         String sql="insert into Review(bbs_no, giveReviewer, getReviewer) VALUES(?,?,?) ";
+	         con=getConnection();
+	         pstmt=con.prepareStatement(sql);
+	         pstmt.setString(1, bbs_no);
+	         pstmt.setString(2, giveid);
+	         pstmt.setString(3, getid);
+	         pstmt.executeUpdate();
+	      }finally {
+	         closeAll(pstmt, con);
+	      }
+	      
+	   }
 	//김수민 : 지원하기
 		public void apply(String bbs_no,String id) throws SQLException {
 			Connection con=null;
@@ -123,6 +171,33 @@ public class ApplyDAO {
 			}
 			return flag;
 		}
+		//업무종료일 됐는지
+		public boolean endWork(String bbs_no) throws SQLException {
+		      Connection con = null;
+		      PreparedStatement pstmt = null;
+		      ResultSet rs = null;
+		      int result=0;
+		      boolean flag= false;
+		      // 현재날짜 - worktime   0보다 크거나 같으면 아직 일이 안끝남
+		      // -값 이면 일이 끝남
+		      try {
+		         String sql="select (TO_CHAR(endworktime, 'YYYYMMDD')) - (to_char(sysdate,'yyyymmdd')) from board where bbs_no=?";
+		         con=getConnection();
+		         pstmt = con.prepareStatement(sql);
+		         pstmt.setNString(1, bbs_no);
+		         rs=pstmt.executeQuery();
+		         if(rs.next()) {
+		            result = rs.getInt(1);
+		            if(result<0) {
+		               flag=true;
+		            }
+		         }
+		      }finally {
+		         closeAll(rs, pstmt, con);
+		      }
+		      return flag;
+		   }
+		
 	public void closeAll(PreparedStatement pstmt,Connection con) throws SQLException{
 		if(pstmt!=null)
 			pstmt.close();

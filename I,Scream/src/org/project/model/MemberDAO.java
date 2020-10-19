@@ -106,4 +106,43 @@ public class MemberDAO {
 		}
 		return flag;
 	}
+	//member db에 있는 total점수를 가지고 오고 review에 씌여진 리뷰개수를 가져온다.
+	public String getRatingStar(String id) throws SQLException {
+	      float avg=0;
+	      String result="0";
+	      Connection con =null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      int totalstar=0;
+	      int totalreview=1;
+	      try {
+	         String sql="select star from member where id=?";
+	         con=getConnection();
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setString(1, id);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) {
+	            totalstar=rs.getInt(1); //해당 아이디의 총점
+	         }
+	         con.close();
+	         pstmt.close();
+	         rs.close();
+	         System.out.println("total stars : "+totalstar);
+	         sql="select count(*) from review where getreviewer=?";       
+	         con=getConnection();
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setString(1, id);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) {
+	            if(rs.getInt(1) != 0)
+	        	 totalreview=rs.getInt(1); // 해당 아이디의 리뷰 갯수
+	         }
+	         avg=(float)totalstar/(float)totalreview;         
+	         result = String.format("%.2f", avg);
+	         
+	      }finally {
+	         closeAll(rs, pstmt, con);
+	      }
+	      return result;
+	   }
 }

@@ -57,6 +57,10 @@ public class HandlerMapping {
 		else if(command.contentEquals("Apply")) {
 			controller=new ApplyController();
 		}
+		//채용결과 확인
+		else if(command.contentEquals("recruitResultConfirm")) {
+			controller=new RecruitResultConfirmController();
+		}
 		return controller; 
 	}
 }

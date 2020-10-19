@@ -115,7 +115,7 @@ public class BBSDAO {
 			if (rs.next()) {
 				// public BBSVO(String bbs_no, String title, String context, int hits, String createDate, String category,
 				// String startWorkTime, String endWorkTime, MemberVO vo)
-				vo = new BBSVO(bbs_no, rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7), new MemberVO(rs.getString(8), null, null));
+				vo = new BBSVO(bbs_no, rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7), new MemberVO(rs.getString(8), null, null,null));
 			}
 		} finally {
 			closeAll(rs, pstmt, con);
