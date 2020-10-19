@@ -169,6 +169,7 @@ select * from board
 select * from member
 select * from apply
 select * from review
+delete from review
 
 
 
