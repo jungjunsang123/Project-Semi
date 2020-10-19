@@ -92,7 +92,6 @@ alter table member rename column avgstars to star
 alter table member modify star varchar2(100)
 //star값 보기 
 
-
 drop table review
 -- review 테이블 생성
 CREATE TABLE Review(
@@ -167,6 +166,11 @@ insert into board values(board_seq.NEXTVAL, '제목2', '내용1', 0, SYSDATE, '�
 select b.* , M.id from board b, member m where b.writer = m.id
 
 select * from board
+select * from member
+select * from apply
+select * from review
+
+
 
 select m.id,m.name,m.avgstars from member m, apply a where a.bbs_no='19'
 
