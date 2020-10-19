@@ -86,7 +86,7 @@
 											<%-- 게시글 데이터 --%>
 											<c:forEach var="pvo" items="${requestScope.lvo.list}">
 												<tr>
-													<td>${pvo.bbs_no }</span></td>
+													<td>${pvo.bbs_no }</td>
 													<td><c:choose>
 															<c:when test="${pvo.category eq '카테고리'}">
 																<span class="label label-success">${pvo.category}</span>

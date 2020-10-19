@@ -96,6 +96,15 @@
 		height: 51px;
 	}
 	
+	/*addReview-Rating-stars*/
+	#rating_star_grade a{
+		text-decoration: none;
+		color: gray;
+	}
+	#rating_star_grade a.on{
+		color: red;
+	}
+	
 
 
 
