@@ -9,7 +9,7 @@ import org.project.model.BBSDAO;
 import org.project.model.BBSVO;
 import org.project.model.MemberVO;
 //게시물 상세보기
-public class DeatilPostController implements Controller {
+public class DetailPostController implements Controller {
 
    @Override
    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -55,7 +55,7 @@ public class MemberDAO {
 		PreparedStatement pstmt=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="INSERT INTO MEMBER(ID,PASSWORD,ADDRESS,NAME,TEL,BIRTH,SEX,REGDATE,PROFILE_PATH) values(?,?,?,?,?,?,?,sysdate)";
+			String sql="INSERT INTO MEMBER(ID,PASSWORD,ADDRESS,NAME,TEL,BIRTH,SEX,REGDATE) values(?,?,?,?,?,?,?,sysdate)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPassword());
@@ -70,6 +70,7 @@ public class MemberDAO {
 			closeAll(pstmt,con);
 		}
 	}
+	//회원 찾기 및 회원정보 가져오기
 	public MemberVO findMemberById(String id) throws SQLException {
 		MemberVO vo=null;
 		Connection con=null;
@@ -77,12 +78,12 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT address, name, tel, birth, sex FROM MEMBER where id=?";
+			String sql="SELECT address, name, tel, sex,birth,star,profile_path FROM MEMBER where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
 			if(rs.next())
-				vo=new MemberVO(id,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
+				vo=new MemberVO(id,null,rs.getString(1),rs.getString(2),rs.getString(3),null,rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
 		}finally {
 			closeAll(rs,pstmt,con);
 		}
@@ -145,4 +146,43 @@ public class MemberDAO {
 	      }
 	      return result;
 	   }
+	//프로필 이미지 업로드
+	public void ProfileImgUpload(String mvoId, String profile_path) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="UPDATE MEMBER set profile_path=? where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, profile_path);
+			pstmt.setString(2, mvoId);
+			pstmt.executeQuery();
+		}finally {
+			closeAll(pstmt,con);
+		}
+	}
+	//회원정보 수정
+	public void updateInfo(MemberVO vo) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=dataSource.getConnection();
+			String sql="UPDATE MEMBER set password=?,address=?, name=?, tel=?, sex=?,birth=? where id=?";
+			pstmt=con.prepareStatement(sql);
+			//id,password,address,name,tel,null,sex,birth)
+			pstmt.setString(1, vo.getPassword());
+			pstmt.setString(2, vo.getAddress());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getTel());
+			pstmt.setString(5, vo.getSex());
+			pstmt.setString(6, vo.getBirth());
+			pstmt.setString(7, vo.getId());
+			pstmt.executeQuery();
+		}finally {
+			closeAll(pstmt,con);
+		}
+		
+	}
+	
+
 }
