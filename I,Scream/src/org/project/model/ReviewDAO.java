@@ -68,8 +68,8 @@ public class ReviewDAO {
 			sql.append("SELECT M.ID, R.REVIEWCONTEXT, R.STARS, R.POSTEDDATE,R.BBS_NO ");
 			sql.append("FROM (SELECT ROW_NUMBER() OVER(ORDER BY BBS_NO DESC) AS RNUM, ");
 			sql.append("BBS_NO, REVIEWCONTEXT, STARS, TO_CHAR(POSTEDDATE,'YYYY.MM.DD') AS POSTEDDATE, ");
-			sql.append("WRITER FROM REVIEW) R, MEMBER M ");
-			sql.append("WHERE R.WRITER = M.ID AND RNUM BETWEEN ? AND ?");
+			sql.append("giveReviewer FROM REVIEW) R, MEMBER M ");
+			sql.append("WHERE R.giveReviewer = M.ID AND RNUM BETWEEN ? AND ?");
 			pstmt=con.prepareStatement(sql.toString());
 			pstmt.setInt(1, PagingBean.getStartRowNumber());
 			pstmt.setInt(2, PagingBean.getEndRowNumber());
@@ -81,10 +81,10 @@ public class ReviewDAO {
 				bvo.setBbs_no(rs.getString(5));
 				mvo.setId(rs.getString(1));
 				rvo.setbVO(bvo);
-				rvo.setvo(mvo);
-				rvo.setreview_context(rs.getString(2));
-				rvo.setstars(rs.getInt(3));
-				rvo.setcreateDate(rs.getString(4));
+				rvo.setGiveReviewer(mvo);
+				rvo.setReview_context(rs.getString(2));
+				rvo.setStars(rs.getInt(3));
+				rvo.setCreateDate(rs.getString(4));
 				reviewList.add(rvo);
 			}
 		}finally {
@@ -101,7 +101,7 @@ public class ReviewDAO {
 		  StringBuilder sql=new StringBuilder();
 		  sql.append("SELECT M.ID, R.REVIEWCONTEXT, R.STARS, R.POSTEDDATE, R.BBS_NO ");
 		  sql.append("FROM MEMBER M, REVIEW R "); 
-		  sql.append("WHERE R.WRITER = M.ID AND R.BBS_NO = ? AND M.ID = ?");
+		  sql.append("WHERE R.giveReviewer = M.ID AND R.BBS_NO = ? AND M.ID = ?");
 		  try {
 			  con=getConnection();
 			  pstmt=con.prepareStatement(sql.toString());
@@ -110,12 +110,12 @@ public class ReviewDAO {
 			  rs=pstmt.executeQuery();
 			  if(rs.next()) {
 				  rvo=new ReviewVO();
-				  rvo.setreview_context(rs.getString(2));
-				  rvo.setstars(rs.getInt(3));
-				  rvo.setcreateDate(rs.getString(4));
+				  rvo.setReview_context(rs.getString(2));
+				  rvo.setStars(rs.getInt(3));
+				  rvo.setCreateDate(rs.getString(4));
 				  MemberVO mvo=new MemberVO();
 				  mvo.setId(id);
-				  rvo.setvo(mvo);
+				  rvo.setGiveReviewer(mvo);
 				  rvo.setbVO(new BBSVO(null, null, null, 0, null, null, null, bbs_no));
 				  ;
 			  }
@@ -132,7 +132,7 @@ public class ReviewDAO {
 			  con=getConnection();
 			  String sql="UPDATE REVIEW SET reviewContext= ? WHERE BBS_NO = ? ";
 			  pstmt=con.prepareStatement(sql);
-			  pstmt.setString(1, vo.getreview_context());
+			  pstmt.setString(1, vo.getReview_context());
 			  pstmt.setString(2, vo.getbVO().getBbs_no());
 			  pstmt.executeUpdate();
 			  pstmt.close();

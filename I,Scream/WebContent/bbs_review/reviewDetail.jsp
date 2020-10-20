@@ -9,7 +9,7 @@
 		<td>작성일</td>
 	</tr>
 	<tr>
-		<td>${requestScope.rvo.vo.id}</td>
+		<td>${requestScope.rvo.giveReviewer.id}</td>
 		<td>${requestScope.rvo.stars }</td>
 		<td>${requestScope.rvo.createDate }</td>
 	</tr>

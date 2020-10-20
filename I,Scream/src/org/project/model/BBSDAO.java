@@ -28,15 +28,16 @@ public class BBSDAO {
 	public void addBBS(BBSVO bbsvo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into BOARD(bbs_no,title,context,posteddate,category,worktime,writer) values(board_seq.nextval,?,?,sysdate,?,?,?)";
+		String sql = "insert into BOARD(bbs_no,title,context,posteddate,category,startworktime,endworktime,writer) values(board_seq.nextval,?,?,sysdate,?,?,?,?)";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bbsvo.getTitle());
 			pstmt.setString(2, bbsvo.getContext());
 			pstmt.setString(3, bbsvo.getCategory());
-			pstmt.setString(4, bbsvo.getWorkTime());
-			pstmt.setString(5, bbsvo.getVo().getId());
+			pstmt.setString(4, bbsvo.getStartWorkTime());
+			pstmt.setString(5, bbsvo.getEndWorkTime());
+			pstmt.setString(6, bbsvo.getVo().getId());
 			pstmt.execute();
 		} finally {
 			closeAll(pstmt, con);
@@ -52,9 +53,9 @@ public class BBSDAO {
 		try {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO ");
+			sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ");
 			sql.append(
-					"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer from board) B, MEMBER M ");
+					"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M ");
 			sql.append("where B.writer = M.ID and rnum between ? and ?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, pagingBean.getStartRowNumber());
@@ -70,6 +71,7 @@ public class BBSDAO {
 				bbsvo.setCreateDate(rs.getNString(3));
 				bbsvo.setHits(rs.getInt(4));
 				bbsvo.setBbs_no(rs.getString(5));
+				bbsvo.setCategory(rs.getString(6));
 				list.add(bbsvo);
 			}
 		} finally {
@@ -105,17 +107,16 @@ public class BBSDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		BBSVO vo = null;
-		String sql = "select * from board where BBS_NO=?";
+		String sql = "select title,context,hits,to_char(posteddate,'yyyy-mm-dd hh24:mm'),category,to_char(startWorkTime,'yyyy-mm-dd'),to_char(endWorkTime,'yyyy-mm-dd'),writer from board where BBS_NO=?";
 		try {
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bbs_no);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				// BBSVO(MemberVO vo, String title, String context, int hits, String createDate,
-				// String category,String workTime, String bbs_no)
-				vo = new BBSVO(new MemberVO(rs.getString(8), null, null), rs.getString(2), rs.getString(3),
-						rs.getInt(4), rs.getString(5), rs.getString(6), rs.getString(7), bbs_no);
+				// public BBSVO(String bbs_no, String title, String context, int hits, String createDate, String category,
+				// String startWorkTime, String endWorkTime, MemberVO vo)
+				vo = new BBSVO(bbs_no, rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7), new MemberVO(rs.getString(8), null, null,null));
 			}
 		} finally {
 			closeAll(rs, pstmt, con);
@@ -143,14 +144,14 @@ public class BBSDAO {
 		PreparedStatement pstmt = null;
 		try {
 			con = getConnection();
-			pstmt = con.prepareStatement("update BOARD set TITLE=?, CONTEXT=?, CATEGORY=?, WORKTIME=? WHERE BBS_NO=?");
+			pstmt = con.prepareStatement("update BOARD set TITLE=?, CONTEXT=?, CATEGORY=?, STARTWORKTIME=?,ENDWORKTIME=? WHERE BBS_NO=?");
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContext());
 			pstmt.setString(3, vo.getCategory());
-			pstmt.setString(4, vo.getWorkTime());
-			pstmt.setString(5, vo.getBbs_no());
+			pstmt.setString(4, vo.getStartWorkTime());
+			pstmt.setString(5, vo.getEndWorkTime());
+			pstmt.setString(6, vo.getBbs_no());
 			pstmt.executeUpdate();
-
 		} finally {
 			closeAll(pstmt, con);
 		}
@@ -178,7 +179,6 @@ public class BBSDAO {
 			if (con != null)
 				con.close();
 		}
-	
 		public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection con) throws SQLException {
 			if (rs != null)
 				rs.close();
@@ -212,8 +212,7 @@ public class BBSDAO {
 		int total = 0;
 		try {
 			con = getConnection();
-			pstmt = con.prepareStatement("select count(*) from board where category='아이돌봄' ");
-
+			pstmt = con.prepareStatement("select count(*) from board where category='아이돌봄'");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				total = rs.getInt(1);
@@ -232,7 +231,7 @@ public class BBSDAO {
 		int total = 0;
 		try {
 			con = getConnection();
-			pstmt = con.prepareStatement("select count(*) from board where category='노인케어' ");
+			pstmt = con.prepareStatement("select count(*) from board where category='노인케어'");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				total = rs.getInt(1);
@@ -251,8 +250,7 @@ public class BBSDAO {
 		int total = 0;
 		try {
 			con = getConnection();
-			pstmt = con.prepareStatement("select count(*) from board where category='반려동물' ");
-
+			pstmt = con.prepareStatement("select count(*) from board where category='반려동물'");
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				total = rs.getInt(1);
@@ -262,8 +260,5 @@ public class BBSDAO {
 		}
 		return total;
 	}
-	
-	
-	
 	
 }

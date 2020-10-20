@@ -21,7 +21,7 @@ public class getPostListController implements Controller {
 		}
 		int totalPostCount = BBSDAO.getInstance().getTotalPostCount();
 		String pageNo = request.getParameter("pageNo");
-	      PagingBean pagingBean = null;
+	    PagingBean pagingBean = null;
 	      if(pageNo==null) {
 	         pagingBean = new PagingBean(totalPostCount);
 	      }else
@@ -41,10 +41,6 @@ public class getPostListController implements Controller {
 	      int petCount=BBSDAO.getInstance().countPetPosting();
 	      request.setAttribute("petCount", petCount);
 	      
-			/*
-			 * //임시로 test.jsp 로 이동함 request.setAttribute("url", "/test.jsp"); return
-			 * "/template/layout.jsp";
-			 */
 	      request.setAttribute("url", "/bbs/BBSAllList.jsp");      
 	      return "/template/bbs-layout.jsp";
 	}

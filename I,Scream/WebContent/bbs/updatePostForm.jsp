@@ -21,16 +21,33 @@
 						      		<td>category </td>
 						      		<td>
 						      			<select name="category">
-						      				  <option>------------------------------</option>
-											  <option value="베이비시터">베이비시터</option>
-											  <option value="펫시터">펫시터</option>
-											  <option value="방문교사">방문교사</option>
-										</select>
+											<option>------------------------------</option>
+											<c:choose>
+				
+												<c:when test="${pvo.category=='아이돌봄'}">
+													<option value="아이돌봄" selected="selected">아이돌봄</option>
+													<option value="노인케어">노인케어</option>
+													<option value="반려동물">반려동물</option>
+												</c:when>
+												<c:when test="${pvo.category=='노인케어'}">
+													<option value="아이돌봄">아이돌봄</option>
+													<option value="노인케어" selected="selected">노인케어</option>
+													<option value="반려동물">반려동물</option>
+												</c:when>
+												<c:otherwise>
+													<option value="아이돌봄">아이돌봄</option>
+													<option value="노인케어">노인케어</option>
+													<option value="반려동물" selected="selected">반려동물</option>
+												</c:otherwise>
+											</c:choose>
+									</select>
 									</td>
 						      	</tr>
 						      	<tr>
-						      		<td>workTime</td>
-						      		<td><input type="text" name="workTime" value="${requestScope.updatePost.workTime}"></td>
+						      		<td>업무시작일</td>
+						      		<td><input type="text" name="startworkTime" value="${requestScope.updatePost.startWorkTime}"></td>
+						      		<td>업무종료일</td>
+						      		<td><input type="text" name="endworkTime" value="${requestScope.updatePost.endWorkTime}"></td>
 						      	</tr>
 						      	<%-- 하단버튼 --%>
 						      	<tr>

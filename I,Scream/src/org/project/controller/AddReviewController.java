@@ -20,8 +20,8 @@ public class AddReviewController implements Controller {
 		  String review_context = request.getParameter("review_context");
 		  
 		  ReviewVO rvo=new ReviewVO();
-		  rvo.setreview_context(review_context);
-		  rvo.setvo((MemberVO)session.getAttribute("mvo"));
+		  rvo.setReview_context(review_context);
+		  rvo.setGiveReviewer((MemberVO)session.getAttribute("mvo"));
 		  ReviewDAO.getInstance().reviewAdd(rvo);
 		  }
 		  

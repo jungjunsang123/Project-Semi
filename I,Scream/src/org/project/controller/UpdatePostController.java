@@ -18,14 +18,16 @@ public class UpdatePostController implements Controller {
 		String title=request.getParameter("title");
 		String context=request.getParameter("context");
 		String category=request.getParameter("category");
-		String workTime=request.getParameter("worktime");
+		String startWorkTime=request.getParameter("startworkTime");
+		String endWorkTime=request.getParameter("endworkTime");
 		String bbs_no= request.getParameter("bbs_no");
 		BBSVO vo=new BBSVO();
 		vo.setBbs_no(bbs_no);
 		vo.setTitle(title);
 		vo.setContext(context);
 		vo.setCategory(category);
-		vo.setWorkTime(workTime);
+		vo.setStartWorkTime(startWorkTime);
+		vo.setEndWorkTime(endWorkTime);
 		BBSDAO.getInstance().updatePosting(vo);
 		String path="redirect:front?command=DetailPost&bbs_no="+bbs_no;
 		return path;

@@ -1,23 +1,31 @@
 package org.project.model;
 
 public class BBSVO {
-	private MemberVO vo;
+	private String bbs_no;
 	private String title;
 	private String context;
 	private int hits;
 	private String createDate;
-	private String Category;
-	private String workTime;
-	private String bbs_no;
-	
-	
-	
-	public MemberVO getVo() {
-		return vo;
+	private String category;
+	private String startWorkTime;
+	private String endWorkTime;
+	private MemberVO vo;
+	private String hiredResult;
+
+	public String getHiredResult() {
+		return hiredResult;
 	}
 
-	public void setVo(MemberVO vo) {
-		this.vo = vo;
+	public void setHiredResult(String hiredResult) {
+		this.hiredResult = hiredResult;
+	}
+
+	public String getBbs_no() {
+		return bbs_no;
+	}
+
+	public void setBbs_no(String bbs_no) {
+		this.bbs_no = bbs_no;
 	}
 
 	public String getTitle() {
@@ -53,59 +61,92 @@ public class BBSVO {
 	}
 
 	public String getCategory() {
-		return Category;
+		return category;
 	}
 
 	public void setCategory(String category) {
-		Category = category;
+		this.category = category;
 	}
 
-	public String getWorkTime() {
-		return workTime;
+	public String getStartWorkTime() {
+		return startWorkTime;
 	}
 
-	public void setWorkTime(String workTime) {
-		this.workTime = workTime;
+	public void setStartWorkTime(String startWorkTime) {
+		this.startWorkTime = startWorkTime;
 	}
 
-	public String getBbs_no() {
-		return bbs_no;
+	public String getEndWorkTime() {
+		return endWorkTime;
 	}
 
-	public void setBbs_no(String bbs_no) {
-		this.bbs_no = bbs_no;
+	public void setEndWorkTime(String endWorkTime) {
+		this.endWorkTime = endWorkTime;
+	}
+
+	public MemberVO getVo() {
+		return vo;
+	}
+
+	public void setVo(MemberVO vo) {
+		this.vo = vo;
 	}
 
 	public BBSVO() {
 		super();
 	}
 
-	
-	
-	public BBSVO(MemberVO vo, String title, String context, String category, String workTime) {
+	public BBSVO(String title, String context, String category, String startWorkTime, String endWorkTime, MemberVO vo) {
 		super();
-		this.vo = vo;
 		this.title = title;
 		this.context = context;
-		Category = category;
-		this.workTime = workTime;
+		this.category = category;
+		this.startWorkTime = startWorkTime;
+		this.endWorkTime = endWorkTime;
+		this.vo = vo;
 	}
 
-	public BBSVO(MemberVO vo, String title, String context, int hits, String createDate, String category,
-			String workTime, String bbs_no) {
+	public BBSVO(String bbs_no, String title, String context, int hits, String createDate, String category,
+			String startWorkTime, String endWorkTime, MemberVO vo) {
 		super();
-		this.vo = vo;
+		this.bbs_no = bbs_no;
 		this.title = title;
 		this.context = context;
 		this.hits = hits;
 		this.createDate = createDate;
-		Category = category;
-		this.workTime = workTime;
+		this.category = category;
+		this.startWorkTime = startWorkTime;
+		this.endWorkTime = endWorkTime;
+		this.vo = vo;
+	}
+
+	public BBSVO(String bbs_no, String title, String context, int hits, String createDate, String category,
+			MemberVO vo) {
+		super();
 		this.bbs_no = bbs_no;
+		this.title = title;
+		this.context = context;
+		this.hits = hits;
+		this.createDate = createDate;
+		this.category = category;
+		this.vo = vo;
+	}
+
+	public BBSVO(String bbs_no, String title, String context, int hits, String createDate, String category,
+			MemberVO vo, String hiredResult) {
+		super();
+		this.bbs_no = bbs_no;
+		this.title = title;
+		this.context = context;
+		this.hits = hits;
+		this.createDate = createDate;
+		this.category = category;
+		this.vo = vo;
+		this.hiredResult = hiredResult;
 	}
 	
 	
 	
 	
-	
+
 }

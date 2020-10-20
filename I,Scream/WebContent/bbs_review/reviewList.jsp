@@ -16,9 +16,9 @@
 		<!-- 리뷰 데이터 -->
 		<c:forEach items="${requestScope.rlvo.reviewList}" var="rvo">
 			<tr>
-				<td>${rvo.vo.id }</td>
+				<td>${rvo.giveReviewer.id}</td>
 				<!-- 리뷰내용 보기 -->
-				<td><a href="${pageContext.request.contextPath}/front?command=ReviewDetail&bbs_no=${rvo.bVO.bbs_no}&id=${rvo.vo.id}">${rvo.review_context }</a></td>
+				<td><a href="${pageContext.request.contextPath}/front?command=ReviewDetail&bbs_no=${rvo.bVO.bbs_no}&id=${rvo.giveReviewer.id}">${rvo.review_context }</a></td>
 				<td>${rvo.stars}</td>
 				<td>${rvo.createDate }</td>
 			</tr>
