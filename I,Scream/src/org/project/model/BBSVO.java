@@ -11,6 +11,16 @@ public class BBSVO {
 	private String endWorkTime;
 	private MemberVO vo;
 	private String hiredResult;
+	private ReviewVO reviewVO;
+
+	
+	public ReviewVO getReviewVO() {
+		return reviewVO;
+	}
+
+	public void setReviewVO(ReviewVO reviewVO) {
+		this.reviewVO = reviewVO;
+	}
 
 	public String getHiredResult() {
 		return hiredResult;

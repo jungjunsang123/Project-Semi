@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
-<h2>현재 평균 별점은 ???점 입니다!</h2><br>
+<h2>${sessionScope.mvo.name}님의 현재 평균 별점은 ???점 입니다!</h2><br>
 <h2>후기 리스트</h2>
 <table id="zero_config" class="table table-striped table-bordered">
 	<thead>

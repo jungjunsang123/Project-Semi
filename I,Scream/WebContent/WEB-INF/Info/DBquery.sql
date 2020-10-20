@@ -50,24 +50,26 @@ CREATE TABLE BOARD(
 	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 	)
 
-// review 테이블 생성
-CREATE TABLE Review(
-   BBS_NO VARCHAR2(100),
-   constraint review_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
-   stars NUMBER not null,
-   isReview varchar2(20) default 'NO',
-   reviewContext CLOB not null,
-   rightForReview varchar2(50) default 'YES',
-   POSTEDDATE date not null,
-   giveReviewer varchar2(100) default 'NULL', 
-   constraint giveReviewer_fk foreign key(giveReviewer) references MEMBER(ID) on delete cascade,
-   getReviewer varchar2(100) default 'NULL', 
-   constraint getReviewer_fk foreign key(getReviewer) references MEMBER(ID) on delete cascade,
-   constraint pk_review primary key(BBS_NO,giveReviewer,getReviewer)
-   )
+--// review 테이블 생성  ------이거 안쓰는거임 쓰지마
+--CREATE TABLE Review(
+--   BBS_NO VARCHAR2(100),
+--   constraint review_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+--   stars NUMBER not null,
+--   isReview varchar2(20) default 'NO',
+--   reviewContext CLOB not null,
+--   rightForReview varchar2(50) default 'YES',
+--   POSTEDDATE date not null,
+--   giveReviewer varchar2(100) default 'NULL', 
+--   constraint giveReviewer_fk foreign key(giveReviewer) references MEMBER(ID) on delete cascade,
+--   getReviewer varchar2(100) default 'NULL', 
+--   constraint getReviewer_fk foreign key(getReviewer) references MEMBER(ID) on delete cascade,
+--   constraint pk_review primary key(BBS_NO,giveReviewer,getReviewer)
+--   )
 
-	
-// Apply 테이블 생성
+   SELECT BBS_NO FROM Review WHERE isReview = 'NO' AND rightForReview = 'YES' AND giveReviewer = a
+
+   
+   // Apply 테이블 생성
 CREATE TABLE Apply(
 	BBS_NO VARCHAR2(100),
 	constraint apply_bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
@@ -110,7 +112,11 @@ CREATE TABLE Review(
    constraint getReviewer_fk foreign key(getReviewer) references MEMBER(ID) on delete cascade,
    constraint pk_review primary key(BBS_NO,giveReviewer,getReviewer)
   )
-
+  
+  INSERT INTO REVIEW VALUES('5', 3, 'NO', ' ', sysdate, 'a', 'b');
+  SELECT BBS_NO FROM Review WHERE isReview = 'NO' AND giveReviewer = 'a';
+  
+SELECT * FROM REVIEW
 drop table apply
 -- Apply 테이블 생성
 CREATE TABLE Apply(
@@ -185,3 +191,5 @@ select b.context,b.hits,b.posteddate,m.id
 from board b,member m
 where b.Writer=m.id 
 order by b.bbs_no asc;
+INSERT INTO REVIEW SET VALUE()reviewContext= ?;
+

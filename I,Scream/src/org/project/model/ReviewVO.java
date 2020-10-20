@@ -6,7 +6,7 @@ public class ReviewVO {
 	private int stars;
 	private boolean isReview;
 	private String createDate;
-	private	MemberVO giveReviewer; //리뷰를 받는 사람
+	private	MemberVO giveReviewer; //리뷰를 받는 사람 
 	private	MemberVO getReviewer; //리뷰를 주는 사람
 
 	
@@ -66,5 +66,8 @@ public class ReviewVO {
 		this.createDate = createDate;
 		this.giveReviewer = giveReviewer;
 		this.getReviewer = getReviewer;
+	}
+	public ReviewVO(String review_context) {
+		this.review_context=review_context;
 	}
 }
