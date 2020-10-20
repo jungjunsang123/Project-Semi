@@ -180,11 +180,13 @@ where B.writer = M.ID and rnum between 1 and 10
  from ( select row_number() over (order by bbs_no desc) as rnum ) b, member m
  where b.writer = m.id and rnum between 1 and 10
  
- 
- 
+ select star from member where ID='a'
+ select count(*) from board where writer='a'
+ select * from review
+ update member set star = 5 where id='a'
  
 select m.id,m.name,m.avgstars from member m, apply a where a.bbs_no='19'
-
+select * from member
 
 update BOARD set HITS=HITS+1 where BBS_NO='24'
 select * from apply
@@ -192,3 +194,15 @@ select b.context,b.hits,b.posteddate,m.id
 from board b,member m
 where b.Writer=m.id 
 order by b.bbs_no asc;
+
+
+select * from review
+
+select getreviewer, avg(stars) as avgStars
+from review
+group by getReviewer
+having avg(stars) > 2
+order by avgStars desc  
+
+select getreviewer, avg(stars) as avgStars from review group by getReviewer having avg(stars) > 2 order by avgStars desc 
+

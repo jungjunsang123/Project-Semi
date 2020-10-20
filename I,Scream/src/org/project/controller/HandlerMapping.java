@@ -61,6 +61,10 @@ public class HandlerMapping {
 		else if(command.contentEquals("recruitResultConfirm")) {
 			controller=new RecruitResultConfirmController();
 		}
+		//우수사원 뽑아오기
+		else if(command.equals("bestemployee")) {
+			controller = new BestEmployeeController();
+		}
 		return controller; 
 	}
 }
