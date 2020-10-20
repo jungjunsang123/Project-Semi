@@ -8,6 +8,9 @@ public class ReviewVO {
 	private String createDate;
 	private	MemberVO giveReviewer; //리뷰를 받는 사람
 	private	MemberVO getReviewer; //리뷰를 주는 사람
+
+	
+	
 	public BBSVO getbVO() {
 		return bVO;
 	}
@@ -38,6 +41,9 @@ public class ReviewVO {
 	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
+	public ReviewVO() {
+		super();
+	}
 	public MemberVO getGiveReviewer() {
 		return giveReviewer;
 	}
@@ -61,11 +67,4 @@ public class ReviewVO {
 		this.giveReviewer = giveReviewer;
 		this.getReviewer = getReviewer;
 	}
-	public ReviewVO() {
-		super();
-	}
-	
-	
-	  
-   
 }

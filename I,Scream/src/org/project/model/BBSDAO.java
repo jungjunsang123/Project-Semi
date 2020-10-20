@@ -53,9 +53,9 @@ public class BBSDAO {
 		try {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO ");
+			sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ");
 			sql.append(
-					"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer from board) B, MEMBER M ");
+					"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M ");
 			sql.append("where B.writer = M.ID and rnum between ? and ?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, pagingBean.getStartRowNumber());
@@ -71,6 +71,7 @@ public class BBSDAO {
 				bbsvo.setCreateDate(rs.getNString(3));
 				bbsvo.setHits(rs.getInt(4));
 				bbsvo.setBbs_no(rs.getString(5));
+				bbsvo.setCategory(rs.getString(6));
 				list.add(bbsvo);
 			}
 		} finally {

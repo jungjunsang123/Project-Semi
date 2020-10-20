@@ -41,6 +41,8 @@
 			        <li><a href="${pageContext.request.contextPath}/front?command=getPostList" class="">채용정보</a></li>
 			        <li><a href="#" class="nav-item nav-link">인재정보</a></li>
 			        <li><a href="#" class="nav-item nav-link">이용안내</a></li>
+			        <!-- 마이페이지 임시구현 -->
+			        <li><a href="${pageContext.request.contextPath}/front?command=ReviewList">마이페이지(테스트)</a></li>
 		     	 </ul>
 				   	
 		    </div>

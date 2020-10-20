@@ -104,8 +104,9 @@ public class ApplyDAO {
 				 String bbs_writer=rs.getString(8);
 				 BBSVO vo = new BBSVO(bbs_no, rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6),new MemberVO(bbs_writer, null, null,null),rs.getString(9));
 				 boolean isendwork_flag = ApplyDAO.getInstance().endWork(bbs_no);
+				 boolean isRightForReview_IsFlag = ApplyDAO.getInstance().isRightForReview(bbs_no);
 				//isendwork_flag 가 true면 업무가 종료됨, false면 업무진행중
-				 if(isendwork_flag) {
+				 if(isendwork_flag && !isRightForReview_IsFlag) {
 						 RightForReview(bbs_no,bbs_writer,id);
 						 RightForReview(bbs_no,id,bbs_writer);
 				 }
@@ -117,6 +118,28 @@ public class ApplyDAO {
 			closeAll(rs, pstmt, con);
 		}
 		return list;
+	}
+	private boolean isRightForReview(String bbs_no) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		//지원한 게시물 가져오기
+		String sql="select count(*) from review where bbs_no=?";
+		boolean flag=false;
+		try {
+			 con = getConnection();
+			 pstmt = con.prepareStatement(sql.toString());
+			 pstmt.setString(1,bbs_no);
+			 rs = pstmt.executeQuery();
+			 if(rs.next()) {
+				 //이미 review에 insert가 된 경우
+				if(rs.getInt(1)>0)
+					flag=true;
+			 }
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return flag;
 	}
 	//endwork시 review테이블에 데이터 입력
 	public void RightForReview(String bbs_no, String giveid, String getid) throws SQLException {
