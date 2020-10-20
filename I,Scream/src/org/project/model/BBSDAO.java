@@ -56,7 +56,7 @@ public class BBSDAO {
 			sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ");
 			sql.append(
 					"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M ");
-			sql.append("where B.writer = M.ID and rnum between ? and ?");
+			sql.append(" where B.writer = M.ID and rnum between ? and ? ");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, pagingBean.getStartRowNumber());
 			pstmt.setInt(2, pagingBean.getEndRowNumber());
@@ -65,13 +65,13 @@ public class BBSDAO {
 			while (rs.next()) {
 				BBSVO bbsvo = new BBSVO();
 				MemberVO mvo = new MemberVO();
-				mvo.setId(rs.getString(2));
-				bbsvo.setVo(mvo);
+				mvo.setId(rs.getString(2));				
 				bbsvo.setTitle(rs.getNString(1));
 				bbsvo.setCreateDate(rs.getNString(3));
 				bbsvo.setHits(rs.getInt(4));
 				bbsvo.setBbs_no(rs.getString(5));
 				bbsvo.setCategory(rs.getString(6));
+				bbsvo.setVo(mvo);
 				list.add(bbsvo);
 			}
 		} finally {

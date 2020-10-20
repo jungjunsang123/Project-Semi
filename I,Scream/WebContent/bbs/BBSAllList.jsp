@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <div class="bbs-container">
 <table class="table table-bordered  table-hover boardlist" border="1px">
 	<!-- ============================================================== -->
@@ -84,9 +85,9 @@
 										</thead>
 										<tbody>
 											<%-- 게시글 데이터 --%>
-											<c:forEach var="pvo" items="${requestScope.lvo.list}">
+											<c:forEach var="pvo" items="${requestScope.lvo.list}" varStatus="status" >
 												<tr>
-													<td>${pvo.bbs_no}</span></td>
+													<td>${fn:length(requestScope.lvo.list)-status.index}</td>
 													<td><c:choose>
 															<c:when test="${pvo.category eq '카테고리'}">
 																<span class="label label-success">${pvo.category}</span>

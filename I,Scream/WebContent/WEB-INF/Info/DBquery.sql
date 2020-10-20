@@ -171,8 +171,18 @@ select * from apply
 select * from review
 delete from review
 
+select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ,b.rnum
+from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M 
+where B.writer = M.ID and rnum between 1 and 10
 
-
+ 
+ select b.rnum
+ from ( select row_number() over (order by bbs_no desc) as rnum ) b, member m
+ where b.writer = m.id and rnum between 1 and 10
+ 
+ 
+ 
+ 
 select m.id,m.name,m.avgstars from member m, apply a where a.bbs_no='19'
 
 
