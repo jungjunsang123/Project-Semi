@@ -28,7 +28,7 @@
 		<a href="${pageContext.request.contextPath}/front?command=listApplyer&bbs_no=5">게시물 지원한 사람출력</a><br>
 		<a href="${pageContext.request.contextPath}/front?command=findApplyList">지원현황 클릭시 리스트 출력</a><br>
 		<a href="${pageContext.request.contextPath}/front?command=ReviewList">마이페이지</a><br>
-		회원정보수정<!-- 회원정보수정 추가예정 -->
+		<a href="${pageContext.request.contextPath}/front?command=memberUpdateForm">회원정보수정(test)</a><br>
 	</c:otherwise>
 	</c:choose>
 </div> 

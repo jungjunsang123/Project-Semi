@@ -91,8 +91,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="org.project.controller.DeatilPostController" project="I,Scream" 
-    file="/I,Scream/src/org/project/controller/DeatilPostController.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="11" language="java" name="org.project.controller.DetailPostController" project="I,Scream" 
+    file="/I,Scream/src/org/project/controller/DetailPostController.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="106" width="354" x="4120" y="135"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -267,81 +267,81 @@
     <end type="TARGET" refId="13"/>  
   </realization>  
   <realization id="31">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <realization id="32">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="13"/>  
   </realization>  
+  <realization id="32">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
   <realization id="33">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <realization id="34">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <realization id="35">    
     <end type="SOURCE" refId="20"/>    
     <end type="TARGET" refId="13"/>  
   </realization>  
-  <association id="36">    
-    <end type="SOURCE" refId="29" navigable="false">      
-      <attribute id="37" name="vo">        
+  <realization id="34">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="35">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="36">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <association id="37">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="38" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="38" minimum="0" maximum="1">        
+      <multiplicity id="39" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
+    <end type="TARGET" refId="18" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="39">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
   <realization id="40">    
-    <end type="SOURCE" refId="19"/>    
+    <end type="SOURCE" refId="22"/>    
     <end type="TARGET" refId="13"/>  
   </realization>  
-  <realization id="41">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <association id="42">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="43" name="dao">        
+  <association id="41">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="42" name="instance">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="44" minimum="0" maximum="1">        
+      <multiplicity id="43" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
+    <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="45">    
+  <realization id="44">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="13"/>  
   </realization>  
-  <association id="46">    
+  <realization id="45">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="46">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <association id="47">    
     <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="47" name="pagingBean">        
+      <attribute id="48" name="pagingBean">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="48" minimum="0" maximum="1">        
+      <multiplicity id="49" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="27" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="49">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
   <association id="50">    
     <end type="SOURCE" refId="28" navigable="false">      
       <attribute id="51" name="dao">        
@@ -355,69 +355,69 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="53">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="54" name="instance">        
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="54" name="vo">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="55" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
+    <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <realization id="56">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <realization id="57">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="13"/>  
   </realization>  
-  <association id="58">    
-    <end type="SOURCE" refId="23" navigable="false">      
-      <attribute id="59" name="list">        
+  <realization id="57">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="58">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="59">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="60">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="61">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <realization id="62">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="13"/>  
+  </realization>  
+  <association id="63">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="64" name="dao">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="60" minimum="0" maximum="2147483647">        
+      <multiplicity id="65" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="66">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="67" name="list">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="68" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="29" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="61">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <realization id="62">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <realization id="63">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <association id="64">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="65" name="instance">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="66" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="26" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="67">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
-  <realization id="68">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="13"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

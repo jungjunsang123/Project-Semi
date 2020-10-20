@@ -79,7 +79,6 @@
 		text-align:center;
 		background-color: #F2F2F2;
 	}
-	
 	/*registerForm text-area size*/
 	#registerForm input[type=text],input[type=password],input[type=submit]{
 		width:460px;

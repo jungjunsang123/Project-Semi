@@ -16,23 +16,41 @@ public class HandlerMapping {
 			controller = new AddPostFormController();
 		else if(command.contentEquals("logout")) {
 			controller=new LogoutController();
-		}else if(command.contentEquals("register")) {
+		}
+		//회원정보수정하는 페이지로 이동
+		else if(command.contentEquals("memberUpdateForm")) {
+			controller=new MemberUpdateFormController();
+		}
+		else if(command.contentEquals("memberUpdate")) {
+			controller=new MemberUpdateController();
+		}
+		else if(command.contentEquals("UpdateInfoResult")) {
+			controller=new UpdateInfoResultController();
+		}
+		
+		else if(command.contentEquals("register")) {
 			controller=new RegisterController();
-		}else if(command.contentEquals("home")) {
-			controller=new HomeController();
 		}else if(command.contentEquals("registerForm")) {
 			controller=new RegisterFormController();
+		}else if(command.contentEquals("home")) {
+			controller=new HomeController();
 		}else if(command.contentEquals("registerResult")) {
 			controller=new RegisterResultController();
 		}else if(command.contentEquals("idcheck")) {
 			controller=new IdCheckController();
 		}else if(command.equals("getPostList")) {
 			controller = new getPostListController();
-		}else if (command.equals("DetailPost")) {
-			controller=new DeatilPostController();
-		}else if (command.equals("UpdatePost")) {
+		}
+		//게시물 상세보기
+		else if (command.equals("DetailPost")) {
+			controller=new DetailPostController();
+		}
+		//게시물 수정
+		else if (command.equals("UpdatePost")) {
 			controller=new UpdatePostController();
-		}else if (command.equals("UpdatePostForm")) {
+		}
+		//게시물 수정하는 목록으로 이동
+		else if (command.equals("UpdatePostForm")) {
 			controller=new UpdatePostFormController();
 		}else if (command.contentEquals("DeletePost")) {
 			controller=new DeletePostController();

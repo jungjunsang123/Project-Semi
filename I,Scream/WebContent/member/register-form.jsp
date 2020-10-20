@@ -10,10 +10,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 </head>
 <body>
-<div id="signinCss">
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		var checkId="";
@@ -101,9 +101,8 @@
 		}); //		registerForm 기능 end
 		
 	});
-
-	
 </script>
+<div id="signinCss">
 <form action="${pageContext.request.contextPath}/front" method="post" id="registerForm" enctype="multipart/form-data">
 		<input type="hidden" name="command" value="register"><br>
 				<h1 align="center"><a href="${pageContext.request.contextPath }/front?command=home"><img src="css/Seeter_logo_wo_background.png" width="200" height="100"></a></h1><br>
@@ -132,8 +131,6 @@
 			</select><br><br>
 			<b>생년월일</b><br>
 			<input type="date" name="birth" id="birth" required="required"><br><br>
-			<b>프로필</b><br>
-			<input type="file" name="profileFile" ><br><br>
 			<input type="submit" value="회원가입"><br><br>
 			</font>
 </form>   	
