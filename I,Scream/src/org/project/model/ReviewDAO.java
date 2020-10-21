@@ -125,19 +125,38 @@ public class ReviewDAO {
 		  return rvo;
 	  }
 	  
-	  public void reviewAdd(ReviewVO vo) throws SQLException {
+	  public void reviewAdd(BBSVO bvo, int stars) throws SQLException {
 		  Connection con=null;
 		  PreparedStatement pstmt=null;
 		  try {
 			  con=getConnection();
-			  String sql="UPDATE REVIEW SET reviewContext= ? WHERE BBS_NO = ? ";
+			  String sql="UPDATE REVIEW SET reviewContext=?, stars=?, posteddate=sysdate, isReview='YES' WHERE bbs_no=?";
 			  pstmt=con.prepareStatement(sql);
-			  pstmt.setString(1, vo.getReview_context());
-			  pstmt.setString(2, vo.getbVO().getBbs_no());
+			 pstmt.setString(1, bvo.getContext());
+			 pstmt.setInt(2, stars);
+			 pstmt.setString(3, bvo.getBbs_no());
 			  pstmt.executeUpdate();
-			  pstmt.close();
 		  }finally {
 			  closeAll(pstmt,con);
 		  }
-	  }	
+	  }
+	public String getBBS_NO(String id) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String result="";
+		try {
+			String sql="SELECT BBS_NO FROM Review WHERE isReview = 'NO' AND giveReviewer = ? ";
+			con=getConnection();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getString(1);
+			}
+		}finally {
+			closeAll(rs,pstmt,con);
+		}
+		return result;
+	}	
 }

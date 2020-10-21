@@ -12,7 +12,7 @@ public class BBSVO {
 	private MemberVO vo;
 	private String hiredResult;
 	private boolean scrap;
-	
+	private ReviewVO reviewVO;
 
 	public boolean isScrap() {
 		return scrap;
@@ -20,6 +20,15 @@ public class BBSVO {
 
 	public void setScrap(boolean scrap) {
 		this.scrap = scrap;
+	}
+	
+
+	public ReviewVO getReviewVO() {
+		return reviewVO;
+	}
+
+	public void setReviewVO(ReviewVO reviewVO) {
+		this.reviewVO = reviewVO;
 	}
 
 	public String getHiredResult() {
