@@ -140,18 +140,6 @@ public class MemberVO {
 		this.sex = sex;
 		this.birth = birth;
 	}
-	
-	public MemberVO(String id, String address, String name, String tel, String sex, String birth) {
-		super();
-		this.id = id;
-		this.address = address;
-		this.name = name;
-		this.tel = tel;
-		this.sex = sex;
-		this.birth = birth;
-	}
-
-
 	public MemberVO(String id, String password, String address, String name, String tel, String regDate, String sex,
 			String birth, String star,String profile_path) {
 		super();

@@ -11,6 +11,25 @@ public class BBSVO {
 	private String endWorkTime;
 	private MemberVO vo;
 	private String hiredResult;
+	private boolean scrap;
+	private ReviewVO reviewVO;
+
+	public boolean isScrap() {
+		return scrap;
+	}
+
+	public void setScrap(boolean scrap) {
+		this.scrap = scrap;
+	}
+	
+
+	public ReviewVO getReviewVO() {
+		return reviewVO;
+	}
+
+	public void setReviewVO(ReviewVO reviewVO) {
+		this.reviewVO = reviewVO;
+	}
 
 	public String getHiredResult() {
 		return hiredResult;

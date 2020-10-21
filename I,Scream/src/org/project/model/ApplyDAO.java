@@ -112,8 +112,7 @@ public class ApplyDAO {
 				 }
 					 list.add(vo);
 			 }
-			 
-			 
+
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
@@ -128,7 +127,7 @@ public class ApplyDAO {
 		boolean flag=false;
 		try {
 			 con = getConnection();
-			 pstmt = con.prepareStatement(sql.toString());
+			 pstmt = con.prepareStatement(sql);
 			 pstmt.setString(1,bbs_no);
 			 rs = pstmt.executeQuery();
 			 if(rs.next()) {

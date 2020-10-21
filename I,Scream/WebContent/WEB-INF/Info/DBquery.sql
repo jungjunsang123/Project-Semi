@@ -1,7 +1,13 @@
-SELECT * FROM MEMBER
-//기존에 MEMBER 테이블 있으면 삭제하고 새로 생성하기
-DROP TABLE MEMBER 
+DROP TABLE Apply;
+DROP TABLE Review;
+DROP TABLE BOARD;
+DROP TABLE MEMBER;
+DROP SEQUENCE BOARD_SEQ;
+DROP SEQUENCE REVIEW_SEQ;
 
+//기존에 MEMBER테이블 있으면 삭제하고 새로 생성하기
+
+--MEMBER SECTION--
 CREATE TABLE MEMBER(
 	ID VARCHAR2(100) PRIMARY KEY,
 	PASSWORD VARCHAR2(100) NOT NULL,
@@ -12,26 +18,19 @@ CREATE TABLE MEMBER(
 	SEX VARCHAR2(50) DEFAULT 'MALE',
 	REGDATE DATE NOT NULL
 )
+
 drop sequence board_seq
 create sequence board_seq nocache
 SELECT*FROM MEMBER;
 COMMIT
+
+//기존에 BOARD 테이블 있으면 삭제하고 새로 생성하기
+--BOARD SECTION--
+
 SELECT * FROM BOARD
 DROP TABLE BOARD 
-//기존에 BOARD 테이블 있으면 삭제하고 새로 생성하기
-
-CREATE TABLE BOARD(
-	BBS_NO VARCHAR2(100) PRIMARY KEY,
-	TITLE VARCHAR2(100) NOT NULL,
-	CONTEXT CLOB NOT NULL,
-	HITS NUMBER DEFAULT 0,
-	POSTEDDATE DATE NOT NULL,
-	CATEGORY VARCHAR2(100) NOT NULL,
-	WORKTIME VARCHAR2(100),
-	Writer varchar2(100) not null, 
-	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
-	)
-	
+create sequence board_seq nocache
+drop sequence board_seq
 ------2차 erd 적용--------------------
 alter table [테이블명] add [컬럼명] [타입] [옵션]; 
 //회원DB에 평균별점 컬럼 추가
@@ -50,24 +49,27 @@ CREATE TABLE BOARD(
 	Writer varchar2(100) not null, 
 	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 	)
-// review 테이블 생성
-CREATE TABLE Review(
-   BBS_NO VARCHAR2(100),
-   constraint review_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
-   stars NUMBER not null,
-   isReview varchar2(20) default 'NO',
-   reviewContext CLOB not null,
-   rightForReview varchar2(50) default 'YES',
-   POSTEDDATE date not null,
-   giveReviewer varchar2(100) default 'NULL', 
-   constraint giveReviewer_fk foreign key(giveReviewer) references MEMBER(ID) on delete cascade,
-   getReviewer varchar2(100) default 'NULL', 
-   constraint getReviewer_fk foreign key(getReviewer) references MEMBER(ID) on delete cascade,
-   constraint pk_review primary key(BBS_NO,giveReviewer,getReviewer)
-   )
 
-	
-// Apply 테이블 생성
+--// review 테이블 생성  ------이거 안쓰는거임 쓰지마
+--CREATE TABLE Review(
+--   BBS_NO VARCHAR2(100),
+--   constraint review_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+--   stars NUMBER not null,
+--   isReview varchar2(20) default 'NO',
+--   reviewContext CLOB not null,
+--   rightForReview varchar2(50) default 'YES',
+--   POSTEDDATE date not null,
+--   giveReviewer varchar2(100) default 'NULL', 
+--   constraint giveReviewer_fk foreign key(giveReviewer) references MEMBER(ID) on delete cascade,
+--   getReviewer varchar2(100) default 'NULL', 
+--   constraint getReviewer_fk foreign key(getReviewer) references MEMBER(ID) on delete cascade,
+--   constraint pk_review primary key(BBS_NO,giveReviewer,getReviewer)
+--   )
+
+   SELECT BBS_NO FROM Review WHERE isReview = 'NO' AND rightForReview = 'YES' AND giveReviewer = a
+
+   
+   // Apply 테이블 생성
 CREATE TABLE Apply(
 	BBS_NO VARCHAR2(100),
 	constraint apply_bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
@@ -76,23 +78,26 @@ CREATE TABLE Apply(
 	constraint pk_apply primary key(BBS_NO,id),
 	HiredResult varchar2(50) default 'NO'
 )
+SELECT *FROM APPLY;
+DROP TABLE Apply;
+
 
 ---------------------------------3차 db 구조변경작업---------------------------------------------
 --board 테이블에 컬럼을 추가해야하는데 db에 내용이 있으면 컬럼추가가 안됨, 그래서 테이블에 있는 내용삭제
 delete from board 
-alter table board drop column worktime
+alter table board drop column endworktime
 alter table board drop column writer
 
 alter table BOARD add STARTWORKTIME date not null; 
 alter table BOARD add ENDWORKTIME date not null; 
 alter table BOARD add Writer varchar2(100) not null;
-alter table BOARD add constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
+alter table BOARD add constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade;
 
-alter table member rename column avgstars to star
-alter table member modify star varchar2(100)
+alter table member rename column avgstars to star;
+alter table member modify star varchar2(100);
 //star값 보기 
 
-drop table review
+drop table review;
 -- review 테이블 생성
 CREATE TABLE Review(
    BBS_NO VARCHAR2(100),
@@ -107,7 +112,11 @@ CREATE TABLE Review(
    constraint getReviewer_fk foreign key(getReviewer) references MEMBER(ID) on delete cascade,
    constraint pk_review primary key(BBS_NO,giveReviewer,getReviewer)
   )
-
+  
+  INSERT INTO REVIEW VALUES('5', 3, 'NO', ' ', sysdate, 'a', 'b');
+  SELECT BBS_NO FROM Review WHERE isReview = 'NO' AND giveReviewer = 'a';
+  
+SELECT * FROM REVIEW
 drop table apply
 -- Apply 테이블 생성
 CREATE TABLE Apply(
@@ -122,8 +131,18 @@ CREATE TABLE Apply(
 --profile 업로드를 위한 member테이블 컬럼 수정
 alter table member add profile_path varchar2(4000) default 'NULL'
 
+---------------------------------4차 db 구조변경작업---------------------------------------------
+CREATE TABLE Scrap(
+	BBS_NO VARCHAR2(100),
+	constraint Scrap_bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+	Scraper VARCHAR2(100),
+	constraint Scrap_id_fk foreign key(Scraper) references member(id) on delete cascade,
+	constraint pk_Scrap primary key(BBS_NO,Scraper)
+)
 
 ----------------------- DB test는 아래에서
+INSERT INTO Review VALUES('5', '5', 'NO', '우하하하 좋아요', sysdate, 'a','b');
+select * from member
 select (TO_CHAR(endworktime, 'YYYYMMDD')) - (to_char(sysdate,'yyyymmdd')) from board where bbs_no='20'
 update apply set hiredResult = CASE when id='test2' then 'YES' ELSE 'Fail' end where bbs_no='18'
 
@@ -134,9 +153,9 @@ INSERT INTO review VALUES('19','4','YES','dfd','YES',sysdate,'a','b');
 INSERT INTO review VALUES('18','4','YES','dfd','YES',sysdate,'a','b');
 update member set avgstars=5 where id='b'
 insert into apply values('18','waooljagy','NO')
-
+INSERT INTO MEMBER(profile_path) values('g') where id='b'
 select title,context,hits,to_char(posteddate,'yyyy-mm-dd hh24:mm'),category,to_char(startWorkTime,'yyyy-mm-dd'),to_char(endWorkTime,'yyyy-mm-dd'),writer from board where BBS_NO='18'
-select * from a
+select * from member
 select b.bbs_no,b.title,b.context,b.hits,b.POSTEDDATE,b.category,
 b.WORKTIME-SYSDATE as workTime,
 b.writer from board b, (select * from apply where id='a' and hiredResult='NO') a where b.writer=a.id;
@@ -149,12 +168,9 @@ insert into member values('test2', '1234', '서울', '홍길동','01012345678', 
 select * from member
 select * from review
 INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate,0);
+>>>>>>> branch 'main' of https://github.com/Minikanko/Kosta-semiProject-i-Scream.git
 
-
-insert into board values(board_seq.NEXTVAL, '제목1', '내용1', 1, SYSDATE, '카테고리', sysdate, 'a' )
 select TITLE, Writer, to_char(POSTEDDATE,'yyyy.mm.dd'), HITS from  board 
-
-select 
 
 select row_number() over(order by no desc)
 
@@ -189,10 +205,12 @@ select m.id,m.name,m.avgstars from member m, apply a where a.bbs_no='19'
 select * from member
 
 update BOARD set HITS=HITS+1 where BBS_NO='24'
+
 select * from apply
 select b.context,b.hits,b.posteddate,m.id
 from board b,member m
 where b.Writer=m.id 
+
 order by b.bbs_no asc;
 
 		
@@ -204,7 +222,6 @@ group by getReviewer
 having avg(stars) > 2
 order by avgStars desc  
 
-select bbs_no  from board  where category='아이돌봄' 
 
 
 ----------------------------------------------------

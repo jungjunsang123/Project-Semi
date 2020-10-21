@@ -39,6 +39,9 @@
 					</c:when>
 					<c:otherwise>
 						${sessionScope.mvo.name} 님 로그인 상태&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/front?command=logout">로그아웃</a><br>
+						<a href="${pageContext.request.contextPath}/front?command=listApplyer&bbs_no=5">게시물 지원한 사람출력</a><br>
+						<a href="${pageContext.request.contextPath}/front?command=findApplyList">지원현황 클릭시 리스트 출력</a><br>
+						<a href="${pageContext.request.contextPath}/front?command=ReviewList">마이페이지</a><br>
 						회원정보수정<!-- 회원정보수정 추가예정 -->
 					</c:otherwise>
 				</c:choose>

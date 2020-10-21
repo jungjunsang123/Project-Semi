@@ -8,31 +8,60 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
-		if(command.contentEquals("login")) {
+		if(command.contentEquals("login")) 
 			controller=new LoginController();
-		}else if(command.equals("AddPost"))
+		//kakaoLogin
+		else if(command.equals("kakaoLogin"))
+			controller = new KakaoLoginController();
+		else if(command.equals("AddPost"))
 			controller = new AddPostController();
 		else if(command.equals("AddPostForm"))
 			controller = new AddPostFormController();
 		else if(command.contentEquals("logout")) {
 			controller=new LogoutController();
-		}else if(command.contentEquals("register")) {
+		}
+		//회원정보수정하는 페이지로 이동
+		else if(command.contentEquals("memberUpdateForm")) {
+			controller=new MemberUpdateFormController();
+		}
+		else if(command.contentEquals("memberUpdate")) {
+			controller=new MemberUpdateController();
+		}
+		else if(command.contentEquals("UpdateInfoResult")) {
+			controller=new UpdateInfoResultController();
+		}
+		//회원가입
+		else if(command.contentEquals("register")) {
 			controller=new RegisterController();
-		}else if(command.contentEquals("home")) {
-			controller=new HomeController();
 		}else if(command.contentEquals("registerForm")) {
 			controller=new RegisterFormController();
+		}else if(command.contentEquals("home")) {
+			controller=new HomeController();
 		}else if(command.contentEquals("registerResult")) {
 			controller=new RegisterResultController();
 		}else if(command.contentEquals("idcheck")) {
 			controller=new IdCheckController();
 		}else if(command.equals("getPostList")) {
 			controller = new getPostListController();
-		}else if (command.equals("DetailPost")) {
-			controller=new DeatilPostController();
-		}else if (command.equals("UpdatePost")) {
+		}
+		//작성자를 통한 게시물 리스트 출력
+		else if(command.equals("findPostListById")) {
+			controller = new FindPostListByIdController();
+		}
+		//게시물 상세보기
+		else if (command.equals("DetailPost")) {
+			controller=new DetailPostController();
+		}
+		//게시물 스크랩
+		else if (command.equals("Scrap")) {
+			controller=new ScrapController();
+		}
+		//게시물 수정
+		else if (command.equals("UpdatePost")) {
 			controller=new UpdatePostController();
-		}else if (command.equals("UpdatePostForm")) {
+		}
+		//게시물 수정하는 목록으로 이동
+		else if (command.equals("UpdatePostForm")) {
 			controller=new UpdatePostFormController();
 		}else if (command.contentEquals("DeletePost")) {
 			controller=new DeletePostController();
@@ -44,16 +73,28 @@ public class HandlerMapping {
 			controller=new OldPostCountController();
 		}else if (command.contentEquals("PetPostCount")) {
 			controller=new PetPostCountController();
-		}//고용주 게시물에서 지원한 사람출력
+		}else if(command.contentEquals("ReviewList")) {
+			controller=new ReviewListController();
+		}else if(command.contentEquals("ReviewDetail")) {
+			controller=new ReviewDetailController();
+		}else if(command.contentEquals("addReview")) {
+			controller=new AddReviewController();
+		}else if(command.contentEquals("AddReviewForm")) {
+			controller=new AddReviewFormController();
+		}
+		//고용주 게시물에서 지원한 사람출력
 		else if (command.contentEquals("listApplyer")) {
 			controller=new ListApplyerController();
-		}//채용하기 버튼 클릭시 채용된 지원자 외에 모두에게 알람 및 고용주에게 알람 발생
+		}
+		//채용하기 버튼 클릭시 채용된 지원자 외에 모두에게 알람 및 고용주에게 알람 발생
 		else if (command.contentEquals("Recruit")) {
 			controller=new RecruitController();
-		}//지원현황 클릭시 리스트 출력
+		}
+		//지원현황 클릭시 리스트 출력
 		else if (command.contentEquals("findApplyList")) {
 			controller=new findApplyListController();
-		}//지원하기
+		}
+		//지원하기
 		else if(command.contentEquals("Apply")) {
 			controller=new ApplyController();
 		}
@@ -61,7 +102,7 @@ public class HandlerMapping {
 		else if(command.contentEquals("recruitResultConfirm")) {
 			controller=new RecruitResultConfirmController();
 		}
-		//우수사원 뽑아오기
+		//우수사원(평균별점3.8 이상) 뽑아오기 
 		else if(command.equals("bestemployee")) {
 			controller = new BestEmployeeController();
 		}

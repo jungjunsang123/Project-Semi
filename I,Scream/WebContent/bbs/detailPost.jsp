@@ -23,11 +23,35 @@
 						}
 					})//ajax
 				}
-			})
+			})//지원하기
+			$("#scrap").click(function(){
+				var ment;
+				if($("#scrap").text()=='스크랩')
+					ment="스크랩 하시겠습니까?";
+				else
+					ment="스크랩 해제하시겠습니까?"
+				if(confirm(ment)){
+					$.ajax({	
+						type: "post",
+						url: "front",
+						data: "command=Scrap&bbs_no="+${requestScope.pvo.bbs_no}+"&isScarp="+$("#scrap").text(),
+						success:function(result){ // result변수로 응답정보가 전달된다.
+							if(result=="OK"){
+								if($("#scrap").text()=="스크랩완료")
+									$("#scrap").text("스크랩")
+								else
+									$("#scrap").text("스크랩완료")
+							}								
+							else{
+								alert("로그인부탁드립니다.");
+								location.href="front?command=home";
+							}
+						}
+					})//ajax
+				}
+			})//스크랩
+			
 	})
-
-
-
 </script>
 
 <div class="bbs-container">
@@ -94,7 +118,16 @@
 
 						</c:if> 
 						<!-- 글 작성자 와 로그인한 사용자가 다르면서 비회원은 아닌 사용자일때만 지원하기 기능이 가능함 -->
-						<c:if test="${!empty sessionScope.mvo&&requestScope.pvo.vo.id!=sessionScope.mvo.id}">
+						<c:if test="${(!empty sessionScope.mvo)&&requestScope.pvo.vo.id!=sessionScope.mvo.id}">
+							<!-- 스크랩여부 확인  -->
+							<c:choose>
+								<c:when test="${!requestScope.IsScrap}">
+									<button type="button" class="btn" id="scrap">스크랩</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" class="btn" id="scrap">스크랩완료</button>
+								</c:otherwise>
+							</c:choose>
 							<!-- 지원한적이 있는지 여부 확인  -->
 							<c:choose>
 								<c:when test="${!requestScope.IsApply}">
@@ -103,9 +136,8 @@
 								<c:otherwise>
 									<button type="button" class="btn">지원완료</button>
 								</c:otherwise>
-							
-							
 							</c:choose>
+						
 						</c:if>
 						<button type="button" class="btn" onclick="postBack()">뒤로</button>
 					</td>

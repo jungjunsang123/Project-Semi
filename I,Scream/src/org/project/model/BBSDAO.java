@@ -260,5 +260,40 @@ public class BBSDAO {
 		}
 		return total;
 	}
-	
+	//수민: 사용자가 작성한 게시물 리스트
+	public ArrayList<BBSVO> findPostListById(PagingBean pagingBean,String id) throws SQLException {
+		ArrayList<BBSVO> list=new ArrayList<BBSVO>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=getConnection();
+			StringBuilder sql=new StringBuilder();
+			sql.append("select b.bbs_no,b.title,b.hits,b.posteddate,m.id ");
+		    sql.append("from(select row_number() over(order by bbs_no desc) as rnum,bbs_no,title,hits, ");
+			sql.append("to_char(posteddate,'YYYY.MM.DD')as posteddate,writer ");
+			sql.append("from board where writer=?)b,member m ");
+			sql.append("where b.writer=m.id and rnum between ? and ? ");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1,id);
+			pstmt.setInt(2,pagingBean.getStartRowNumber());
+			pstmt.setInt(3,pagingBean.getEndRowNumber());
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				BBSVO bvo=new BBSVO();
+				bvo.setBbs_no(rs.getString(1));
+				bvo.setTitle(rs.getString(2));
+				bvo.setHits(rs.getInt(3));
+				bvo.setCreateDate(rs.getString(4));
+				MemberVO mvo=new MemberVO();
+			    mvo.setId(rs.getString(5));
+			    bvo.setVo(mvo);
+				list.add(bvo);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+		
+	}
 }
