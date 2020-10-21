@@ -95,15 +95,13 @@
 						location.href="front?command=home";
 		            }
 					else{
-						alert("dd");
 					  //$("#profileUploadForm")[0].reset();
-	                  $(".DivProfileImg img").attr("src","${pageContext.request.contextPath}/profile/"+data);
+	                  $(".DivProfileImg img").attr("src","${pageContext.request.contextPath}/profile/"+$("#id").val()+"/"+data);
 					}
 				}
 			});
 		})
 	});
-
 </script>
 <div id="signinCss">
 <font size= "4px">
@@ -113,7 +111,7 @@
 				<img src="css/Seeter_logo_wo_background.png" width="200" height="100"></a></h1><br>
 			
 			<b>아이디</b><br>
-			<input type="text" value="${requestScope.fmvo.id}" readonly><br>
+			<input type="text" value="${requestScope.fmvo.id}" readonly id="id"><br>
 			<span id="checkResult"></span><br>
 			<b>비밀번호</b><br>
 			<input type="password" name="password" id="pw1" required="required"><br>
@@ -160,8 +158,8 @@
             <b>프로필</b><br>
               <div class="DivProfileImg">
               	<c:choose>
-              		<c:when test="${requestScope.fmvo.profile_path != null }">
-              			<img src="${pageContext.request.contextPath}/profile/${requestScope.fmvo.profile_path}"style="width:460px; heigth:100%;object-fit:contain"/>
+              		<c:when test="${requestScope.fmvo.profile_path != 'null' }">
+              			<img src="${pageContext.request.contextPath}/profile/${requestScope.fmvo.id}/${requestScope.fmvo.profile_path}"style="width:460px; heigth:100%;object-fit:contain"/>
               		</c:when>
               		<c:otherwise>
               			<img src="${pageContext.request.contextPath}/profile/defaultProfile.jpg" style="width:460px; heigth:100%;object-fit:contain"/>
@@ -172,7 +170,7 @@
 					<input type="file" name="profileImg" id="profileImg" accept="image/*"><br><br>
 				</form>
 				<div style="text-align: center">
-					<button type="button" class="btn" id="memberInfoUpdate" >회원정보수정</button><br><br>
+					<button type="button" class="btn btn-info" id="memberInfoUpdate" >회원정보수정</button><br><br>
 				</div>	
 		</font>
 		</div>

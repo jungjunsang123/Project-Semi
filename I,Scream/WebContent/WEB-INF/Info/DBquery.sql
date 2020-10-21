@@ -125,10 +125,18 @@ CREATE TABLE Apply(
 --profile 업로드를 위한 member테이블 컬럼 수정
 alter table member add profile_path varchar2(4000) default 'NULL'
 
+---------------------------------4차 db 구조변경작업---------------------------------------------
+CREATE TABLE Scrap(
+	BBS_NO VARCHAR2(100),
+	constraint Scrap_bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+	Scraper VARCHAR2(100),
+	constraint Scrap_id_fk foreign key(Scraper) references member(id) on delete cascade,
+	constraint pk_Scrap primary key(BBS_NO,Scraper)
+)
 
 ----------------------- DB test는 아래에서
 INSERT INTO Review VALUES('5', '5', 'NO', '우하하하 좋아요', sysdate, 'a','b');
-select * from board
+select * from member
 select (TO_CHAR(endworktime, 'YYYYMMDD')) - (to_char(sysdate,'yyyymmdd')) from board where bbs_no='20'
 update apply set hiredResult = CASE when id='test2' then 'YES' ELSE 'Fail' end where bbs_no='18'
 

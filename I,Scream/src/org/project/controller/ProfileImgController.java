@@ -35,6 +35,7 @@ public class ProfileImgController extends HttpServlet {
 	      HttpSession session =request.getSession(false);
 	      String message = "";
     		  //로그인 상태 확인
+	      System.out.println("하이");
     		  if(session == null || session.getAttribute("mvo")==null) 
     	    	  message="IsNotLogin";
     	      else {
@@ -63,7 +64,7 @@ public class ProfileImgController extends HttpServlet {
 	
 	 	        //Files.copy(원본파일패스, 복사파일패스, 파일옵션);
 	 	        Path serverDir = Paths.get(path, message);
-	 	       Path workDir = Paths.get(workspace, message);
+	 	        Path workDir = Paths.get(workspace, message);
 	 	         Files.copy(serverDir,workDir,REPLACE_EXISTING);
     		  System.out.println(message);
     		  request.setAttribute("responsebody", message);
