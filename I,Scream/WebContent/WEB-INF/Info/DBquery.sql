@@ -195,7 +195,7 @@ from board b,member m
 where b.Writer=m.id 
 order by b.bbs_no asc;
 
-
+		
 select * from review
 
 select getreviewer, avg(stars) as avgStars
@@ -204,5 +204,45 @@ group by getReviewer
 having avg(stars) > 2
 order by avgStars desc  
 
-select getreviewer, avg(stars) as avgStars from review group by getReviewer having avg(stars) > 2 order by avgStars desc 
+select bbs_no  from board  where category='아이돌봄' 
 
+
+----------------------------------------------------
+select  getreviewer, avg(stars) as avgStars 
+from (select  r.*
+from board b, review r
+where b.bbs_no = r.bbs_no and b.category='반려동물')
+group by getReviewer 
+having avg(stars) > 2.3 order by avgStars desc 
+
+
+select  getreviewer, avg(stars) as avgStars 
+from (select  r.*
+from board b, review r
+where b.bbs_no = r.bbs_no and b.category='노인케어')
+group by getReviewer 
+having avg(stars) > 1 order by avgStars desc 
+
+
+select  getreviewer, avg(stars) as avgStars 
+from (select  r.*
+from board b, review r
+where b.bbs_no = r.bbs_no and b.category='아이돌봄')
+group by getReviewer 
+having avg(stars) > 1 order by avgStars desc 
+
+
+
+select * from member
+
+select * from review
+
+select category from board
+
+
+select  r.*
+from board b, review r
+where b.bbs_no = r.bbs_no and b.category='노인케어'
+
+
+SELECT address, name, tel, to_char(birth,'yyyy-mm-dd'), sex FROM MEMBER where id='a'

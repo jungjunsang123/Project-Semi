@@ -78,7 +78,7 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT address, name, tel, birth, sex FROM MEMBER where id=?";
+			String sql="SELECT address, name, tel, to_char(birth,'yyyy-mm-dd'), sex FROM MEMBER where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();

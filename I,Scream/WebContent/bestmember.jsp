@@ -8,13 +8,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#ajaxBtn").click(function() {
+	$(".ajaxBtn").click(function() {
 		var abc=$(this).val();
-		//alert(abc);
+		alert(abc);
 		 $.ajax({
 			type:"post",
 			url:"front",
-			data:"command=bestemployee",
+			data:"command=bestemployee&category="+abc,
 			success:function(result){
 				alert(result);
 			}
@@ -25,7 +25,9 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<input type="button" id="ajaxBtn" value="">멤버 들의 평균 점수 보러가기
+<input type="button" class="ajaxBtn" value="아이돌봄">아이돌봄<br>
+<input type="button" class="ajaxBtn" value="노인케어">노인케어<br>
+<input type="button" class="ajaxBtn" value="반려동물">반려동물<br>
 
 </body>
 </html>

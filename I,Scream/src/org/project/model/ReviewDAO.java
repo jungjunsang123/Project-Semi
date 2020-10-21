@@ -42,17 +42,21 @@ public class ReviewDAO {
 		closeAll(pstmt,con);
 
 	}
-	public ArrayList<MemberVO> getAVGStar() throws SQLException {
+	public ArrayList<MemberVO> getAVGStar(String category) throws SQLException {
 		Connection con= null;
 		PreparedStatement pstmt= null;
 		ResultSet rs = null;
 		ArrayList<MemberVO> list =new ArrayList<MemberVO>();
 		MemberVO vo;
 		try {
-			String sql="select getreviewer, avg(stars) as avgStars from review group by getReviewer having avg(stars) > 2 order by avgStars desc";
-			// 평균 별점이 2점이상 인사람 뽑아옴
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select  getreviewer, avg(stars) as avgStars ");
+			sql.append(" from (select  r.* from board b, review r  where b.bbs_no = r.bbs_no and b.category=?) ");
+			sql.append(" group by getReviewer  having avg(stars) > 1 order by avgStars desc  ");
+			// 평균 별점이 1점이상 인사람 뽑아옴
 			con = getConnection();
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, category);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				float tmp = rs.getFloat(2);

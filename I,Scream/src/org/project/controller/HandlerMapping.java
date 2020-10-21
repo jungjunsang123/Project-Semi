@@ -65,6 +65,10 @@ public class HandlerMapping {
 		else if(command.equals("bestemployee")) {
 			controller = new BestEmployeeController();
 		}
+		//홈화면에서 프로필 디테일 받아오기
+		else if(command.equals("getProfileDetail")) {
+			controller = new GetProfileDetailController();
+		}
 		return controller; 
 	}
 }
