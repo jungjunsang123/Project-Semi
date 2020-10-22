@@ -13,15 +13,7 @@
 <link href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	$(document).ready(function(){
-		let today = new Date();   
-		let year = today.getFullYear(); // 년도
-		let month = today.getMonth() + 1;  // 월
-		let date = today.getDate();  // 날짜
-		alert(year+"-"+month+"-"+date)
-		$("#startWorkTimeInput").attr("value",year+"-"+month+"-"+date);
-		
+<script type="text/javascript">	
 		$("#Recruit").click(function(){
 			if(confirm($("#applyID").val()+"를 채용하시겠습니까?")){
 				$.ajax({	
@@ -41,8 +33,6 @@
 				})//ajax
 			}
 		})
-		
-	})
 	Kakao.init('9f024aef4fd406c17cf1d1f36dfd1c54');
 //카카오 로그인 버튼을 생성한다.
 function loginWithKakao(){
@@ -86,11 +76,7 @@ function logoutWithKakao(){
 	function updatePostForm() {
 			document.updateForm.submit();
 	}
-	function addPost() {
-		if (confirm("게시글을 등록하시겠습니까?")) {
-			document.addPostForm.submit();
-		}
-	}
+	
 	function postBack(){
 		location.href="front?command=getPostList";
 	}
