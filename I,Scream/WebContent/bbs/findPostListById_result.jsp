@@ -2,24 +2,22 @@
 	pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<table class="table table-bordered  table-hover boardlist">
+<table class="table table-bordered table-hover boardlist" style="text-align:center;">
 	<thead>
-		<tr class="success">
+		<tr class="info">
 			<th>번호</th>
 			<th>제목</th>
 			<th>작성일</th>
 			<th>조회수</th>
-			<th>작성자</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach var="pvo" items="${requestScope.lvo.list}">
 			<tr>
 				<td>${pvo.bbs_no}</td>
-				<td>${pvo.title}</td>
+				<td><a href="${pageContext.request.contextPath}/front?command=listApplyer&bbs_no=${pvo.bbs_no}&mypage=YES">${pvo.title}</a></td>
 				<td>${pvo.createDate}</td>
 				<td>${pvo.hits}</td>
-				<td>${pvo.vo.id}</td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -29,15 +27,14 @@
 <div class="pagingArea">
 	<ul class="pagination">
 		<c:if test="${pb.previousPageGroup}">
-			<li><a
-				href="front?command=findPostListById&id=${requestScope.findPostListById}&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
+			<li><a href="front?command=findPostListById&pageNo=${pb.startPageOfPageGroup-1}">&laquo;</a>
 			</li>
 		</c:if>
-		<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
-			end="${pb.endPageOfPageGroup}">
+		<c:forEach var="i" begin="${pb.startPageOfPageGroup}" end="${pb.endPageOfPageGroup}">
 			<c:choose>
+				<c:when test="${empty requestScope.lvo.list}"></c:when>
 				<c:when test="${pb.nowPage!=i}">
-					<li><a href="front?command=findPostListById&id=${requestScope.findPostListById}&pageNo=${i}">${i}</a></li>
+					<li><a href="front?command=findPostListById&pageNo=${i}">${i}</a></li>
 				</c:when>
 				<c:otherwise>
 					<li class="active"><a href="#">${i}</a></li>
@@ -46,7 +43,7 @@
 		</c:forEach>
 		<c:if test="${pb.nextPageGroup}">
 			<li><a
-				href="front?command=findPostListById&id=${requestScope.findPostListById}&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
+				href="front?command=findPostListById&pageNo=${pb.endPageOfPageGroup+1}">&raquo;</a>
 			</li>
 		</c:if>
 	</ul>

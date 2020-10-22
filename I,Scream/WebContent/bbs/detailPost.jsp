@@ -4,8 +4,12 @@
 
 <script type="text/javascript">
 		$(document).ready(function(){
+			var applyText = $("#apply").text();
 			$("#apply").click(function(){
-				if(confirm("${requestScope.pvo.vo.id}에게 지원하시겠습니까?")){
+				if(applyText =='지원완료'){
+					alert("이미 지원완료하였습니다.");
+				}
+				else(confirm("${requestScope.pvo.vo.id}에게 지원하시겠습니까?")){
 					$.ajax({	
 						type: "post",
 						url: "front",
@@ -124,8 +128,6 @@
 							</table>
 						</div>
 						<div class="col-sm-offset-9 col-sm-3">
-							<tr>
-								<td colspan="5" class="btnArea">
 						<!-- 글 작성자가 로그인한 사용자일때  --> 
 						<c:if test="${requestScope.pvo.vo.id==sessionScope.mvo.id}">
 							<form name="deletePostForm"
@@ -165,7 +167,6 @@
 						
 						</c:if>
 						<button type="button" class="btn btn-secondary" onclick="postBack()">뒤로</button>
-							</tr>
 						</div>
 					</div>
 				</div>

@@ -20,7 +20,7 @@
 		class="img-fluid" alt="Bootstrap Image Preview"
 		src="image/SeeTer2.png" style="width: 100px;"> </a>
 	<div class="row justify-content-left">
-		<div class="col-sm-9">
+		<div class="col-sm-8">
 			<div class="card-body align-items-center">
 			<div class="col-sm-auto">
 				<form class="searchForm"
@@ -38,10 +38,9 @@
 				</form></div>
 			</div>
 		</div>
-		<div class="col-sm-3">
 		
+		<div class="col-sm-4">
 			<c:choose>
-			<!--로그인여부 확인 시작  -->
 				<c:when test="${sessionScope.mvo==null}">
 					<form method="post"
 						action="${pageContext.request.contextPath}/front">
@@ -57,15 +56,17 @@
 								<span class="input box"> <input type="password"
 									name="password" placeholder="비밀번호" required="required">
 								</span>&nbsp;&nbsp;<input type="submit" value="로그인">
+								&nbsp;&nbsp;
+								<a href="javascript:loginWithKakao()"> 
+									<img src="${pageContext.request.contextPath}/css/kakao_login_small.png">
+								</a>
 							</div>
 						</fieldset>
 					</form>
 				</c:when>
-				<!--로그인했지만 카카오로 로그인 했는지 자체 디비로 로그인 했는지 확인 시작  -->
 				<c:otherwise>
 					${sessionScope.mvo.name} 님 로그인 상태<br>
 						<a href="${pageContext.request.contextPath}/front?command=mypage">마이페이지</a><br>
-				<!-- 카카오로 로그인시 로직이 다르기 때문에 생성함 -->
 					<c:choose>
 						<c:when test="${sessionScope.IsKakaoLogin=='YES'}">
 							<a href="javascript:logoutWithKakao()">로그아웃</a><br>
@@ -75,8 +76,6 @@
 						</c:otherwise>
 					</c:choose>
 				</c:otherwise>
-				<!--로그인했지만 카카오로 로그인 했는지 자체 디비로 로그인 했는지 확인 끝  -->
-				<!--로그인여부 확인 끝  -->
 			</c:choose>
 			
 		</div>

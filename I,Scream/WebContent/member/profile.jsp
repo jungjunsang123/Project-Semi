@@ -12,16 +12,22 @@
 			<div class="card-body">
 				<div class="col-sm-12">
 					<div class="row">
-						<div class="col-sm-2">
-							<img src="image/img_avatar1.png" class="img-thumbnail"
-								alt="Cinque Terre" width="200" height="200">
+						<div class="col-sm-3">
+							<c:choose>
+							<c:when test="${requestScope.mvo.profile_path!=NULL}">
+								<img src="${pageContext.request.contextPath}/profile/${requestScope.mvo.id}/${requestScope.mvo.profile_path}" class="card-img-top" style="height: 245px;width: 245px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top" src="profile/defaultProfile.jpg" style="width: 245px; height:245.5px;">
+							</c:otherwise>
+						</c:choose>
 						</div>
 						<div class="col-sm-5">
 							<h1>${requestScope.mvo.name}님의
 								<br>현재 평균별점은 ${requestScope.mvo.star}점 입니다!
 							</h1>
 						</div>
-						<div class="col-sm-5">
+						<div class="col-sm-4">
 							<form class="form-horizontal" role="form">
 								<div class="form-group row">
 									<label for="name" class="col-sm-3 control-label">이름</label>

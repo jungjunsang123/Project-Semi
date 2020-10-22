@@ -36,7 +36,8 @@ public class ReviewListController implements Controller {
 			return "/member/IsNotLogin.jsp";
 		}
 		
-		return "/template/bbs-layout.jsp";
+		return "/template/mypage-layout.jsp";
+
 		
 	}
 

@@ -18,14 +18,6 @@ public class searchByTextController implements Controller {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		int totalPostCount = BBSDAO.getInstance().getTotalPostCount();
-//		//Paging for User_Id
-//		String searchuseridpageNo = request.getParameter("searchidpageNo");
-//		PagingBean searchUserIdpagingBean = null;
-//		if(searchuseridpageNo==null)
-//			searchUserIdpagingBean = new PagingBean(totalPostCount);
-//		else
-//			searchUserIdpagingBean = new PagingBean(totalPostCount,Integer.parseInt(searchuseridpageNo));
-		//Paging for search_Title
 		String searchtitlepageNo = request.getParameter("searchtitlepageNo");
 		PagingBean searchTitlepagingBean = null;
 		if(searchtitlepageNo==null) 

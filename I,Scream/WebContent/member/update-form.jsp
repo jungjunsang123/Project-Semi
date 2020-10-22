@@ -1,19 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="false"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
+	pageEncoding="UTF-8" session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/myhome.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>회원정보수정</title>
 </head>
-<body>
 
+<body>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var checkPw="";
@@ -63,16 +67,16 @@
 			pw1=$("#pw1").val();
 			pw2=$("#pw2").val();
 			teltype=$("#teltype").val();
-			if(pw1 != pw2){
-				alert("비밀번호를  확인해주세요!");
-				return false;
-			
+			if((pw1=="" || pw2=="") || pw1!=pw2){
+
+					alert("비밀번호를 확인해주세요!");
+					return false;
 			}else if(teltype.length!=11){
 				alert("휴대폰 번호를 확인해주세요!");
 				return false;
 			}else{
 				if(confirm("수정하시겠습니까?")){
-					$("#registerForm").submit();
+					$("#memberInfoUpdateForm").submit();
 					return true;
 				}
 				
@@ -103,84 +107,91 @@
 		})
 	});
 </script>
-<div id="signinCss">
-<font size= "4px">
-<form action="${pageContext.request.contextPath}/front" method="post" id="registerForm">
-		<input type="hidden" name="command" value="memberUpdate"><br>
-				<h1 align="center"><a href="${pageContext.request.contextPath }/front?command=home">
-				<img src="css/Seeter_logo_wo_background.png" width="200" height="100"></a></h1><br>
-			
-			<b>아이디</b><br>
-			<input type="text" value="${requestScope.fmvo.id}" readonly id="id"><br>
-			<span id="checkResult"></span><br>
-			<b>비밀번호</b><br>
-			<input type="password" name="password" id="pw1" required="required"><br>
-			<span id="passwordLengthCheckMessage"></span><br>
-			<b>비밀번호확인</b><br>
-			<input type="password" name="passwordconfirm" id="pw2"required="required"><br>
-			<span id="passwordCheckMessage"></span><br>
-			<b>이름</b><br>
-			<input type="text" name="name" required="required" value="${requestScope.fmvo.name}"><br><br>
-			<b>주소</b><br>
-			<input type="text" name="address" required="required" value="${requestScope.fmvo.address}"><br><br>
-			<b>전화번호</b><br>
-			<input type="text" pattern="[0-9]+" name="tel" id="teltype" placeholder="번호만 입력하세요. ex)01012345678 " value="${requestScope.fmvo.tel}" required="required"><br>
-			<span id="telInputTypeCheck"></span><br>
-			<b>성별</b><br>
-			<select name="sex" class="sexSelect">
-			<c:choose>	
-				<c:when test="${requestScope.fmvo.sex eq'남자'}">
-					 <option value="남자" selected="selected">남자</option>
-				 	 <option value="여자">여자</option>
-				 	 <option value="선택하지않음">선택하지않음</option>
-				</c:when>
-				<c:when test="${requestScope.fmvo.sex eq'여자'}">
-					 <option value="남자">남자</option>
-				  	<option value="여자" selected="selected">여자</option>
-				  	<option value="선택하지않음">선택하지않음</option>
-				</c:when>
-				<c:when test="${requestScope.fmvo.sex eq '선택하지않음'}">
-					  <option value="남자" >남자</option>
-				  	  <option value="여자">여자</option>
-				      <option value="선택하지않음" selected="selected">선택하지않음</option>
-				</c:when>
-				<c:otherwise>
-					  <option value="남자" >남자</option>
-				  	  <option value="여자">여자</option>
-				      <option value="선택하지않음">선택하지않음</option>
-					
-				</c:otherwise>
-			</c:choose>
-			</select><br><br>
-			<b>생년월일</b><br>
-			<input type="date" name="birth" id="birth" value="${requestScope.fmvo.birth}"><br><br>
-	</form> 
-            <b>프로필</b><br>
-              <div class="DivProfileImg">
-              	<c:choose>
-              		<c:when test="${requestScope.fmvo.profile_path != 'null' }">
-              			<img src="${pageContext.request.contextPath}/profile/${requestScope.fmvo.id}/${requestScope.fmvo.profile_path}"style="width:460px; heigth:100%;object-fit:contain"/>
-              		</c:when>
-              		<c:otherwise>
-              			<img src="${pageContext.request.contextPath}/profile/defaultProfile.jpg" style="width:460px; heigth:100%;object-fit:contain"/>
-              		</c:otherwise>
-              	</c:choose>
-			 </div>
-				<form id="profileUploadForm" enctype="multipart/form-data">
-					<input type="file" name="profileImg" id="profileImg" accept="image/*"><br><br>
-				</form>
-				<div style="text-align: center">
-					<button type="button" class="btn btn-info" id="memberInfoUpdate" >회원정보수정</button><br><br>
-				</div>	
+	<div class="col-sm-offset-4 col-sm-4">
+		<font size=4px>
+			<form action="${pageContext.request.contextPath}/front" method="post" id="memberInfoUpdateForm" >
+				<input type="hidden" name="command" value="memberUpdate"><br>
+				<h1 align="center">
+					<a href="${pageContext.request.contextPath }/front?command=home">
+						<img src="image/SeeTer2.png" width="439" height="249">
+					</a>
+				</h1>
+				<br> <b>아이디</b><br> <input type="text"
+					value="${requestScope.fmvo.id}" readonly id="id"
+					required="required" style="width: 439px"><br> <span
+					id="checkResult"></span><br> <b>비밀번호</b><br> <input
+					type="password" name="password" id="pw1" required="required"
+					style="width: 439px"><br> <span
+					id="passwordLengthCheckMessage"></span><br> <b>비밀번호확인</b><br>
+				<input type="password" name="passwordconfirm" id="pw2"
+					required="required" style="width: 439px"><br> <span
+					id="passwordCheckMessage"></span><br> <b>이름</b><br> <input
+					type="text" name="name" required="required"
+					value="${requestScope.fmvo.name}" style="width: 439px"><br>
+				<br> <b>주소</b><br> <input type="text" name="address"
+					required="required" style="width: 439px"
+					value="${requestScope.fmvo.address}"><br> <br> <b>전화번호</b><br>
+				<input type="text" pattern="[0-9]+" name="tel" id="teltype"
+					placeholder="번호만 입력하세요. ex)01012345678 " required="required"
+					style="width: 439px" value="${requestScope.fmvo.tel}"><br>
+				<span id="telInputTypeCheck"></span><br> <b>성별</b><br> <select
+					name="sex" class="sexSelect" required="required"
+					style="width: 439px">
+					<c:choose>
+						<c:when test="${requestScope.fmvo.sex eq'남자'}">
+							<option value="남자" selected="selected">남자</option>
+							<option value="여자">여자</option>
+							<option value="선택하지않음">선택하지않음</option>
+						</c:when>
+						<c:when test="${requestScope.fmvo.sex eq'여자'}">
+							<option value="남자">남자</option>
+							<option value="여자" selected="selected">여자</option>
+							<option value="선택하지않음">선택하지않음</option>
+						</c:when>
+						<c:when test="${requestScope.fmvo.sex eq '선택하지않음'}">
+							<option value="남자">남자</option>
+							<option value="여자">여자</option>
+							<option value="선택하지않음" selected="selected">선택하지않음</option>
+						</c:when>
+						<c:otherwise>
+							<option value="남자">남자</option>
+							<option value="여자">여자</option>
+							<option value="선택하지않음">선택하지않음</option>
+
+						</c:otherwise>
+					</c:choose>
+				</select><br> <br> <b>생년월일</b><br> <input type="date"
+					name="birth" id="birth" required="required" style="width: 439px"
+					value="${requestScope.fmvo.birth}"><br> <br>
+			</form> <b>프로필</b><br>
+			<div class="DivProfileImg">
+				<c:choose>
+					<c:when test="${requestScope.fmvo.profile_path!=NULL }">
+						<img
+							src="${pageContext.request.contextPath}/profile/${requestScope.fmvo.id}/${requestScope.fmvo.profile_path}"
+							style="width: 460px; heigth: 100%; object-fit: contain" />
+					</c:when>
+					<c:otherwise>
+						<img src="${pageContext.request.contextPath}/profile/defaultProfile.jpg"
+							style="width: 460px; heigth: 100%; object-fit: contain" />
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<form id="profileUploadForm" enctype="multipart/form-data">
+				<input type="file" name="profileImg" id="profileImg"
+					accept="image/*"><br>
+				<br>
+			</form>
+			<div style="text-align: center; margin: 0 auto;">
+				<button type="button" class="btn btn-info" id="memberInfoUpdate">회원정보수정</button>
+				<br>
+				<br>
+			</div>
 		</font>
-		</div>
-		
-<!-- footer -->
-<div id="signinfooterCsds">
-<a href="${pageContext.request.contextPath }/front?command=home"><img src="css/Seeter_logo_wo_background.png" width="100" height="50"></a>&nbsp;&nbsp;For you. Seeter.
-<br><br><br><br>
-</div>
+
+	</div>
 
 </body>
 </html>
+
 

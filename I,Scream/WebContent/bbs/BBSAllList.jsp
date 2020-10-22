@@ -2,10 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <body>
 	<div class="container">
-		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card">
@@ -17,37 +15,46 @@
 								<!-- Column -->
 								<div class="col-xs-3">
 									<div class="card card-hover">
+									<a href="${pageContext.request.contextPath}/front?command=getPostList" style="text-decoration:none;">
 										<div class="p-2 rounded bg-warning text-center">
 											<h1 class="font-light text-white">${requestScope.allCount}</h1>
 											<h6 class="text-white">전체 게시글</h6>
 										</div>
+										</a>
 									</div>
 								</div>
+								
 								<!-- Column -->
 								<div class="col-xs-3">
 									<div class="card card-hover">
+									<a href="${pageContext.request.contextPath}/front?command=YoungPostList" style="text-decoration:none;">
 										<div class="p-2 rounded bg-danger text-center">
 											<h1 class="font-light text-white">${requestScope.youngCount}</h1>
-											<h6 class="text-white">아이돌봄 게시글</h6>
+										<h6 class="text-white">아이돌봄 게시글</h6>
 										</div>
+										</a>
 									</div>
 								</div>
 								<!-- Column -->
 								<div class="col-xs-3">
 									<div class="card card-hover">
+									<a href="${pageContext.request.contextPath}/front?command=OldPostList" style="text-decoration:none;">
 										<div class="p-2 rounded bg-success text-center">
 											<h1 class="font-light text-white">${requestScope.oldCount}</h1>
 											<h6 class="text-white">노인케어 게시글</h6>
 										</div>
+										</a>
 									</div>
 								</div>
 								<!-- Column -->
 								<div class="col-xs-3">
 									<div class="card card-hover">
+										<a href="${pageContext.request.contextPath}/front?command=PetPostList" style="text-decoration:none;">
 										<div class="p-2 rounded bg-primary text-center">
 											<h1 class="font-light text-white">${requestScope.petCount}</h1>
 											<h6 class="text-white">반려동물 게시글</h6>
 										</div>
+										</a>
 									</div>
 								</div>
 								<!-- Column -->
@@ -55,15 +62,15 @@
 							</div>
 						</div>
 						<div class="container">
-							<table class="table table-bordered">
+							<table class="table table-bordered" style="text-align:center;">
 								<thead>
 									<tr>
-										<th style="width: 5%" class="text-center">Number</th>
-										<th style="width: 5%" class="text-center">Category</th>
-										<th style="width: 60%" class="text-center">Title</th>
-										<th style="width: 10%" class="text-center">Id</th>
-										<th style="width: 10%" class="text-center">Date</th>
-										<th style="width: 10%" class="text-center">Hits</th>
+										<th style="width: 5%" class="text-center">번호</th>
+										<th style="width: 5%" class="text-center">채용분야</th>
+										<th style="width: 60%" class="text-center">제목</th>
+										<th style="width: 10%" class="text-center">작성자</th>
+										<th style="width: 10%" class="text-center">등록일</th>
+										<th style="width: 10%" class="text-center">조회수</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -108,6 +115,7 @@
 										<c:forEach var="i" begin="${pb.startPageOfPageGroup}"
 											end="${pb.endPageOfPageGroup}">
 											<c:choose>
+												<c:when test="${empty requestScope.lvo.list}"></c:when>
 												<c:when test="${pb.nowPage!=i}">
 													<li><a href="front?command=getPostList&pageNo=${i}">${i}</a></li>
 												</c:when>
@@ -136,7 +144,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 </body>
 

@@ -65,6 +65,9 @@ public class HandlerMapping {
 		else if (command.equals("Scrap")) {
 			controller=new ScrapController();
 		}
+		else if (command.equals("scrapList")) {
+			controller=new ScrapListController();
+		}
 		//게시물 수정
 		else if (command.equals("UpdatePost")) {
 			controller=new UpdatePostController();
@@ -142,6 +145,7 @@ public class HandlerMapping {
 		else if (command.contentEquals("mypage")) {
 		controller=new MypageController();
 		}
+	
 		
 		return controller; 
 

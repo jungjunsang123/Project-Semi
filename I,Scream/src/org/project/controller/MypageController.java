@@ -16,14 +16,14 @@ public class MypageController implements Controller {
 		String url ="";	
 		//세션이 끊겼는지 확인
 		if(session !=null&&session.getAttribute("mvo")!=null) {
-			url="member/mypage.jsp";
+			url="/member/memberInfo.jsp";
 		}
 		else {
 			url="/member/IsNotLogin.jsp";
 			return url;
 		}
-		
-		return "bbs/bbs-layout.jsp";
+		request.setAttribute("url", url);
+		return "/template/mypage-layout.jsp";
 	}
 
 }

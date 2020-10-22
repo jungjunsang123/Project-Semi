@@ -29,9 +29,8 @@ public class HomeController implements Controller {
 			ApplyDAO.getInstance().applyEndWork(id);
 			//내가 작성한 게시물의 endwork 알리는 영역;
 			ApplyDAO.getInstance().writerEndWork(id);
-			int totalPostCount = BBSDAO.getInstance().getTotalPostCount();
-			PagingBean pagingBean = new PagingBean(totalPostCount);
-			ArrayList<BBSVO> list=BBSDAO.getInstance().mustReview(pagingBean, id);
+
+			ArrayList<BBSVO> list=BBSDAO.getInstance().mustReview(id);
 			//써야할 리뷰가 있다.
 			if(list.size() >0) {
 				request.setAttribute("MustReviewPost", list.get(0));

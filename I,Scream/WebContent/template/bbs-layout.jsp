@@ -9,34 +9,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css"/>
 <link href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">	
-		$("#Recruit").click(function(){
-			if(confirm($("#applyID").val()+"를 채용하시겠습니까?")){
-				$.ajax({	
-					type: "post",
-					url: "front",
-					data: "command=Recruit&bbs_no="+$("#bbs_no").val()+"&applyID="+$("#applyID").val(),
-					success:function(result){ // result변수로 응답정보가 전달된다.
-						if(result=="OK"){
-							alert("채용됐습니다.");
-							$("#Recruit").text("채용완료")
-						}
-						else{
-							alert("로그인부탁드립니다.");
-							location.href="front?command=home";
-						}
+$(document).ready(function(){
+	$("#Recruit").click(function(){
+		if(confirm($("#applyID").val()+"를 채용하시겠습니까?")){
+			$.ajax({	
+				type: "post",
+				url: "front",
+				data: "command=Recruit&bbs_no="+$("#bbs_no").val()+"&applyID="+$("#applyID").val(),
+				success:function(result){ // result변수로 응답정보가 전달된다.
+					if(result=="OK"){
+						alert("채용됐습니다.");
+						$("#Recruit").text("채용완료")
 					}
-				})//ajax
-			}
-		})
+					else{
+						alert("로그인부탁드립니다.");
+						location.href="front?command=home";
+					}
+				}
+			})//ajax
+		}
+	})
+})
+		
 	Kakao.init('9f024aef4fd406c17cf1d1f36dfd1c54');
 //카카오 로그인 버튼을 생성한다.
 function loginWithKakao(){
-	Kakao.Auth.login({
+	Kakao.Auth.loginForm({
 		success : function(authObj) {
 			Kakao.API.request({
 				url : '/v2/user/me',
@@ -86,6 +89,12 @@ function logoutWithKakao(){
 			document.applyForm.submit();
 		}
 	}
+	function addReview(){
+		if(confirm("후기남기시겠습니까?")){
+			alert("후기등록됐습니다");
+			document.addReviewForm.submit();
+		}
+	}
 	function goHome(){
 		location.href="front?command=home";
 	}
@@ -95,7 +104,7 @@ function logoutWithKakao(){
 <div class="container">
 	<c:import url="bbs-header.jsp"/>
 	<hr>   
-		<div class="row content content-custom">
+		<div class="row content">
 				<c:import url="${requestScope.url}"></c:import>
 		</div>
 	

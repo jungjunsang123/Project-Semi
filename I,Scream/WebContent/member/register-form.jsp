@@ -2,8 +2,6 @@
     pageEncoding="UTF-8" session="false"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
 <!DOCTYPE html>
-
-
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 </head>
 <body>
 	<div class="col-sm-offset-4 col-sm-4">
@@ -75,7 +73,7 @@
 		$("#teltype").keyup(function(){
 			var telValue=$(this).val();
 			teltype=$("#teltype").val();
-			if(telValue.length != 11){
+			if(telValue.length!= 11){
 				$("#telInputTypeCheck").html("잘못된 번호 형식입니다.").css("color","red");
 				return
 			}else{
@@ -90,11 +88,11 @@
 				alert("아이디 중복을 확인해주세요!");
 				return false;
 			}
-			else if(pw1 != pw2){
+			else if(pw1!=pw2){
 				alert("비밀번호를  확인해주세요!");
 				return false;
 			
-			}else if(teltype.length !=11){
+			}else if(teltype.length!=11){
 				alert("휴대폰 번호를 확인해주세요!");
 				return false;
 			}else{
@@ -143,8 +141,8 @@
 			</div>
 		</form>
 		<!-- footer -->
+
 	</div>
-	
 </body>
 </html>
 

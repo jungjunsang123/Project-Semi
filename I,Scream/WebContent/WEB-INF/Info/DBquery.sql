@@ -72,4 +72,3 @@ CREATE TABLE Scrap(
 	constraint pk_Scrap primary key(BBS_NO,Scraper)
 )
 
-

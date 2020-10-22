@@ -23,14 +23,13 @@ public class findApplyListController implements Controller {
 			MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 			ArrayList<BBSVO> list = ApplyDAO.getInstance().findApplyList(mvo.getId());
 			request.setAttribute("ApplyList", list);
-			url="/apply/findApplyList.jsp";
+				url="/apply/findApplyList.jsp";
 		}
 		else {
 			url="/member/IsNotLogin.jsp";
-			return url;
 		}
 		request.setAttribute("url", url);
-		return "template/bbs-layout.jsp";
+		return "/template/mypage-layout.jsp";
 
 	}
 

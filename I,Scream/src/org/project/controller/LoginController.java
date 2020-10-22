@@ -13,6 +13,7 @@ import org.project.model.ListVO;
 import org.project.model.MemberDAO;
 import org.project.model.MemberVO;
 import org.project.model.PagingBean;
+import org.project.model.ReviewDAO;
 
 public class LoginController implements Controller {
 
@@ -24,15 +25,13 @@ public class LoginController implements Controller {
 		if(vo==null) {
 			return "/member/login-fail.jsp"; //로그인 실패 화면
 		}else {
+			vo.setstar(ReviewDAO.getInstance().getAVGStarById(vo.getId()));
 			HttpSession session=request.getSession();
 			//내가 지원한 게시물의 endwork 알리는 영역;
 			ApplyDAO.getInstance().applyEndWork(id);
 			//내가 작성한 게시물의 endwork 알리는 영역;
 			ApplyDAO.getInstance().writerEndWork(id);
-			
-			int totalPostCount = BBSDAO.getInstance().getTotalPostCount();
-			PagingBean pagingBean = new PagingBean(totalPostCount);
-			ArrayList<BBSVO> list=BBSDAO.getInstance().mustReview(pagingBean, id);
+			ArrayList<BBSVO> list=BBSDAO.getInstance().mustReview(id);
 			//써야할 리뷰가 있다.
 			if(list.size()>0) {
 				request.setAttribute("MustReviewPost", list.get(0));

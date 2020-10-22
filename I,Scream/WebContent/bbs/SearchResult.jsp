@@ -1,129 +1,192 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="false"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="table-responsive">
-									<%-- <table id="zero_config"
-										class="table table-striped table-bordered">
-										<thead>
-											<tr>
-												<th>Number</th>
-												<th>Category</th>
-												<th>Title</th>
-												<th>Id</th>
-												<th>Date</th>
-												<th>Hits</th>
-											</tr>
-										</thead>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="container">
+				<div class="row">
+					<%-- 첫번째  검색 결과--%>
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4>' 회원 ' 검색결과</h4>
+							</div>
+							<div class="card-body">
+								<div class="row"></div>
+								<div class="container">
+									<table class="table table-bordered">
 										<tbody>
-											게시글 데이터
-											<c:forEach var="spvo" items="${requestScope.slvo.list}">
-												<tr>
-
-													<td>${spvo.bbs_no}</span></td>
-													<td><c:choose>
-															<c:when test="${spvo.category eq '카테고리'}">
-																<span class="label label-success">${spvo.category}</span>
-															</c:when>
-
-															<c:otherwise>
-																<span class="label label-warning">${spvo.category}</span>
-															</c:otherwise>
-														</c:choose></td>
-													<td><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${spvo.bbs_no}">${spvo.title}</a></td>
-													<td>${spvo.vo.id}</td>
-													<td>${spvo.createDate}</td>
-													<td>${spvo.hits}</td> 
-												</tr>
-											</c:forEach>
+											<%-- 게시글 데이터 --%>
+												<c:choose>
+													<c:when test="${requestScope.sbymco.id==null}">
+														회원 아이디 검색 결과가 존재하지 않습니다.
+													</c:when>
+													<c:otherwise>
+														<tr>
+															<td rowspan="2">
+																<img src="${pageContext.request.contextPath}/profile/${requestScope.sbymco.id}/${requestScope.sbymco.profile_path}">
+															</td>
+															<td><a href="${pageContext.request.contextPath}/front?command=getProfileDetail&id=${requestScope.sbymco.id}&avgstar=${requestScope.sbymco.star}">아이디</a></td>
+															<td>주소</td>
+															<td>이름</td>
+															<td>전화번호</td>
+															<td>가입일</td>
+															<td>성별</td>
+															<td>생년월일</td>
+															<td>평점</td>
+														</tr>
+														<tr>
+															<td>${requestScope.sbymco.id}</td>
+															<td>${requestScope.sbymco.address}</td>
+															<td>${requestScope.sbymco.name}</td>
+															<td>${requestScope.sbymco.tel}</td>
+															<td>${requestScope.sbymco.regDate}</td>
+															<td>${requestScope.sbymco.sex}</td>
+															<td>${requestScope.sbymco.birth}</td>
+														</tr>
+														
+													</c:otherwise>
+												</c:choose>
 										</tbody>
-									</table> --%>
-									회원 아이디로 검색결과<br><br>
-									<c:choose>
-										<c:when test="${requestScope.sbymco.id==null}">
-											회원 아이디 검색 결과가 존재하지 않습니다.
-										</c:when>
-										<c:otherwise>
-											${requestScope.sbymco.id}
-										</c:otherwise>
-									</c:choose>
-									<br><br>
-									글 제목으로 검색결과 <br><br>
-									<!-- 검색결과가 없는 경우 -->
-								 	<c:if test="${empty requestScope.slvo.list}">
-								 		 검색 결과가 존재하지 않습니다.
-								 	</c:if>
-									<c:forEach var="spvo" items="${requestScope.slvo.list}">
-										<a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${spvo.bbs_no}">${spvo.title}</a><br><br>
-									</c:forEach>
-									
-									
-									
-									<%-- Search Title paging 처리 START--%>
-									
-									<div class="pagingAreaTitle">
-									<c:set var="spb" value="${requestScope.slvo.pagingBean}"/>
-										<ul class="pagination">
-											<c:if test="${spb.previousPageGroup}">
-												<li><a
-													href="front?command=searchByText&searchtitlepageNo=${spb.startPageOfPageGroup-1}">&laquo;</a>
-												</li>
+										<%-- SH : 코드 끝 --%>
+									</table>
+								</div>
+							</div>
+						</div>
+						<br>
+					</div>
+					<%-- 두번째 검색 결과 --%>
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4>' 제목 ' 검색결과</h4>
+							</div>
+							<div class="card-body">
+								<div class="row"></div>
+								<div class="container">
+									<table class="table  table-bordered">
+										
+											<%-- 게시글 데이터 --%>
+
+											<c:if test="${empty requestScope.slvo.list}">
+													 검색 결과가 존재하지 않습니다.
 											</c:if>
-											<c:forEach var="si" begin="${spb.startPageOfPageGroup}"
-												end="${spb.endPageOfPageGroup}">
-												<c:choose>
-													<c:when test="${spb.nowPage!=i}">
-														<li><a href="front?command=searchByText&searchtitlepageNo=${si}">${si}</a></li>
-													</c:when>
-													<c:otherwise>
-														<li class="active"><a href="#">${si}</a></li>
-													</c:otherwise>
-												</c:choose>
+											<c:forEach var="spvo" items="${requestScope.slvo.list}">
+												<font size=12px><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${spvo.bbs_no}">${spvo.title}</a></font>
+												<font size=2px><textarea name="context" rows="2" id="context" style="width: 100%; border: none" readonly>${spvo.createDate}&nbsp;${spvo.context}</textarea></font>
+												<br><br>
 											</c:forEach>
-											<c:if test="${spb.nextPageGroup}">
-												<li><a
-													href="front?command=searchByText&searchtitlepageNo=${spb.endPageOfPageGroup+1}">&raquo;</a>
-												</li>
-											</c:if>
-										</ul>
+										<%-- SH : 코드 끝 --%>
+									</table>
+								</div>
+								<%-- paging 처리  --%>
+								<div class="container">
+									<div class="row">
+										<div class="pagingArea" style="float: none; margin: 0 auto">
+											<c:set var="spb" value="${requestScope.slvo.pagingBean}" />
+											<ul class="pagination">
+												<c:if test="${spb.previousPageGroup}">
+													<li><a
+														href="front?command=searchByText&searchtitlepageNo=${spb.startPageOfPageGroup-1}">&laquo;</a></li>
+												</c:if>
+												<c:forEach var="i" begin="${spb.startPageOfPageGroup}" end="${spb.endPageOfPageGroup}">
+													<c:choose>
+														<c:when test="${i==0}"></c:when>
+														<c:when test="${spb.nowPage!=i}">
+															<li><a href="front?command=searchByText&searchtitlepageNo=${i}">${i}</a></li>
+														</c:when>
+														<c:otherwise>
+															<li class="active"><a href="#">${i}</a></li>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+												<c:if test="${spb.nextPageGroup}">
+													<li><a
+														href="front?command=searchByText&searchtitlepageNo=${spb.endPageOfPageGroup+1}">&raquo;</a>
+													</li>
+												</c:if>
+											</ul>
+										</div>
 									</div>
-									
-									<%-- Search Title paging 처리 END  --%>
-									글 내용으로 검색결과<br><br>
-									<c:if test="${empty requestScope.sclvo.list}">
-										검색 결과가 존재하지 않습니다.
-									</c:if>
-									<c:forEach var="searchContext" items="${requestScope.sclvo.list }">
-										<a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${searchContext.bbs_no}">${searchContext.context}</a><br><br>
-									</c:forEach>
-									
-									<%-- Search Context paging 처리 START --%>
-									
-									<div class="pagingAreaContext">
-									<c:set var="scpb" value="${requestScope.sclvo.pagingBean}"/>
-										<ul class="pagination">
-											<c:if test="${scpb.previousPageGroup}">
-												<li><a
-													href="front?command=searchByText&searchtextpageNo=${scpb.startPageOfPageGroup-1}">&laquo;</a>
-												</li>
-											</c:if>
-											<c:forEach var="sci" begin="${scpb.startPageOfPageGroup}"
-												end="${scpb.endPageOfPageGroup}">
-												<c:choose>
-													<c:when test="${scpb.nowPage!=i}">
-														<li><a href="front?command=searchByText&searchtextpageNo=${sci}">${sci}</a></li>
-													</c:when>
-													<c:otherwise>
-														<li class="active"><a href="#">${sci}</a></li>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-											<c:if test="${scpb.nextPageGroup}">
-												<li><a
-													href="front?command=searchByText&searchtextpageNo=${scpb.endPageOfPageGroup+1}">&raquo;</a>
-												</li>
-											</c:if>
-										</ul>
+								</div>
+							</div>
+						</div>
+						<br>
+					</div>
+					<%-- 세번째 검색 결과 --%>
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4>' 내용 ' 검색결과</h4>
+							</div>
+							<div class="card-body">
+								<div class="row"></div>
+
+								<div class="container">
+									<table class="table table-bordered">
+										<c:if test="${empty requestScope.sclvo.list}">
+											검색 결과가 존재하지 않습니다.
+										</c:if>
+										<c:forEach var="searchContext" items="${requestScope.sclvo.list }">
+											<font size=12px><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${searchContext.bbs_no}">${searchContext.title}</a></font>
+											<font size=3px><textarea name="context" rows="2" id="context" disabled="disabled" style="width: 100%; border: none" >${spvo.createDate}&nbsp;${searchContext.context}</textarea></font>
+											<br><br>
+										</c:forEach>
+										<%-- SH : 코드 끝 --%>
+									</table>
+								</div>
+								<%-- paging 처리  --%>
+								<div class="container">
+									<div class="row">
+										<div class="pagingArea" style="float: none; margin: 0 auto">
+											<c:set var="scpb" value="${requestScope.sclvo.pagingBean}"/>
+											<ul class="pagination">
+												<c:if test="${scpb.previousPageGroup}">
+													<li><a
+														href="front?command=searchByText&searchtextpageNo=${scpb.startPageOfPageGroup-1}">&laquo;</a>
+													</li>
+												</c:if>
+												<c:forEach var="sci" begin="${scpb.startPageOfPageGroup}"
+													end="${scpb.endPageOfPageGroup}">
+													<c:choose>
+														<c:when test="${i==0}"></c:when>
+														<c:when test="${scpb.nowPage!=sci}">
+															<li><a href="front?command=searchByText&searchtextpageNo=${sci}">${sci}</a></li>
+														</c:when>
+														<c:otherwise>
+															<li class="active"><a href="#">${sci}</a></li>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+												<c:if test="${scpb.nextPageGroup}">
+													<li><a
+														href="front?command=searchByText&searchtextpageNo=${scpb.endPageOfPageGroup+1}">&raquo;</a>
+													</li>
+												</c:if>
+											</ul>
+										</div>
 									</div>
-									<%-- Search Context paging 처리 END  --%>
-									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<%-- 홈으로가는 버튼 starts --%>
+					<div class="col-sm-offset-11 col-sm-1">
+						<br>
+						<table>
+							<tr>
+								<td colspan=1 class="btnArea" style="text-align: right;">
+									<button type="button" class="btn btn-secondary"
+										onclick="goHome()">홈으로</button>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<%-- 홈으로가는 버튼 ends --%>
+				</div>
+			</div>
+		</div>
+	</div>

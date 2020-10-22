@@ -270,9 +270,9 @@ public class BBSDAO {
 		StringBuilder sql = new StringBuilder();
 		try {
 			con=getConnection();
-			sql.append("SELECT B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ");
+			sql.append("SELECT B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category,b.context ");
 			sql.append("FROM (SELECT row_number() over(order by bbs_no desc) as rnum, bbs_no, hits, to_char(POSTEDDATE,'YYYY.MM.DD') as POSTEDDATE,");
-			sql.append("writer, category, title FROM board WHERE TITLE LIKE ?) B, MEMBER M ");
+			sql.append("writer, category, title,context FROM board WHERE TITLE LIKE ?) B, MEMBER M ");
 			sql.append("WHERE B.WRITER = M.ID AND rnum between ? and ?");
 			pstmt=con.prepareStatement(sql.toString());
 			pstmt.setString(1, "%"+searchText+"%");
@@ -285,6 +285,7 @@ public class BBSDAO {
 				mvo.setId(rs.getString(2));
 				bvo.setVo(mvo);
 				bvo.setTitle(rs.getString(1));
+				bvo.setContext(rs.getString(7));
 				bvo.setCreateDate(rs.getString(3));
 				bvo.setHits(rs.getInt(4));
 				bvo.setBbs_no(rs.getString(5));
@@ -370,7 +371,7 @@ public class BBSDAO {
 		
 	}
 	// 상훈 : 채용 후 리뷰를 아직 쓰지 않은 건수 출력
-		public ArrayList<BBSVO> mustReview(PagingBean pagingBean,String id) throws SQLException {
+		public ArrayList<BBSVO> mustReview(String id) throws SQLException {
 			Connection con = null;
 			PreparedStatement pstmt = null;
 			ResultSet rs = null;
@@ -382,11 +383,9 @@ public class BBSDAO {
 			    sql.append("from(select row_number() over(order by bbs_no desc) as rnum,bbs_no,title,hits, ");
 				sql.append("to_char(posteddate,'YYYY.MM.DD')as posteddate,writer,category ");
 				sql.append("from board)b,(select * from review where givereviewer=? and ISREVIEW='NO') r ");
-				sql.append("where b.bbs_no=r.bbs_no and rnum between ? and ? ");
+				sql.append("where b.bbs_no=r.bbs_no ");
 				pstmt = con.prepareStatement(sql.toString());
 				pstmt.setString(1, id);
-				pstmt.setInt(2, pagingBean.getStartRowNumber());
-				pstmt.setInt(3, pagingBean.getEndRowNumber());
 				rs = pstmt.executeQuery();
 				while (rs.next()) {
 					BBSVO bvo = new BBSVO();

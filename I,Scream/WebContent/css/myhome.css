@@ -1,4 +1,4 @@
-/* @charset "UTF-8";
+ /*@charset "UTF-8";
 	회원가입폼에서 가운데 정렬하기 위한 CSS/네이버회원가입 벤치마킹
 	#signinCss{
 		background-color: #F2F2F2;
@@ -37,16 +37,5 @@
 		width:460px;
 		height: 51px;
 	}
+*/	
 	
-	addReview-Rating-stars
-	#rating_star_grade a{
-		text-decoration: none;
-		color: gray;
-	}
-	#rating_star_grade a.on{
-		color: red;
-	}
-
-
-
- */

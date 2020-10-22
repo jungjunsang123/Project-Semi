@@ -38,13 +38,13 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT address, name, tel, birth, sex, regdate FROM MEMBER WHERE id=? and password=?";
+			String sql="SELECT address, name, tel, regdate,sex,to_char(birth,'yyyy-mm-dd'),star,profile_path FROM MEMBER WHERE id=? and password=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
 			rs=pstmt.executeQuery();
 			if(rs.next())
-				vo=new MemberVO(id, password, rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6));
+				vo=new MemberVO(id, password, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
 		}finally {
 			closeAll(rs,pstmt,con);
 		}
@@ -78,12 +78,12 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT address, name, tel, sex, to_char(birth,'yyyy-mm-dd'), star, profile_path FROM MEMBER where id=?";
+			String sql="SELECT address, name, tel, sex, to_char(birth,'yyyy-mm-dd'), star, profile_path,regdate FROM MEMBER where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, searchText);
 			rs=pstmt.executeQuery();
 			if(rs.next())
-				vo=new MemberVO(searchText,null,rs.getString(1),rs.getString(2),rs.getString(3),null,rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+				vo=new MemberVO(searchText,null,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(8),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
 		}finally {
 			closeAll(rs,pstmt,con);
 		}

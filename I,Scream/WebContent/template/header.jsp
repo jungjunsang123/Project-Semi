@@ -22,7 +22,7 @@
    <div class="row justify-content-left">
    <%-- 로고이미지 end --%>
    <%-- 검색기능 start --%>
-      <div class="col-sm-9">
+      <div class="col-sm-8">
 			<div class="card-body align-items-center">
 			<div class="col-sm-auto">
 				<form class="searchForm"
