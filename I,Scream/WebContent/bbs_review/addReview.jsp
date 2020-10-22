@@ -4,8 +4,9 @@
     
 <div class="addReview-container" align="center">
 <form action="${pageContext.request.contextPath}/front" method="post" id="addReview">
-<h3>**후기받는대상**님과 함께한 시간을 어땟나요?<br>
-다른 사람들을 위해 별점과 후기를 남겨주세요!</h3>
+<h2><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${requestScope.bvo.bbs_no}">${requestScope.bvo.title}</a> 공고 리뷰</h2>
+<h4>${requestScope.grvo.id}님과 함께한 시간을 어땟나요?<br>
+다른 사람들을 위해 별점과 후기를 남겨주세요!</h4>
 <br>
 <input type="hidden" name="command" value="addReview">
 

@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script type="text/javascript">
+
+
+
+
+
+</script>
 <div class="bbs-container">
-	<form action="${pageContext.request.contextPath}/front" method="post" name="addPostForm">
+	<form action="${pageContext.request.contextPath}/front" method="post" name="addPostForm" submit="return ">
 		<h4 class="card-title">게시글 작성</h4>
 		<input type="hidden" name="command" value="AddPost">
 		<table class="table table-bordered" style="width: 800px; margin-left: auto; margin-right: auto;">
@@ -27,11 +34,11 @@
 			</tr>
 			<tr>
 				<td>업무 시작일</td>
-				<td><input type="date" name="StartWorkTime"></td>
+				<td><input type="date" name="StartWorkTime" id="startWorkTimeInput"></td>
 			</tr>
 			<tr>
 				<td>업무 종료일</td>
-				<td><input type="date" name="EndWorkTime"></td>
+				<td><input type="date" name="EndWorkTime" id="endWorkTimeInput"></td>
 			</tr>
 			<%-- 하단버튼 --%>
 			<tr>
