@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -79,7 +78,7 @@ public class MemberDAO {
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT address, name, tel, sex,birth,star,profile_path FROM MEMBER where id=?";
+			String sql="SELECT address, name, tel, sex, to_char(birth,'yyyy-mm-dd'), star, profile_path FROM MEMBER where id=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, searchText);
 			rs=pstmt.executeQuery();

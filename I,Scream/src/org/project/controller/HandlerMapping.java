@@ -11,7 +11,11 @@ public class HandlerMapping {
 		//로그인
 		if(command.contentEquals("login")) {
 			controller=new LoginController();
-		}else if(command.equals("AddPost"))
+		}
+		//kakaoLogin
+		else if(command.equals("kakaoLogin"))
+			controller = new KakaoLoginController();
+		else if(command.equals("AddPost"))
 			controller = new AddPostController();
 		else if(command.equals("AddPostForm"))
 			controller = new AddPostFormController();
@@ -46,9 +50,17 @@ public class HandlerMapping {
 		}else if(command.equals("getPostList")) {
 			controller = new getPostListController();
 		}
+		//작성자를 통한 게시물 리스트 출력
+		else if(command.equals("findPostListById")) {
+			controller = new FindPostListByIdController();
+		}
 		//게시물 상세보기
 		else if (command.equals("DetailPost")) {
 			controller=new DetailPostController();
+		}
+		//게시물 스크랩
+		else if (command.equals("Scrap")) {
+			controller=new ScrapController();
 		}
 		//게시물 수정
 		else if (command.equals("UpdatePost")) {
@@ -78,16 +90,20 @@ public class HandlerMapping {
 			controller=new AddReviewController();
 		}else if(command.contentEquals("AddReviewForm")) {
 			controller=new AddReviewFormController();
-		}//고용주 게시물에서 지원한 사람출력
+		}
+		//고용주 게시물에서 지원한 사람출력
 		else if (command.contentEquals("listApplyer")) {
 			controller=new ListApplyerController();
-		}//채용하기 버튼 클릭시 채용된 지원자 외에 모두에게 알람 및 고용주에게 알람 발생
+		}
+		//채용하기 버튼 클릭시 채용된 지원자 외에 모두에게 알람 및 고용주에게 알람 발생
 		else if (command.contentEquals("Recruit")) {
 			controller=new RecruitController();
-		}//지원현황 클릭시 리스트 출력
+		}
+		//지원현황 클릭시 리스트 출력
 		else if (command.contentEquals("findApplyList")) {
 			controller=new findApplyListController();
-		}//지원하기
+		}
+		//지원하기
 		else if(command.contentEquals("Apply")) {
 			controller=new ApplyController();
 		}
@@ -98,10 +114,18 @@ public class HandlerMapping {
 		}else if(command.contentEquals("searchByText")) {
 			controller=new searchByTextController();
 		}
+		//우수사원(평균별점3.8 이상) 뽑아오기 
+		else if(command.equals("bestemployee")) {
+			controller = new BestEmployeeController();
+		}
+		//홈화면에서 프로필 디테일 받아오기
+		else if(command.equals("getProfileDetail")) {
+			controller = new GetProfileDetailController();
+		}
 		return controller; 
-	}
-}
 
+		}
+	}
 
 
 

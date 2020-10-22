@@ -1,57 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>   
-  
-<nav class="navbar">
-  <div class="container-fluid">
-    	<div class="row">
-    		<!-- 로고 start-->
-    		<div class="col-sm-3">
-    			<a class="navbar-brand" href="${pageContext.request.contextPath}/front?command=home">HOME</a>
-    		</div>
-    		<!-- 로고 end-->
-    		<!-- 검색창 start -->
-    		<div class="col-sm-6">
-	      			<form class="searchForm" action="${pageContext.request.contextPath}/front">
-	      			<input type="hidden" name="command" value="searchByText">
-					  <div class="input-group">
-					    <input type="text" class="form-control" placeholder="Search" name="searchText">
-					    <div class="input-group-btn">
-					      <button class="btn btn-default" type="submit">
-					        <i class="glyphicon glyphicon-search"></i>
-					      </button>
-					    </div>
-					  </div>
-					</form>
-    		</div>
-    		<!-- 검색창 end -->
-   		</div><!-- /row  -->
-	</div>
- </nav>
-<!-- 카테고리 start -->
-<nav class="navbar">
-  <div class="container-fluid">
-   	<div class="row categorybar">
-   	 		<!--  -->
-    		<div class="collapse navbar-collapse">
-			      <ul class="nav navbar-nav">
-		 			 <li>
-		 			 	<a href="#" class="burger-custom collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
-	     					<img src="${pageContext.request.contextPath}/image/Hamburger_icon2.png"></a>
-		 			 </li>
-			        <li><a href="${pageContext.request.contextPath}/front?command=getPostList" class="">채용정보</a></li>
-			        <li><a href="#" class="nav-item nav-link">인재정보</a></li>
-			        <li><a href="#" class="nav-item nav-link">이용안내</a></li>
-		     	 </ul>
-				   	
-		    </div>
-		    <!--  -->
-
-		 </div>
-	 </div>
- </nav>
- <!-- 카테고리 end -->
-
-    	
-    	
-  
+   pageEncoding="UTF-8" session="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<head>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<div class="container">
+<%-- 로고이미지 start --%>
+   <a class="navbar-brand" href="${pageContext.request.contextPath}/front?command=home">
+   <img class="img-fluid" alt="Bootstrap Image Preview" src="image/SeeTer2.png" style="width: 100px;"> </a>
+   <div class="row justify-content-left">
+   <%-- 로고이미지 end --%>
+   <%-- 검색기능 start --%>
+      <div class="col-sm-9">
+      <form class="searchForm" action="${pageContext.request.contextPath}/front">
+      <input type="hidden" name="command" value="searchByText" >
+         <div class="card-body row no-gutters align-items-center">
+            <div class="col-auto">
+               <i class="fas fa-search h4 text-body"></i>
+            </div>
+            <div class="col">
+                <input class="form-control form-control-lg form-control-borderless"
+                  type="search" placeholder="검색 내용을 적어주세요." name="searchText"> 
+            </div>
+            <div class="col-auto">
+               <button class="btn btn-lg btn-secondary" type="submit">검색</button>
+            </div>
+         </div>
+         </form>
+      </div>
+      <%-- 검색기능 end --%>
+   </div>
+</div>
+<div class="container">
+   <div class="row">
+   <%-- 첫번째 게시판 메뉴바 start --%>
+         <div class="col-xs-3 ">
+         <nav>
+            <br><a href="${pageContext.request.contextPath}/front?command=getPostList">
+            <button type="button" class="btn btn-outline-warning btn-block">전체 게시판</button>
+         </a></nav>
+      </div>
+      <%-- 첫번째 게시판 메뉴바 end --%>
+      <%-- 두번째 게시판 메뉴바 start --%>
+      <div class="col-xs-3 ">
+         <nav>
+            <br><a href="${pageContext.request.contextPath}/front?command=YoungPostList">
+            <button type="button" class="btn btn-outline-danger btn-block">아이돌봄 게시판</button>
+         </a></nav>
+      </div>
+      <%-- 두번째 게시판 메뉴바 end --%>
+      <%-- 세번째 게시판 메뉴바 start --%>
+      <div class="col-xs-3 ">
+         <nav>
+            <br><a href="${pageContext.request.contextPath}/front?command=OldPostList">
+            <button type="button" class="btn btn-outline-success btn-block">노인케어 게시판</button>
+         </a></nav>
+      </div>
+      <%-- 세번째 게시판 메뉴바 end --%>
+      <%-- 네번째 게시판 메뉴바 start --%>
+      <div class="col-xs-3 ">
+         <nav>
+            <br><a href="${pageContext.request.contextPath}/front?command=PetPostList">
+            <button type="button" class="btn btn-outline-primary btn-block">반려동물</button>
+         </a></nav>
+      </div>
+      <%-- 네번째 게시판 메뉴바 end --%>
+   </div>
+</div>

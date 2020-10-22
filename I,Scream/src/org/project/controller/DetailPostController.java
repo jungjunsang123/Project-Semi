@@ -8,6 +8,7 @@ import org.project.model.ApplyDAO;
 import org.project.model.BBSDAO;
 import org.project.model.BBSVO;
 import org.project.model.MemberVO;
+import org.project.model.ScrapDAO;
 //게시물 상세보기
 public class DetailPostController implements Controller {
 
@@ -16,15 +17,17 @@ public class DetailPostController implements Controller {
       HttpSession session = request.getSession(false);
       MemberVO mvo=(MemberVO) session.getAttribute("mvo");
       String LoginId="";
-      
       String bbs_no = request.getParameter("bbs_no");
       BBSVO vo = BBSDAO.getInstance().detailPostingByNo(bbs_no);
       
       if(mvo!=null) {
          LoginId= mvo.getId();
          boolean IsApply=false;
+         boolean IsScrap=false;
          IsApply = ApplyDAO.getInstance().IsApply(bbs_no, mvo.getId());
+         IsScrap = ScrapDAO.getInstance().IsScrap(bbs_no, mvo.getId());
          request.setAttribute("IsApply", IsApply);
+         request.setAttribute("IsScrap", IsScrap);
          //게시물 작성자 와 로그인한 사용자가 다른지 확인, 다를시에만 hit up
          if(!LoginId.equals(vo.getVo().getId()) || LoginId=="") {
              BBSDAO.getInstance().updateBBSHit(bbs_no);

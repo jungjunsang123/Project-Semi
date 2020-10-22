@@ -5,6 +5,11 @@ DROP TABLE MEMBER;
 DROP SEQUENCE BOARD_SEQ;
 DROP SEQUENCE REVIEW_SEQ;
 
+SELECT * FROM MEMBER
+SELECT * FROM BOARD
+SELECT * FROM REVIEW
+SELECT * FROM APPLY
+
 //기존에 MEMBER테이블 있으면 삭제하고 새로 생성하기
 
 --MEMBER SECTION--
@@ -131,10 +136,18 @@ CREATE TABLE Apply(
 --profile 업로드를 위한 member테이블 컬럼 수정
 alter table member add profile_path varchar2(4000) default 'NULL'
 
+---------------------------------4차 db 구조변경작업---------------------------------------------
+CREATE TABLE Scrap(
+	BBS_NO VARCHAR2(100),
+	constraint Scrap_bbs_no_fk foreign key(bbs_no) references board(bbs_no) on delete cascade,
+	Scraper VARCHAR2(100),
+	constraint Scrap_id_fk foreign key(Scraper) references member(id) on delete cascade,
+	constraint pk_Scrap primary key(BBS_NO,Scraper)
+)
 
 ----------------------- DB test는 아래에서
 INSERT INTO Review VALUES('5', '5', 'NO', '우하하하 좋아요', sysdate, 'a','b');
-select * from board
+select * from member
 select (TO_CHAR(endworktime, 'YYYYMMDD')) - (to_char(sysdate,'yyyymmdd')) from board where bbs_no='20'
 update apply set hiredResult = CASE when id='test2' then 'YES' ELSE 'Fail' end where bbs_no='18'
 
@@ -160,7 +173,6 @@ insert into member values('test2', '1234', '서울', '홍길동','01012345678', 
 select * from member
 select * from review
 INSERT INTO MEMBER VALUES('a','1','수원','양성식','010',to_date('18-05-1992','dd-mm-yyyy'),null,sysdate,0);
->>>>>>> branch 'main' of https://github.com/Minikanko/Kosta-semiProject-i-Scream.git
 
 select TITLE, Writer, to_char(POSTEDDATE,'yyyy.mm.dd'), HITS from  board 
 
@@ -179,10 +191,22 @@ select * from apply
 select * from review
 delete from review
 
+select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ,b.rnum
+from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M 
+where B.writer = M.ID and rnum between 1 and 10
 
-
+ 
+ select b.rnum
+ from ( select row_number() over (order by bbs_no desc) as rnum ) b, member m
+ where b.writer = m.id and rnum between 1 and 10
+ 
+ select star from member where ID='a'
+ select count(*) from board where writer='a'
+ select * from review
+ update member set star = 5 where id='a'
+ 
 select m.id,m.name,m.avgstars from member m, apply a where a.bbs_no='19'
-
+select * from member
 
 update BOARD set HITS=HITS+1 where BBS_NO='24'
 
@@ -190,10 +214,56 @@ select * from apply
 select b.context,b.hits,b.posteddate,m.id
 from board b,member m
 where b.Writer=m.id 
-order by b.bbs_no asc;
-INSERT INTO REVIEW SET VALUE()reviewContext= ?;
 
-SELECT B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category, B.context 
-			FROM (SELECT row_number() over(order by bbs_no desc) as rnum, bbs_no, hits, to_char(POSTEDDATE,'YYYY.MM.DD') as POSTEDDATE, 
-			writer, category, title, context FROM board WHERE CONTEXT LIKE '%a%') B, MEMBER M 
-			WHERE B.WRITER = M.ID AND rnum between 1 and 5
+order by b.bbs_no asc;
+
+		
+select * from review
+
+select getreviewer, avg(stars) as avgStars
+from review
+group by getReviewer
+having avg(stars) > 2
+order by avgStars desc  
+
+
+
+----------------------------------------------------
+select  getreviewer, avg(stars) as avgStars 
+from (select  r.*
+from board b, review r
+where b.bbs_no = r.bbs_no and b.category='반려동물')
+group by getReviewer 
+having avg(stars) > 2.3 order by avgStars desc 
+
+
+select  getreviewer, avg(stars) as avgStars 
+from (select  r.*
+from board b, review r
+where b.bbs_no = r.bbs_no and b.category='노인케어')
+group by getReviewer 
+having avg(stars) > 1 order by avgStars desc 
+
+
+select  getreviewer, avg(stars) as avgStars 
+from (select  r.*
+from board b, review r
+where b.bbs_no = r.bbs_no and b.category='아이돌봄')
+group by getReviewer 
+having avg(stars) > 1 order by avgStars desc 
+
+
+
+select * from member
+
+select * from review
+
+select category from board
+
+
+select  r.*
+from board b, review r
+where b.bbs_no = r.bbs_no and b.category='노인케어'
+
+
+SELECT address, name, tel, to_char(birth,'yyyy-mm-dd'), sex FROM MEMBER where id='a'
