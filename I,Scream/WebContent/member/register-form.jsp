@@ -2,19 +2,21 @@
     pageEncoding="UTF-8" session="false"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
 <!DOCTYPE html>
+
+
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>Insert title here</title>
 </head>
 <body>
-
-<script type="text/javascript">
+	<div class="col-sm-offset-4 col-sm-4">
+		<script type="text/javascript">
 	$(document).ready(function(){
 		var checkId="";
 		$("#memberId").keyup(function(){
@@ -102,44 +104,48 @@
 		
 	});
 </script>
-<div id="signinCss">
-<form action="${pageContext.request.contextPath}/front" method="post" id="registerForm" enctype="multipart/form-data">
-		<input type="hidden" name="command" value="register"><br>
-				<h1 align="center"><a href="${pageContext.request.contextPath }/front?command=home"><img src="css/Seeter_logo_wo_background.png" width="200" height="100"></a></h1><br>
-			<font size= 4px >
-			<b>아이디</b><br>
-			<input type="text" name="id" id="memberId" required="required"><br>
-			<span id="checkResult"></span><br>
-			<b>비밀번호</b><br>
-			<input type="password" name="password" id="pw1" required="required"><br>
-			<span id="passwordLengthCheckMessage"></span><br>
-			<b>비밀번호확인</b><br>
-			<input type="password" name="passwordconfirm" id="pw2"required="required"><br>
-			<span id="passwordCheckMessage"></span><br>
-			<b>이름</b><br>
-			<input type="text" name="name" required="required"><br><br>
-			<b>주소</b><br>
-			<input type="text" name="address" required="required"><br><br>
-			<b>전화번호</b><br>
-			<input type="text" pattern="[0-9]+" name="tel" id="teltype" placeholder="번호만 입력하세요. ex)01012345678 " required="required"><br>
-			<span id="telInputTypeCheck"></span><br>
-			<b>성별</b><br>
-			<select name="sex" class="sexSelect" required="required">
-			  <option value="남자">남자</option>
-			  <option value="여자">여자</option>
-			  <option value="선택하지않음">선택하지않음</option>
-			</select><br><br>
-			<b>생년월일</b><br>
-			<input type="date" name="birth" id="birth" required="required"><br><br>
-			<input type="submit" value="회원가입"><br><br>
-			</font>
-</form>   	
-</div>
-<!-- footer -->
-<div id="signinfooterCsds">
-<a href="${pageContext.request.contextPath }/front?command=home"><img src="css/Seeter_logo_wo_background.png" width="100" height="50"></a>&nbsp;&nbsp;For you. Seeter.
-<br><br><br><br>
-</div>
+		<form action="${pageContext.request.contextPath}/front" method="post" id="registerForm">
+			<div>
+				<input type="hidden" name="command" value="register"><br>
+				<h1 align="center">
+					<a href="${pageContext.request.contextPath }/front?command=home">
+					<img src="image/SeeTer2.png" width="439" height="249"></a>
+				</h1>
+				<br> <font size=4px> 
+				<b>아이디</b><br> 
+				<input type="text" name="id" id="memberId" required="required" style="width: 439px"><br>
+				<span id="checkResult"></span><br>
+				<b>비밀번호</b><br>
+				<input type="password" name="password" id="pw1" required="required" style="width: 439px"><br>
+				<span id="passwordLengthCheckMessage"></span><br> 
+				<b>비밀번호확인</b><br>
+				<input type="password" name="passwordconfirm" id="pw2" required="required" style="width: 439px"><br> <span
+					id="passwordCheckMessage"></span><br> <b>이름</b><br> <input
+					type="text" name="name" required="required" style="width: 439px"><br>
+					<br> <b>주소</b><br> <input type="text" name="address"
+					required="required" style="width: 439px"><br> <br>
+					<b>전화번호</b><br> <input type="text" pattern="[0-9]+" name="tel"
+					id="teltype" placeholder="번호만 입력하세요. ex)01012345678 "
+					required="required" style="width: 439px"><br> <span
+					id="telInputTypeCheck"></span><br> <b>성별</b><br> <select
+					name="sex" class="sexSelect" required="required"
+					style="width: 439px">
+						<option value="남자">남자</option>
+						<option value="여자">여자</option>
+						<option value="선택하지않음">선택하지않음</option>
+				</select><br> <br> <b>생년월일</b><br> <input type="date"
+					name="birth" id="birth" required="required" style="width: 439px"><br>
+					<br>
+					<div style="text-align: center; margin: 0 auto;">
+						<input type="submit" value="회원가입"><br><br><br>
+					</div>
+				</font>
+			</div>
+		</form>
+		<!-- footer -->
+	</div>
+	
 </body>
 </html>
+
 

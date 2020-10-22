@@ -442,4 +442,109 @@ public class BBSDAO {
 			return list;
 			
 		}
+		// SH: 아이돌봄 게시물 가져오기
+		public ArrayList<BBSVO> getPostingYoungList(PagingBean pagingBean) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<BBSVO> list = new ArrayList<BBSVO>();
+			try {
+				con = getConnection();
+				StringBuilder sql = new StringBuilder();
+				sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO, B.CATEGORY ");
+				sql.append(
+						"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, CATEGORY from board) B, MEMBER M ");
+				sql.append("where B.writer = M.ID and rnum between ? and ? and B.CATEGORY='아이돌봄' ");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, pagingBean.getStartRowNumber());
+				pstmt.setInt(2, pagingBean.getEndRowNumber());
+				
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					BBSVO bbsvo = new BBSVO();
+					MemberVO mvo = new MemberVO();
+					mvo.setId(rs.getString(2));
+					bbsvo.setVo(mvo);
+					bbsvo.setTitle(rs.getNString(1));
+					bbsvo.setCreateDate(rs.getNString(3));
+					bbsvo.setHits(rs.getInt(4));
+					bbsvo.setBbs_no(rs.getString(5));
+					bbsvo.setCategory(rs.getString(6));
+					list.add(bbsvo);
+				}
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return list;
+		}
+		// SH: 노인케어 게시물 가져오기
+		public ArrayList<BBSVO> getPostingOldList(PagingBean pagingBean) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<BBSVO> list = new ArrayList<BBSVO>();
+			try {
+				con = getConnection();
+				StringBuilder sql = new StringBuilder();
+				sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO, B.CATEGORY ");
+				sql.append(
+						"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, CATEGORY from board) B, MEMBER M ");
+				sql.append("where B.writer = M.ID and rnum between ? and ? and B.CATEGORY='노인케어' ");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, pagingBean.getStartRowNumber());
+				pstmt.setInt(2, pagingBean.getEndRowNumber());
+				
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					BBSVO bbsvo = new BBSVO();
+					MemberVO mvo = new MemberVO();
+					mvo.setId(rs.getString(2));
+					bbsvo.setVo(mvo);
+					bbsvo.setTitle(rs.getNString(1));
+					bbsvo.setCreateDate(rs.getNString(3));
+					bbsvo.setHits(rs.getInt(4));
+					bbsvo.setBbs_no(rs.getString(5));
+					bbsvo.setCategory(rs.getString(6));
+					list.add(bbsvo);
+				}
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return list;
+		}
+		// SH: 반려동물 게시물 가져오기
+		public ArrayList<BBSVO> getPostingPetList(PagingBean pagingBean) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<BBSVO> list = new ArrayList<BBSVO>();
+			try {
+				con = getConnection();
+				StringBuilder sql = new StringBuilder();
+				sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO, B.CATEGORY ");
+				sql.append(
+						"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, CATEGORY from board) B, MEMBER M ");
+				sql.append("where B.writer = M.ID and rnum between ? and ? and B.CATEGORY='반려동물' ");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, pagingBean.getStartRowNumber());
+				pstmt.setInt(2, pagingBean.getEndRowNumber());
+				
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					BBSVO bbsvo = new BBSVO();
+					MemberVO mvo = new MemberVO();
+					mvo.setId(rs.getString(2));
+					bbsvo.setVo(mvo);
+					bbsvo.setTitle(rs.getNString(1));
+					bbsvo.setCreateDate(rs.getNString(3));
+					bbsvo.setHits(rs.getInt(4));
+					bbsvo.setBbs_no(rs.getString(5));
+					bbsvo.setCategory(rs.getString(6));
+					list.add(bbsvo);
+				}
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return list;
+		}
 }

@@ -98,7 +98,8 @@ function logoutWithKakao(){
 		<div class="row content content-custom">
 				<c:import url="${requestScope.url}"></c:import>
 		</div>
-	<hr>   
+	
+	<hr>
 	<c:import url="footer.jsp"/>
 </div>
 

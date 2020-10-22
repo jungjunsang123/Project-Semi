@@ -33,6 +33,7 @@
 			</div>
 	</div>
 	<%-- 하단 풋터 start --%>
+	<hr>
 	<c:import url="footer.jsp"/>
 	<%-- 하단 풋터 end --%>
 </div>
