@@ -100,7 +100,9 @@ function logoutWithKakao(){
 			document.applyForm.submit();
 		}
 	}
-	
+	function goHome(){
+		location.href="front?command=home";
+	}
 </script>
 </head>
 <body>

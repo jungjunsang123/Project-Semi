@@ -1,69 +1,4 @@
 @charset "UTF-8";
-
-
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-    }
-    
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: auto;}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
- 
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: green;
-      color: white;
-
-    }
-
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-     
-    }
-	
-	.searchForm{
-		padding:15px;
-	}
-	
-	.categorybar{
-		background-color:#81DAF5;
-	}
-	.content-custom{
-		margin:0px;
-		background-color:yellow;
-		height:800px;
-	}
-
-	.sidenav{
-		padding-left: 5px;
-	    padding-left: 7px;
-	}
-	.bbs-custom{
-	    margin-left: -3;
-	    margin-right: 12px;
-		
-	}
-	
-	.bbs-container{
-		padding:25px;
-		
-	}
-	 td{
-		text-align: center;
-	}
 	/*회원가입폼에서 가운데 정렬하기 위한 CSS/네이버회원가입 벤치마킹*/
 	#signinCss{
 		background-color: #F2F2F2;
@@ -80,7 +15,15 @@
 		background-color: #F2F2F2;
 	}
 	/*registerForm text-area size*/
-	#registerForm input[type=text],input[type=password],input[type=submit]{
+	#registerForm>input[type=text]{
+		width:460px;
+		height: 51px;
+	}
+	#registerForm>input[type=password]{
+		width:460px;
+		height: 51px;
+	}
+	#registerForm>input[type=submit]{
 		width:460px;
 		height: 51px;
 	}
@@ -103,7 +46,6 @@
 	#rating_star_grade a.on{
 		color: red;
 	}
-	
 
 
 

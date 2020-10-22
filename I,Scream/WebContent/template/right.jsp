@@ -67,6 +67,7 @@ function logoutWithKakao(){
 		</c:when>
 		<c:otherwise>
 		${sessionScope.mvo.name} 님 로그인 상태<br>
+
 		<!-- 카카오로 로그인시 로직이 다르기 때문에 생성함 -->
 			<c:choose>
 				<c:when test="${sessionScope.IsKakaoLogin=='YES'}">

@@ -18,21 +18,23 @@
 </head>
 <body>
 <div class="container">
+<%-- 상단 헤더 start --%>
 	<c:import url="header.jsp"/>
-	<hr>   
-		<div class="row content content-custom">
-		    <div class="col-sm-10 text-left"> 
-				<c:import url="${requestScope.url}"></c:import>
-		    </div>
+	<!-- 상단 헤더 end -->
+	<hr>
+	<div class="row content">
+			<div class="container">
+			 	<c:import url="${requestScope.url}"/>
 		    <!-- 오른쪽 사이드바 start -->
 		    <div class="col-sm-2 sidenav">
 		    	<c:import url="right.jsp"/>
 		    </div>
 		     <!-- 오른쪽 사이드바 end -->
-		</div>
-	<hr>   
+			</div>
+	</div>
+	<%-- 하단 풋터 start --%>
 	<c:import url="footer.jsp"/>
+	<%-- 하단 풋터 end --%>
 </div>
-
 </body>
 </html>

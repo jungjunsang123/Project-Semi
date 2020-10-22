@@ -71,19 +71,19 @@ public class MemberDAO {
 		}
 	}
 	//회원 찾기 및 회원정보 가져오기
-	public MemberVO findMemberById(String id) throws SQLException {
+	public MemberVO findMemberById(String searchText) throws SQLException {
 		MemberVO vo=null;
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			con=dataSource.getConnection();
-			String sql="SELECT address, name, tel, sex,birth,star,profile_path FROM MEMBER where id=?";
+			String sql="SELECT address, name, tel, sex, to_char(birth,'yyyy-mm-dd'), star, profile_path FROM MEMBER where id=?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, searchText);
 			rs=pstmt.executeQuery();
 			if(rs.next())
-				vo=new MemberVO(id,null,rs.getString(1),rs.getString(2),rs.getString(3),null,rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+				vo=new MemberVO(searchText,null,rs.getString(1),rs.getString(2),rs.getString(3),null,rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
 		}finally {
 			closeAll(rs,pstmt,con);
 		}
@@ -183,4 +183,5 @@ public class MemberDAO {
 		}
 		
 	}
+
 }

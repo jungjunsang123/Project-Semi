@@ -1,10 +1,10 @@
 package org.project.model;
 
-import java.sql.*;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -54,8 +54,9 @@ public class BBSDAO {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ");
-			sql.append("from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M ");
-			sql.append("where B.writer = M.ID and rnum between ? and ?");
+			sql.append(
+					"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M ");
+			sql.append(" where B.writer = M.ID and rnum between ? and ? ");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, pagingBean.getStartRowNumber());
 			pstmt.setInt(2, pagingBean.getEndRowNumber());
@@ -64,13 +65,13 @@ public class BBSDAO {
 			while (rs.next()) {
 				BBSVO bbsvo = new BBSVO();
 				MemberVO mvo = new MemberVO();
-				mvo.setId(rs.getString(2));
-				bbsvo.setVo(mvo);
+				mvo.setId(rs.getString(2));				
 				bbsvo.setTitle(rs.getNString(1));
 				bbsvo.setCreateDate(rs.getNString(3));
 				bbsvo.setHits(rs.getInt(4));
 				bbsvo.setBbs_no(rs.getString(5));
 				bbsvo.setCategory(rs.getString(6));
+				bbsvo.setVo(mvo);
 				list.add(bbsvo);
 			}
 		} finally {
@@ -258,6 +259,79 @@ public class BBSDAO {
 			closeAll(rs, pstmt, con);
 		}
 		return total;
+	}
+	
+	// 타이틀 키워드 검색으로 일치하는 게시물 검색하기
+	public ArrayList<BBSVO> searchIdTitleByText(String searchText, PagingBean searchTitlepagingBean) throws SQLException{
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<BBSVO> list = new ArrayList<BBSVO>();
+		StringBuilder sql = new StringBuilder();
+		try {
+			con=getConnection();
+			sql.append("SELECT B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ");
+			sql.append("FROM (SELECT row_number() over(order by bbs_no desc) as rnum, bbs_no, hits, to_char(POSTEDDATE,'YYYY.MM.DD') as POSTEDDATE,");
+			sql.append("writer, category, title FROM board WHERE TITLE LIKE ?) B, MEMBER M ");
+			sql.append("WHERE B.WRITER = M.ID AND rnum between ? and ?");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1, "%"+searchText+"%");
+			pstmt.setInt(2, searchTitlepagingBean.getStartRowNumber());
+			pstmt.setInt(3, searchTitlepagingBean.getEndRowNumber());
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				BBSVO bvo=new BBSVO();
+				MemberVO mvo=new MemberVO();
+				mvo.setId(rs.getString(2));
+				bvo.setVo(mvo);
+				bvo.setTitle(rs.getString(1));
+				bvo.setCreateDate(rs.getString(3));
+				bvo.setHits(rs.getInt(4));
+				bvo.setBbs_no(rs.getString(5));
+				bvo.setCategory(rs.getString(6));
+				list.add(bvo);
+			}
+		}finally {
+			closeAll(rs,pstmt,con);
+		}
+		return list;
+	}
+	//텍스트로 글내용 검색하기
+	public ArrayList<BBSVO>searchContextByText(String searchText, PagingBean searchContextpagingBean) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<BBSVO> list = new ArrayList<BBSVO>();
+		StringBuilder sql = new StringBuilder();
+		try {
+			con=getConnection();
+			sql.append("SELECT B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category, B.context ");
+			sql.append("FROM (SELECT row_number() over(order by bbs_no desc) as rnum, bbs_no, hits, to_char(POSTEDDATE,'YYYY.MM.DD') as POSTEDDATE,");
+			sql.append("writer, category, title, context FROM board WHERE CONTEXT LIKE ?) B, MEMBER M ");
+			sql.append("WHERE B.WRITER = M.ID AND rnum between ? and ?");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1, "%"+searchText+"%");
+			pstmt.setInt(2, searchContextpagingBean.getStartRowNumber());
+			pstmt.setInt(3, searchContextpagingBean.getEndRowNumber());
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				BBSVO searchcontextbvo=new BBSVO();
+				MemberVO searchcontextmvo=new MemberVO();
+				searchcontextmvo.setId(rs.getString(2));
+				searchcontextbvo.setVo(searchcontextmvo);
+				searchcontextbvo.setTitle(rs.getString(1)); 
+				searchcontextbvo.setCreateDate(rs.getString(3));
+				searchcontextbvo.setHits(rs.getInt(4));
+				searchcontextbvo.setBbs_no(rs.getString(5));
+				searchcontextbvo.setCategory(rs.getString(6));   
+				searchcontextbvo.setContext(rs.getString(7)); 
+				list.add(searchcontextbvo);
+			}
+		}finally {
+			closeAll(rs,pstmt,con);
+		}
+		
+		return list;
 	}
 	//수민: 사용자가 작성한 게시물 리스트
 	public ArrayList<BBSVO> findPostListById(PagingBean pagingBean,String id) throws SQLException {

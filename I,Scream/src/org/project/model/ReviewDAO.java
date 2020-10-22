@@ -38,6 +38,36 @@ public class ReviewDAO {
 		closeAll(pstmt,con);
 
 	}
+	//카테고리별 평균점수가 3.8 이상인 멤버들을 AryList 에 담는 메소드
+	public ArrayList<MemberVO> getAVGStar(String category) throws SQLException {
+		Connection con= null;
+		PreparedStatement pstmt= null;
+		ResultSet rs = null;
+		ArrayList<MemberVO> list =new ArrayList<MemberVO>();
+		MemberVO vo;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select  getreviewer, avg(stars) as avgStars ");
+			sql.append(" from (select  r.* from board b, review r  where b.bbs_no = r.bbs_no and b.category=?) ");
+			sql.append(" group by getReviewer  having avg(stars) > 3.8 order by avgStars desc  ");
+			// 평균 별점이 1점이상 인사람 뽑아옴
+			con = getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, category);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				float tmp = rs.getFloat(2);
+				vo = new MemberVO();
+				String avg_tmp = String.format("%.2f", tmp);
+				vo.setId(rs.getString(1));
+				vo.setstar(avg_tmp);
+				list.add(vo);
+			}
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
 	//리뷰 페이징을 위한 포스트 개수
 	public int getTotalReviewCount() throws SQLException {
 		int totalCount = 0;
