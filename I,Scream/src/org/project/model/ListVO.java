@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class ListVO {
 	private ArrayList<BBSVO> list;
 	private PagingBean pagingBean;
+	
 	public ListVO(ArrayList<BBSVO> list, PagingBean pagingBean) {
 		super();
 		this.list = list;

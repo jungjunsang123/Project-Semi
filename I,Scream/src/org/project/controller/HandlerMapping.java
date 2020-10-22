@@ -8,12 +8,14 @@ public class HandlerMapping {
 	}
 	public Controller create(String command) {
 		Controller controller=null;
+		//로그인
 		if(command.contentEquals("login")) {
 			controller=new LoginController();
 		}else if(command.equals("AddPost"))
 			controller = new AddPostController();
 		else if(command.equals("AddPostForm"))
 			controller = new AddPostFormController();
+		//로그아웃
 		else if(command.contentEquals("logout")) {
 			controller=new LogoutController();
 		}
@@ -27,15 +29,18 @@ public class HandlerMapping {
 		else if(command.contentEquals("UpdateInfoResult")) {
 			controller=new UpdateInfoResultController();
 		}
-		
+		//회원가입
 		else if(command.contentEquals("register")) {
 			controller=new RegisterController();
 		}else if(command.contentEquals("registerForm")) {
 			controller=new RegisterFormController();
+		//홈화면 이동
 		}else if(command.contentEquals("home")) {
 			controller=new HomeController();
+		//회원가입 결과 
 		}else if(command.contentEquals("registerResult")) {
 			controller=new RegisterResultController();
+		//아이디 확인
 		}else if(command.contentEquals("idcheck")) {
 			controller=new IdCheckController();
 		}else if(command.equals("getPostList")) {
@@ -62,10 +67,13 @@ public class HandlerMapping {
 			controller=new OldPostCountController();
 		}else if (command.contentEquals("PetPostCount")) {
 			controller=new PetPostCountController();
+		//리뷰목록
 		}else if(command.contentEquals("ReviewList")) {
 			controller=new ReviewListController();
+		//리뷰보기
 		}else if(command.contentEquals("ReviewDetail")) {
 			controller=new ReviewDetailController();
+		//리뷰게시하기
 		}else if(command.contentEquals("addReview")) {
 			controller=new AddReviewController();
 		}else if(command.contentEquals("AddReviewForm")) {
@@ -86,6 +94,9 @@ public class HandlerMapping {
 		//채용결과 확인
 		else if(command.contentEquals("recruitResultConfirm")) {
 			controller=new RecruitResultConfirmController();
+		//제목 키워드로 검색하기
+		}else if(command.contentEquals("searchByText")) {
+			controller=new searchByTextController();
 		}
 		return controller; 
 	}

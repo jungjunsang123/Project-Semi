@@ -193,3 +193,7 @@ where b.Writer=m.id
 order by b.bbs_no asc;
 INSERT INTO REVIEW SET VALUE()reviewContext= ?;
 
+SELECT B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category, B.context 
+			FROM (SELECT row_number() over(order by bbs_no desc) as rnum, bbs_no, hits, to_char(POSTEDDATE,'YYYY.MM.DD') as POSTEDDATE, 
+			writer, category, title, context FROM board WHERE CONTEXT LIKE '%a%') B, MEMBER M 
+			WHERE B.WRITER = M.ID AND rnum between 1 and 5
