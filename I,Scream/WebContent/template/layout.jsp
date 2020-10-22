@@ -35,7 +35,7 @@
 							alt="Card image" style="width: 100%">
 						<div class="card-body">
 						<c:choose>
-						<c:when test="${pb=='null'}">
+						<c:when test="${pb==null}">
 						우수회원에 도전하세요
 						</c:when>
 						<c:otherwise>

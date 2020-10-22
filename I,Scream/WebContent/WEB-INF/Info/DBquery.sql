@@ -142,7 +142,7 @@ CREATE TABLE Scrap(
 
 ----------------------- DB test는 아래에서
 INSERT INTO Review VALUES('5', '5', 'NO', '우하하하 좋아요', sysdate, 'a','b');
-select * from member
+select * from board
 select (TO_CHAR(endworktime, 'YYYYMMDD')) - (to_char(sysdate,'yyyymmdd')) from board where bbs_no='20'
 update apply set hiredResult = CASE when id='test2' then 'YES' ELSE 'Fail' end where bbs_no='18'
 
@@ -186,6 +186,9 @@ select * from member
 select * from apply
 select * from review
 delete from review
+delete from board
+delete from apply
+delete from member
 
 select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ,b.rnum
 from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M 
@@ -249,7 +252,7 @@ group by getReviewer
 having avg(stars) > 1 order by avgStars desc 
 
 
-
+select *  from apply
 select * from member
 
 select * from review
