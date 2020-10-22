@@ -34,7 +34,7 @@ CREATE TABLE BOARD(
 	STARTWORKTIME date not null,
 	ENDWORKTIME date not null,
 	Writer varchar2(100) not null,
-	alter table BOARD add constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade;
+	constraint board_fk foreign key(Writer) references MEMBER(ID) on delete cascade
 	)
 	
 ---------------------------------Apply table---------------------------------------------
@@ -71,6 +71,5 @@ CREATE TABLE Scrap(
 	constraint Scrap_id_fk foreign key(Scraper) references member(id) on delete cascade,
 	constraint pk_Scrap primary key(BBS_NO,Scraper)
 )
-
 
 
