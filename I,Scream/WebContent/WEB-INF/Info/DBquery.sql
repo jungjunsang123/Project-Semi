@@ -153,9 +153,10 @@ INSERT INTO review VALUES('19','4','YES','dfd','YES',sysdate,'a','b');
 INSERT INTO review VALUES('18','4','YES','dfd','YES',sysdate,'a','b');
 update member set avgstars=5 where id='b'
 insert into apply values('18','waooljagy','NO')
+update review set isreview='NO' 
 INSERT INTO MEMBER(profile_path) values('g') where id='b'
 select title,context,hits,to_char(posteddate,'yyyy-mm-dd hh24:mm'),category,to_char(startWorkTime,'yyyy-mm-dd'),to_char(endWorkTime,'yyyy-mm-dd'),writer from board where BBS_NO='18'
-select * from member
+select * from review
 select b.bbs_no,b.title,b.context,b.hits,b.POSTEDDATE,b.category,
 b.WORKTIME-SYSDATE as workTime,
 b.writer from board b, (select * from apply where id='a' and hiredResult='NO') a where b.writer=a.id;
@@ -194,10 +195,17 @@ select m.id,m.name,m.avgstars from member m, apply a where a.bbs_no='19'
 
 update BOARD set HITS=HITS+1 where BBS_NO='24'
 
-select * from apply
+select * from review
 select b.context,b.hits,b.posteddate,m.id
 from board b,member m
 where b.Writer=m.id 
 order by b.bbs_no asc;
 INSERT INTO REVIEW SET VALUE()reviewContext= ?;
 
+select b.bbs_no,b.endWORKTIME-SYSDATE,a.id
+from (select * from board where writer='a') b,
+apply a
+where b.bbs_no = a.bbs_no
+
+select b.bbs_no,b.endWORKTIME-SYSDATE,b.writer from board b,(select * from apply where id='test2' and hiredResult='NO') a where b.bbs_no = a.bbs_no
+select * from apply

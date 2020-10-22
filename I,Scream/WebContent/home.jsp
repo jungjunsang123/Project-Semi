@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="false"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>     
+<script>
+	$(document).ready(function(){
+		//리뷰건수가 있는지 계산
+		if(${requestScope.MustReviewPostSize>0}){
+			alert("${requestScope.MustReviewPostSize}건 리뷰 작성이 필요합니다.");
+			location.href="${pageContext.request.contextPath}/front?command=AddReviewForm&bbs_no=${requestScope.MustReviewPost.bbs_no}";		
+		}
+	})
+</script>
 
 홈인디?
 <br>

@@ -14,21 +14,17 @@ public class AddReviewController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession(false);
-		MemberVO vo= (MemberVO) session.getAttribute("mvo");
-		String id = vo.getId();
-		String BBS_NO = ReviewDAO.getInstance().getBBS_NO(id);
-		String rc = request.getParameter("review_content");
-		int stars = Integer.parseInt(request.getParameter("reviewstar"));
-		BBSVO bvo = new BBSVO();
-		bvo.setBbs_no(BBS_NO);
-		bvo.setContext(rc);
-		ReviewDAO.getInstance().reviewAdd(bvo,stars);
-		
-		
 		
 		if(session!=null&&session.getAttribute("mvo")!=null) {
-//			String review_context = request.getParameter("review_context");
-			
+			MemberVO vo= (MemberVO) session.getAttribute("mvo");
+			String id = vo.getId();
+			String BBS_NO = ReviewDAO.getInstance().getBBS_NO(id);
+			String rc = request.getParameter("review_content");
+			int stars = Integer.parseInt(request.getParameter("reviewstar"));
+			BBSVO bvo = new BBSVO();
+			bvo.setBbs_no(BBS_NO);
+			bvo.setContext(rc);
+			ReviewDAO.getInstance().reviewAdd(bvo,stars);
 		}else
 			return "/member/IsNotLogin.jsp";
 		return "redirect:bbs_review/addReview_Result.jsp";

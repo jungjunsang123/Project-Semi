@@ -54,8 +54,7 @@ public class BBSDAO {
 			con = getConnection();
 			StringBuilder sql = new StringBuilder();
 			sql.append("select B.TITLE, M.ID, B.POSTEDDATE, B.HITS, B.BBS_NO , B.category ");
-			sql.append(
-					"from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M ");
+			sql.append("from( select row_number() over(order by bbs_no desc) as rnum, bbs_no, title, hits, to_char(POSTEDDATE,'yyyy.mm.dd') as POSTEDDATE, writer, category from board) B, MEMBER M ");
 			sql.append("where B.writer = M.ID and rnum between ? and ?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setInt(1, pagingBean.getStartRowNumber());
@@ -296,4 +295,77 @@ public class BBSDAO {
 		return list;
 		
 	}
+	// 상훈 : 채용 후 리뷰를 아직 쓰지 않은 건수 출력
+		public ArrayList<BBSVO> mustReview(PagingBean pagingBean,String id) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			ArrayList<BBSVO> list = new ArrayList<BBSVO>();
+			try {
+				con = getConnection();
+				StringBuilder sql = new StringBuilder();
+				sql.append("select b.bbs_no,b.title,b.hits,b.posteddate,b.category,b.writer ");
+			    sql.append("from(select row_number() over(order by bbs_no desc) as rnum,bbs_no,title,hits, ");
+				sql.append("to_char(posteddate,'YYYY.MM.DD')as posteddate,writer,category ");
+				sql.append("from board)b,(select * from review where givereviewer=? and ISREVIEW='NO') r ");
+				sql.append("where b.bbs_no=r.bbs_no and rnum between ? and ? ");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setString(1, id);
+				pstmt.setInt(2, pagingBean.getStartRowNumber());
+				pstmt.setInt(3, pagingBean.getEndRowNumber());
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					BBSVO bvo = new BBSVO();
+					MemberVO mvo = new MemberVO();
+					mvo.setId(rs.getString(6));
+					bvo.setVo(mvo);
+					bvo.setTitle(rs.getNString(2));
+					bvo.setCreateDate(rs.getNString(4));
+					bvo.setHits(rs.getInt(3));
+					bvo.setBbs_no(rs.getString(1));
+					bvo.setCategory(rs.getString(5));
+					list.add(bvo);
+				}
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return list;
+		}
+		//조회수가 높은 게시글 출력
+		public ArrayList<BBSVO> PopularityPostList(PagingBean pagingBean) throws SQLException{
+			ArrayList<BBSVO> list=new ArrayList<BBSVO>();
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				con=getConnection();
+				StringBuilder sql=new StringBuilder();
+				sql.append("select b.bbs_no,b.title,b.posteddate,b.hits,m.id ");
+				sql.append("from(select row_number() over(order by hits desc)as rnum,bbs_no,title, ");
+				sql.append("to_char(posteddate,'YYYY.MM.DD')as posteddate,hits,writer ");
+				sql.append("from board )b,member m ");
+				sql.append("where b.writer=m.id ");
+				sql.append("and rnum between ? and ? ");
+				sql.append("order by b.hits desc");
+				pstmt=con.prepareStatement(sql.toString());
+				pstmt.setInt(1,pagingBean.getStartRowNumber());
+				pstmt.setInt(2,pagingBean.getEndRowNumber());
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					BBSVO bvo=new BBSVO();
+					bvo.setBbs_no(rs.getString(1));
+					bvo.setTitle(rs.getString(2));
+					bvo.setCreateDate(rs.getString(3));
+					bvo.setHits(rs.getInt(4));
+					MemberVO mvo=new MemberVO();
+					mvo.setId(rs.getString(5));
+					bvo.setVo(mvo);
+					list.add(bvo);
+				}
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return list;
+			
+		}
 }

@@ -13,6 +13,9 @@ public class HandlerMapping {
 		//kakaoLogin
 		else if(command.equals("kakaoLogin"))
 			controller = new KakaoLoginController();
+		//kakaoLogout
+		else if(command.equals("kakaoLogout"))
+			controller = new KakaoLogoutController();
 		else if(command.equals("AddPost"))
 			controller = new AddPostController();
 		else if(command.equals("AddPostForm"))
@@ -61,9 +64,12 @@ public class HandlerMapping {
 			controller=new UpdatePostController();
 		}
 		//게시물 수정하는 목록으로 이동
-		else if (command.equals("UpdatePostForm")) {
+		else if (command.equals("UpdatePostForm")) 
 			controller=new UpdatePostFormController();
-		}else if (command.contentEquals("DeletePost")) {
+		//인기게시글 출력
+		else if (command.equals("TopHitsPostList")) 
+			controller=new TopHitsPostListController();
+		else if (command.contentEquals("DeletePost")) {
 			controller=new DeletePostController();
 		}else if (command.contentEquals("AllPostCount")) {
 			controller=new AllPostCountController();
