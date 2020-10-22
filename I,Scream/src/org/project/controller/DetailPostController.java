@@ -16,15 +16,17 @@ public class DetailPostController implements Controller {
    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
       HttpSession session = request.getSession(false);
       MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-      String LoginId="";
       String bbs_no = request.getParameter("bbs_no");
       BBSVO vo = BBSDAO.getInstance().detailPostingByNo(bbs_no);
       
       if(mvo!=null) {
-         LoginId= mvo.getId();
+    	 String LoginId= mvo.getId();
+    	 //해당 게시물을 지원했는지 확인.
          boolean IsApply=false;
          boolean IsScrap=false;
+         //현재 접속한 사용자가 게시물을 지원했는지 확인.
          IsApply = ApplyDAO.getInstance().IsApply(bbs_no, mvo.getId());
+         //해당 게시물을 스크랩했는지 확인.
          IsScrap = ScrapDAO.getInstance().IsScrap(bbs_no, mvo.getId());
          request.setAttribute("IsApply", IsApply);
          request.setAttribute("IsScrap", IsScrap);

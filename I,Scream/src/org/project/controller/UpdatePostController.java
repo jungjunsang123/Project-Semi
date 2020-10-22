@@ -7,8 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.project.model.BBSDAO;
 import org.project.model.BBSVO;
 
-public class UpdatePostController implements Controller {
 
+public class UpdatePostController implements Controller {
+	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session=request.getSession(false);
@@ -21,6 +22,7 @@ public class UpdatePostController implements Controller {
 		String startWorkTime=request.getParameter("startworkTime");
 		String endWorkTime=request.getParameter("endworkTime");
 		String bbs_no= request.getParameter("bbs_no");
+		//작성자가 수정한 게시물 정보 받아오기
 		BBSVO vo=new BBSVO();
 		vo.setBbs_no(bbs_no);
 		vo.setTitle(title);
@@ -28,9 +30,9 @@ public class UpdatePostController implements Controller {
 		vo.setCategory(category);
 		vo.setStartWorkTime(startWorkTime);
 		vo.setEndWorkTime(endWorkTime);
+		//DB테이블에 UPDATE하기 위해 BBSDAO 호출
 		BBSDAO.getInstance().updatePosting(vo);
-		String path="redirect:front?command=DetailPost&bbs_no="+bbs_no;
-		return path;
+		
+		return "redirect:front?command=DetailPost&bbs_no="+bbs_no;
 	}
-
 }

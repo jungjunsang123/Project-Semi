@@ -3,8 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
 
+//카카오 API 서버로 들어가는 키값
 Kakao.init('9f024aef4fd406c17cf1d1f36dfd1c54');
-//카카오 로그인 버튼을 생성한다.
+//카카오 로그인 버튼 클릭시 실행되는 메소드.
 function loginWithKakao() {
 	Kakao.Auth.loginForm({
 		success : function(authObj) {
@@ -33,7 +34,6 @@ function loginWithKakao() {
 }
 function logoutWithKakao(){
 	Kakao.Auth.logout(function() { 
-		
 		location.href="${pageContext.request.contextPath}/front?command=kakaoLogout"
 		}); 
 }
