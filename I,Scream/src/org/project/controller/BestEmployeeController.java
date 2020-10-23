@@ -31,15 +31,6 @@ public class BestEmployeeController implements Controller {
 			result=bestMember;
 			request.setAttribute("responsebody", result);
 			return "AjaxView";
-		}
-		/*
-		 * for(int i=0 ; i<10 ; i++) { int iValue = rand.nextInt(r_size);// 1 <= iValue
-		 * < 원하는 별점 이상의 멤버 수 System.out.println("이번 랜덤 회원은 ? :"+iValue); // 랜덤 멤버인덱스
-		 * System.out.println("=======================");
-		 * System.out.println(avgStar_list.get(iValue).getId());
-		 * System.out.println(avgStar_list.get(iValue).getstar());
-		 * System.out.println("======================="); }
-		 */
-		
+		}		
 	}
 }

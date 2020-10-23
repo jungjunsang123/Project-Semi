@@ -14,6 +14,19 @@ public class BBSVO {
 	private boolean scrap;
 	private ReviewVO reviewVO;
 
+	
+	
+	public BBSVO(String bbs_no, String title, String context, int hits, String createDate, String category,
+			MemberVO vo) {
+		super();
+		this.bbs_no = bbs_no;
+		this.title = title;
+		this.context = context;
+		this.hits = hits;
+		this.createDate = createDate;
+		this.category = category;
+		this.vo = vo;
+	}
 	public boolean isScrap() {
 		return scrap;
 	}
@@ -136,18 +149,6 @@ public class BBSVO {
 		this.category = category;
 		this.startWorkTime = startWorkTime;
 		this.endWorkTime = endWorkTime;
-		this.vo = vo;
-	}
-
-	public BBSVO(String bbs_no, String title, String context, int hits, String createDate, String category,
-			MemberVO vo) {
-		super();
-		this.bbs_no = bbs_no;
-		this.title = title;
-		this.context = context;
-		this.hits = hits;
-		this.createDate = createDate;
-		this.category = category;
 		this.vo = vo;
 	}
 

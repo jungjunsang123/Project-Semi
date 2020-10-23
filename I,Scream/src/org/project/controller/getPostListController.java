@@ -15,10 +15,7 @@ public class getPostListController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession(false);
-		if(session == null) {
-			
-		}
+		
 		int totalPostCount = BBSDAO.getInstance().getTotalPostCount();
 		String pageNo = request.getParameter("pageNo");
 	    PagingBean pagingBean = null;

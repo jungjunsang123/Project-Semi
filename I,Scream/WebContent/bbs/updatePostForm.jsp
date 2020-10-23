@@ -45,9 +45,9 @@
 						      	</tr>
 						      	<tr>
 						      		<td>업무시작일</td>
-						      		<td><input type="text" name="startworkTime" value="${requestScope.updatePost.startWorkTime}"></td>
+						      		<td><input type="date" name="startworkTime" value="${requestScope.updatePost.startWorkTime}"></td>
 						      		<td>업무종료일</td>
-						      		<td><input type="text" name="endworkTime" value="${requestScope.updatePost.endWorkTime}"></td>
+						      		<td><input type="date" name="endworkTime" value="${requestScope.updatePost.endWorkTime}"></td>
 						      	</tr>
 						      	<%-- 하단버튼 --%>
 						      	<tr>

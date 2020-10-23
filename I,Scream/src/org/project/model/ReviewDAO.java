@@ -129,7 +129,7 @@ public class ReviewDAO {
 		  ResultSet rs=null; 
 		  ReviewVO rvo=null;
 		  StringBuilder sql=new StringBuilder();
-		  sql.append("SELECT M.ID, R.REVIEWCONTEXT, R.STARS, R.POSTEDDATE, R.BBS_NO ");
+		  sql.append("SELECT M.ID, R.REVIEWCONTEXT, R.STARS, R.POSTEDDATE,R.GETREVIEWER ");
 		  sql.append("FROM MEMBER M, REVIEW R "); 
 		  sql.append("WHERE R.giveReviewer = M.ID AND R.BBS_NO = ? AND M.ID = ?");
 		  try {
@@ -146,6 +146,7 @@ public class ReviewDAO {
 				  MemberVO mvo=new MemberVO();
 				  mvo.setId(id);
 				  rvo.setGiveReviewer(mvo);
+				  mvo.setId(rs.getString(5));
 				  rvo.setbVO(new BBSVO(null, null, null, 0, null, null, null, bbs_no));
 				  ;
 			  }
@@ -154,7 +155,7 @@ public class ReviewDAO {
 		  }
 		  return rvo;
 	  }
-	  
+	  //리뷰추가
 	  public void reviewAdd(BBSVO bvo, int stars) throws SQLException {
 		  Connection con=null;
 		  PreparedStatement pstmt=null;
@@ -170,6 +171,7 @@ public class ReviewDAO {
 			  closeAll(pstmt,con);
 		  }
 	  }
+	  //리뷰를 주는 사람중 안쓴 게시물의 번호를 받아옴
 	public String getBBS_NO(String id) throws SQLException {
 		Connection con=null;
 		PreparedStatement pstmt=null;

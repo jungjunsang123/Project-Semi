@@ -23,6 +23,8 @@ public class KakaoLoginController implements Controller {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("mvo", vo);
+		//로그아웃처리할때 확인하기 위함
+		session.setAttribute("IsKakaoLogin", "YES");
 		result = name;
 		request.setAttribute("responsebody", result);
 		return "AjaxView";	

@@ -155,6 +155,15 @@ public class MemberVO {
 		this.profile_path = profile_path;
 	}
 
+	public MemberVO(String id, String address, String name, String tel, String regDate) {
+		super();
+		this.id = id;
+		this.address = address;
+		this.name = name;
+		this.tel = tel;
+		this.regDate = regDate;
+	}
+
 
 	
 	

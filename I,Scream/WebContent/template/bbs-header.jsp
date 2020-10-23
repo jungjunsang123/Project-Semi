@@ -12,9 +12,10 @@
     		<!-- 로고 end-->
     		<!-- 검색창 start -->
     		<div class="col-sm-6">
-	      			<form class="searchForm" action="/action_page.php">
+	      			<form class="searchForm" action="${pageContext.request.contextPath}/front">
+	      			<input type="hidden" name="command" value="searchByText">
 					  <div class="input-group">
-					    <input type="text" class="form-control" placeholder="Search">
+					    <input type="text" class="form-control" placeholder="Search" name="searchText">
 					    <div class="input-group-btn">
 					      <button class="btn btn-default" type="submit">
 					        <i class="glyphicon glyphicon-search"></i>
