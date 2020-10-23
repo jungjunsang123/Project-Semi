@@ -67,6 +67,9 @@ public class HandlerMapping {
 		else if (command.equals("Scrap")) {
 			controller=new ScrapController();
 		}
+		else if (command.equals("scrapList")) {
+			controller=new ScrapListController();
+		}
 		//게시물 수정
 		else if (command.equals("UpdatePost")) {
 			controller=new UpdatePostController();
@@ -130,6 +133,22 @@ public class HandlerMapping {
 		else if(command.equals("getProfileDetail")) {
 			controller = new GetProfileDetailController();
 		}
+		// SH: 아이돌봄 게시판 가져오기
+		else if (command.contentEquals("YoungPostList")) {
+		controller=new YoungPostListController();
+		}// SH: 노인케어 게시판 가져오기
+		else if (command.contentEquals("OldPostList")) {
+		controller=new OldPostListController();
+		}// SH: 반려동물 게시판 가져오기
+		else if (command.contentEquals("PetPostList")) {
+		controller=new PetPostListController();
+		}
+		//마이페이지
+		else if (command.contentEquals("mypage")) {
+		controller=new MypageController();
+		}
+	
+		
 		return controller; 
 
 		}

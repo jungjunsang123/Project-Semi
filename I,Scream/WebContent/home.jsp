@@ -15,8 +15,15 @@
 				<div class="col-sm-3">
 					<h2>아이돌봄 우수회원</h2>
 					<div class="card" style="width: 100%">
-						<img class="card-img-top" src="image/img_avatar1.png"
-							alt="Card image" style="width: 100%">
+						<c:choose>
+							<c:when test="${pb.profile_path!=NULL}">
+								<img src="${pageContext.request.contextPath}/profile/${pb.id}/${pb.profile_path}" class="card-img-top" style="height: 245px;width: 245px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top" src="profile/defaultProfile.jpg" style="width: 245px; height:245.5px;">
+							</c:otherwise>
+						</c:choose>
+						
 						<div class="card-body">
 						<c:choose>
 						<c:when test="${pb==null}">
@@ -37,8 +44,14 @@
 				<div class="col-sm-3">
 					<h2>노인케어 우수회원</h2>
 					<div class="card" style="width: 100%">
-						<img class="card-img-top" src="image/img_avatar1.png"
-							alt="Card image" style="width: 100%">
+						<c:choose>
+							<c:when test="${pb.profile_path!=NULL}">
+								<img src="${pageContext.request.contextPath}/profile/${pb.id}/${pb.profile_path}" class="card-img-top" style="height: 245px;width: 245px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top" src="profile/defaultProfile.jpg" style="width: 245px; height:245.5px;">
+							</c:otherwise>
+						</c:choose>
 						<div class="card-body">
 						<c:choose>
 						<c:when test="${pb==null}">
@@ -59,8 +72,14 @@
 				<div class="col-sm-3">
 					<h2>반려동물 우수회원</h2>
 					<div class="card" style="width: 100%">
-						<img class="card-img-top" src="image/img_avatar1.png"
-							alt="Card image" style="width: 100%">
+						<c:choose>
+							<c:when test="${pb.profile_path!=NULL}">
+								<img src="${pageContext.request.contextPath}/profile/${pb.id}/${pb.profile_path}" class="card-img-top" style="height: 245px;width: 245px;">
+							</c:when>
+							<c:otherwise>
+								<img class="card-img-top" src="profile/defaultProfile.jpg" style="width: 245px; height:245.5px;">
+							</c:otherwise>
+						</c:choose>
 						<div class="card-body">
 							<c:choose>
 						<c:when test="${pb==null}">

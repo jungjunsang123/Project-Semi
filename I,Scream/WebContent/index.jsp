@@ -13,7 +13,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="container">
+<div class="container">	
 <jsp:forward page="front">
 	<jsp:param name="command" value="home"/>
 </jsp:forward>

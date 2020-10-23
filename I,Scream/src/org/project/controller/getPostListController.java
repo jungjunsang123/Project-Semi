@@ -19,16 +19,18 @@ public class getPostListController implements Controller {
 		int totalPostCount = BBSDAO.getInstance().getTotalPostCount();
 		String pageNo = request.getParameter("pageNo");
 	    PagingBean pagingBean = null;
+	    
 	      if(pageNo==null) {
 	         pagingBean = new PagingBean(totalPostCount);
 	      }else
 	       pagingBean = new PagingBean(totalPostCount,Integer.parseInt(pageNo));
+	      //게시물 전체리스트 출력
 	      ArrayList<BBSVO> list=BBSDAO.getInstance().getPostingList(pagingBean);
 	      ListVO listVO = new ListVO(list, pagingBean);
 	      request.setAttribute("lvo", listVO);
 	      
 
-	      //SH : 게시판 수량 관련 
+	      //게시판 카테고리별 수량 계산
 	      int allCount=BBSDAO.getInstance().countAllPosting();
 	      request.setAttribute("allCount", allCount);
 	      int youngCount=BBSDAO.getInstance().countYoungPosting();

@@ -9,12 +9,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myhome.css" />
-<link href="https://fonts.googleapis.com/css?family=https://fonts.googleapis.com/css?family=Inconsolata:400,500,600,700|Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>아이스크림</title>
 </head>
 <body>
 <div class="container">
@@ -33,6 +30,7 @@
 			</div>
 	</div>
 	<%-- 하단 풋터 start --%>
+	<hr>
 	<c:import url="footer.jsp"/>
 	<%-- 하단 풋터 end --%>
 </div>

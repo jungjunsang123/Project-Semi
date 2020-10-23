@@ -225,7 +225,7 @@ public class ApplyDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "update Review set hiredResult='EXPIRED' where bbs_no=? and id=? ";
+			String sql = "update apply set hiredResult='EXPIRED' where bbs_no=? and id=? ";
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bbs_no);

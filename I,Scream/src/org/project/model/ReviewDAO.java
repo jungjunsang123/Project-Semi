@@ -68,6 +68,33 @@ public class ReviewDAO {
 		}
 		return list;
 	}
+	//사용자에 대한 평점 조회
+	public String getAVGStarById(String id) throws SQLException {
+		Connection con= null;
+		PreparedStatement pstmt= null;
+		ResultSet rs = null;
+		String avg_tmp="";
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append(" select getreviewer, avg(stars) as avgStars  ");
+			sql.append(" from (select  r.* from board b, review r  where b.bbs_no = r.bbs_no and r.getreviewer=?) ");
+			sql.append(" group by getReviewer order by avgStars desc  ");
+			// 평균 별점이 1점이상 인사람 뽑아옴
+			con = getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				float tmp = rs.getFloat(2);
+				avg_tmp = String.format("%.2f", tmp);
+			}
+			else
+				avg_tmp="0";
+		}finally {
+			closeAll(rs, pstmt, con);
+		}
+		return avg_tmp;
+	}
 	//리뷰 페이징을 위한 포스트 개수
 	public int getTotalReviewCount() throws SQLException {
 		int totalCount = 0;
@@ -76,7 +103,7 @@ public class ReviewDAO {
 		ResultSet rs = null;
 		try {
 			con=getConnection();
-			String sql="SELECT COUNT(*)FROM BOARD";
+			String sql="SELECT COUNT(*)FROM review";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			if(rs.next())

@@ -15,30 +15,31 @@
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<div class="container">
+<div class="container"><br/>
 <%-- 로고이미지 start --%>
    <a class="navbar-brand" href="${pageContext.request.contextPath}/front?command=home">
    <img class="img-fluid" alt="Bootstrap Image Preview" src="image/SeeTer2.png" style="width: 100px;"> </a>
    <div class="row justify-content-left">
    <%-- 로고이미지 end --%>
    <%-- 검색기능 start --%>
-      <div class="col-sm-9">
-      <form class="searchForm" action="${pageContext.request.contextPath}/front">
-      <input type="hidden" name="command" value="searchByText" >
-         <div class="card-body row no-gutters align-items-center">
-            <div class="col-auto">
-               <i class="fas fa-search h4 text-body"></i>
-            </div>
-            <div class="col">
-                <input class="form-control form-control-lg form-control-borderless"
-                  type="search" placeholder="검색 내용을 적어주세요." name="searchText"> 
-            </div>
-            <div class="col-auto">
-               <button class="btn btn-lg btn-secondary" type="submit">검색</button>
-            </div>
-         </div>
-         </form>
-      </div>
+      <div class="col-sm-8">
+			<div class="card-body align-items-center">
+			<div class="col-sm-auto">
+				<form class="searchForm"
+					action="${pageContext.request.contextPath}/front">
+					<input type="hidden" name="command" value="searchByText">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search"
+							name="searchText">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
+				</form></div>
+			</div>
+		</div>
       <%-- 검색기능 end --%>
    </div>
 </div>

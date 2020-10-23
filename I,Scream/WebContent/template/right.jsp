@@ -3,8 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
 
+//카카오 API 서버로 들어가는 키값
 Kakao.init('9f024aef4fd406c17cf1d1f36dfd1c54');
-//카카오 로그인 버튼을 생성한다.
+//카카오 로그인 버튼 클릭시 실행되는 메소드.
 function loginWithKakao() {
 	Kakao.Auth.loginForm({
 		success : function(authObj) {
@@ -33,7 +34,6 @@ function loginWithKakao() {
 }
 function logoutWithKakao(){
 	Kakao.Auth.logout(function() { 
-		
 		location.href="${pageContext.request.contextPath}/front?command=kakaoLogout"
 		}); 
 }
@@ -44,7 +44,6 @@ function logoutWithKakao(){
 	<c:choose>
 		<c:when test="${sessionScope.mvo==null}">
 			<a href="${pageContext.request.contextPath}/front?command=registerForm">회원가입</a>
-			
 			<form method="post" action="${pageContext.request.contextPath}/front">
 				<input type="hidden" name="command" value="login">
 				<fieldset class="login_form">
@@ -67,33 +66,17 @@ function logoutWithKakao(){
 		</c:when>
 		<c:otherwise>
 		${sessionScope.mvo.name} 님 로그인 상태<br>
-
+			<a href="${pageContext.request.contextPath}/front?command=mypage">마이페이지</a>
+			<br>
 		<!-- 카카오로 로그인시 로직이 다르기 때문에 생성함 -->
 			<c:choose>
 				<c:when test="${sessionScope.IsKakaoLogin=='YES'}">
-					<a href="javascript:logoutWithKakao()">로그아웃</a>
+					<a href="javascript:logoutWithKakao()">로그아웃</a><br>
 				</c:when>
 				<c:otherwise>
-					<a href="${pageContext.request.contextPath}/front?command=logout">로그아웃</a>
+					<a href="${pageContext.request.contextPath}/front?command=logout">로그아웃</a><br>
 				</c:otherwise>
 			</c:choose>
-			<br>
-			<a
-				href="${pageContext.request.contextPath}/front?command=listApplyer&bbs_no=5">게시물
-				지원한 사람출력</a>
-			<br>
-			<a
-				href="${pageContext.request.contextPath}/front?command=findApplyList">지원현황
-				클릭시 리스트 출력</a>
-			<br>
-			<a
-				href="${pageContext.request.contextPath}/front?command=memberUpdateForm">회원정보수정(test)</a>
-			<br>
-			<a
-				href="${pageContext.request.contextPath}/front?command=findPostListById&id=${sessionScope.mvo.id}">내가
-				작성한 게시물 </a>
-			<br>
 		</c:otherwise>
 	</c:choose>
-	<a href="https://developers.kakao.com/logout">로그아웃</a>
 </div>
