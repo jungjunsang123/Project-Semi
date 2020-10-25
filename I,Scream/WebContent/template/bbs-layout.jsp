@@ -73,7 +73,7 @@ function logoutWithKakao(){
 	}
 	function updatePost() {
 		if (confirm("게시글을 수정하시겠습니까?")) {
-			document.getElementById("updatePost").submit();
+			document.getElementById("updatePostSubmit").submit();
 		}
 	}
 	function updatePostForm() {

@@ -114,7 +114,7 @@ public class ReviewDAO {
 		return totalCount;
 	}
 	//리뷰 목록 가져오기
-	public ArrayList<ReviewVO> getReviewList(PagingBean PagingBean) throws SQLException{
+	public ArrayList<ReviewVO> getReviewList(PagingBean PagingBean,String id) throws SQLException{
 		ArrayList<ReviewVO> reviewList = new ArrayList<ReviewVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -122,14 +122,15 @@ public class ReviewDAO {
 		try {
 			con=getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT M.ID, R.REVIEWCONTEXT, R.STARS, R.POSTEDDATE,R.BBS_NO ");
+			sql.append("SELECT R.giveReviewer, R.REVIEWCONTEXT, R.STARS, R.POSTEDDATE,R.BBS_NO ");
 			sql.append("FROM (SELECT ROW_NUMBER() OVER(ORDER BY BBS_NO DESC) AS RNUM, ");
 			sql.append("BBS_NO, REVIEWCONTEXT, STARS, TO_CHAR(POSTEDDATE,'YYYY.MM.DD') AS POSTEDDATE, ");
-			sql.append("giveReviewer FROM REVIEW) R, MEMBER M ");
+			sql.append("giveReviewer FROM REVIEW where getReviewer=?) R, MEMBER M ");
 			sql.append("WHERE R.giveReviewer = M.ID AND RNUM BETWEEN ? AND ?");
 			pstmt=con.prepareStatement(sql.toString());
-			pstmt.setInt(1, PagingBean.getStartRowNumber());
-			pstmt.setInt(2, PagingBean.getEndRowNumber());
+			pstmt.setString(1, id);
+			pstmt.setInt(2, PagingBean.getStartRowNumber());
+			pstmt.setInt(3, PagingBean.getEndRowNumber());
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				ReviewVO rvo=new ReviewVO(); 

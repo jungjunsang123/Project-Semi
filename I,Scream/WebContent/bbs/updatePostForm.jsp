@@ -60,7 +60,7 @@
 
 <div class="container">
 	<form action="${pageContext.request.contextPath}/front" method="post"
-		id="updatePost">
+		id="updatePostSubmit">
 		<div class="col-sm-12">
 			<div class="card">
 				<div class="card-header">
@@ -88,12 +88,12 @@
 								<td><select name="category" id="category">
 										<option value="null">------------------------------</option>
 										<c:choose>
-											<c:when test="${pvo.category=='아이돌봄'}">
+											<c:when test="${requestScope.updatePost.category=='아이돌봄'}">
 												<option value="아이돌봄" selected="selected">아이돌봄</option>
 												<option value="노인케어">노인케어</option>
 												<option value="반려동물">반려동물</option>
 											</c:when>
-											<c:when test="${pvo.category=='노인케어'}">
+											<c:when test="${requestScope.updatePost.category=='노인케어'}">
 												<option value="아이돌봄">아이돌봄</option>
 												<option value="노인케어" selected="selected">노인케어</option>
 												<option value="반려동물">반려동물</option>

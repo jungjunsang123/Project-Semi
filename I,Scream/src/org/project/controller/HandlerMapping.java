@@ -58,9 +58,10 @@ public class HandlerMapping {
 			controller = new FindPostListByIdController();
 		}
 		//게시물 상세보기
-		else if (command.equals("DetailPost")) {
-			controller=new DetailPostController();
-		}
+		/*
+		 * else if (command.equals("DetailPost")) { controller=new
+		 * DetailPostController(); }
+		 */
 		//게시물 스크랩
 		else if (command.equals("Scrap")) {
 			controller=new ScrapController();

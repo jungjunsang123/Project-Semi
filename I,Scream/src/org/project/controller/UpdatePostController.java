@@ -16,6 +16,7 @@ public class UpdatePostController implements Controller {
 		if (session==null||session.getAttribute("mvo")==null||request.getMethod().equals("POST")==false) {
 			return "redirect:front?command=getPostList";
 		}
+		
 		String title=request.getParameter("title");
 		String context=request.getParameter("context");
 		String category=request.getParameter("category");
@@ -33,6 +34,7 @@ public class UpdatePostController implements Controller {
 		//DB테이블에 UPDATE하기 위해 BBSDAO 호출
 		BBSDAO.getInstance().updatePosting(vo);
 		
-		return "redirect:front?command=DetailPost&bbs_no="+bbs_no;
+		
+		return "redirect:front?command=listApplyer&bbs_no="+bbs_no+"&mypage=";
 	}
 }

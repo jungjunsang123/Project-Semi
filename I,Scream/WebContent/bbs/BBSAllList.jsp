@@ -75,9 +75,9 @@
 								</thead>
 								<tbody>
 									<%-- 게시글 데이터 --%>
-									<c:forEach var="pvo" items="${requestScope.lvo.list}">
+									<c:forEach var="pvo" items="${requestScope.lvo.list}" varStatus="status">
 										<tr>
-											<td class="text-center">${pvo.bbs_no}</td>
+											<td class="text-center">${fn:length(requestScope.lvo.list)-status.index}</td>
 											<td><c:choose>
 													<c:when test="${pvo.category eq '아이돌봄'}">
 														<span class="label label-danger">${pvo.category}</span>
@@ -90,7 +90,7 @@
 													</c:otherwise>
 												</c:choose></td>
 											<td><a
-												href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${pvo.bbs_no}">${pvo.title}</a></td>
+												href="${pageContext.request.contextPath}/front?command=listApplyer&bbs_no=${pvo.bbs_no}&mypage=">${pvo.title}</a></td>
 											<td class="text-center">${pvo.vo.id}</td>
 											<td class="text-center">${pvo.createDate}</td>
 											<td class="text-center">${pvo.hits}</td>

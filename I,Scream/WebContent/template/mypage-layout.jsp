@@ -15,14 +15,6 @@
 <title>아이스크림 마이페이지</title>
 <script type="text/javascript">
 	$(document).ready(function(){
-		/* var element = $(".active");
-		$("a").click(function(event){
-			element.toggleClass("active")
-			$(this).toggleClass("active")
-		})
-		 $("#navRow li a").on("click",".nav-link",function(){
-			$(this).addClass("d")
-		}) */ 
 		$("#Recruit").click(function(){
 			if(confirm($("#applyID").val()+"를 채용하시겠습니까?")){
 				$.ajax({	
@@ -42,18 +34,55 @@
 				})//ajax
 			}
 		})
+	})
 		function deletePost() {
 		if (confirm("게시글을 삭제하시겠습니까?")) {
 			 document.deletePostForm.submit();
 		}
 	}
+		function updatePost() {
+			if (confirm("게시글을 수정하시겠습니까?")) {
+				document.getElementById("updatePostSubmit").submit();
+			}
+		}
+		
 		function updatePostForm() {
 			document.updateForm.submit();
 	}
 		function postBack(){
 			location.href="front?command=mypage";
 		}
-	})
+		Kakao.init('9f024aef4fd406c17cf1d1f36dfd1c54');
+		//카카오 로그인 버튼을 생성한다.
+		function loginWithKakao(){
+			Kakao.Auth.loginForm({
+				success : function(authObj) {
+					Kakao.API.request({
+						url : '/v2/user/me',
+						success : function(res) {
+							var email = res.kakao_account.email;
+							var name = res.properties.nickname;
+							var image = res.properties.profile_image;
+							$.ajax({	
+							type: "post",
+							url: "front",
+							data: "command=kakaoLogin&id="+email+"&name="+name,
+							success:function(result){ // result변수로 응답정보가 전달된다.
+								if(result!="NULL"){
+									alert(result+"님 카카오 계정으로 로그인 됐습니다.");
+									location.href="${pageContext.request.contextPath}/front?command=home"
+								}					
+							}
+						})//ajax
+						}
+					})
+				}//success
+			})
+		}
+		function logoutWithKakao(){
+			Kakao.Auth.logout(function() { location.href="${pageContext.request.contextPath}/front?command=kakaoLogout"}); 
+		}
+
 </script>
 </head>
 <body>
@@ -90,7 +119,7 @@
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
 									<li class="nav-item">
-										<a class="nav-link active" href="${pageContext.request.contextPath}/front?command=mypage">개인정보</a>
+										<a class="nav-link" href="${pageContext.request.contextPath}/front?command=mypage">개인정보</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="${pageContext.request.contextPath}/front?command=findPostListById">지원현황</a>

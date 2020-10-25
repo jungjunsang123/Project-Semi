@@ -546,4 +546,49 @@ public class BBSDAO {
 			}
 			return list;
 		}
+
+		public int getTotalTitleCount(String searchText) throws SQLException {
+			int total = 0;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				String sql = "SELECT count(*) FROM (SELECT bbs_no, hits, to_char(POSTEDDATE,'YYYY.MM.DD') as POSTEDDATE, writer, category, title, context FROM board WHERE title LIKE ?) B, MEMBER M WHERE B.WRITER = M.ID ";
+				con = getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+searchText+"%");
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()) {
+					total = rs.getInt(1);
+				}
+
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return total;		
+			}
+		public int getTotalContextCount(String searchText) throws SQLException {
+			int total = 0;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				String sql = "SELECT count(*) FROM (SELECT bbs_no, hits, to_char(POSTEDDATE,'YYYY.MM.DD') as POSTEDDATE, writer, category, title, context FROM board WHERE context LIKE ?) B, MEMBER M WHERE B.WRITER = M.ID ";
+				con = getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, "%"+searchText+"%");
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()) {
+					total = rs.getInt(1);
+				}
+				
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return total;		
+		}
+
+		
 }

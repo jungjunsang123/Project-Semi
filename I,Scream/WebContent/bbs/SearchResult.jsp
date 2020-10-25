@@ -16,7 +16,24 @@
 							<div class="card-body">
 								<div class="row"></div>
 								<div class="container">
-									<table class="table table-bordered">
+									<div class="col-sm-offset-1 col-sm-1">
+									
+										<c:choose>
+											<c:when test="${requestScope.sbymco.id!=NULL}">
+												<c:choose>
+														<c:when test="${requestScope.sbymco.profile_path!=NULL}">
+															<img src="${pageContext.request.contextPath}/profile/${requestScope.sbymco.id}/${requestScope.sbymco.profile_path}" class="card-img-top" style="height: 70px;width: 70px;">
+														</c:when>
+														<c:otherwise>
+															<img class="card-img-top" src="profile/defaultProfile.jpg" style="width: 70px; height:70px;">
+														</c:otherwise>
+													
+													</c:choose>
+											</c:when>
+										</c:choose>
+									</div>
+									<div class="col-sm-9">
+										<table class="table table-bordered table-hover boardlist" style="text-align:center;">
 										<tbody>
 											<%-- 게시글 데이터 --%>
 												<c:choose>
@@ -24,11 +41,9 @@
 														회원 아이디 검색 결과가 존재하지 않습니다.
 													</c:when>
 													<c:otherwise>
-														<tr>
-															<td rowspan="2">
-																<img src="${pageContext.request.contextPath}/profile/${requestScope.sbymco.id}/${requestScope.sbymco.profile_path}">
-															</td>
-															<td><a href="${pageContext.request.contextPath}/front?command=getProfileDetail&id=${requestScope.sbymco.id}&avgstar=${requestScope.sbymco.star}">아이디</a></td>
+													<thead>
+														<tr class="info">
+															<td>아이디</td>
 															<td>주소</td>
 															<td>이름</td>
 															<td>전화번호</td>
@@ -37,21 +52,30 @@
 															<td>생년월일</td>
 															<td>평점</td>
 														</tr>
-														<tr>
-															<td>${requestScope.sbymco.id}</td>
-															<td>${requestScope.sbymco.address}</td>
-															<td>${requestScope.sbymco.name}</td>
-															<td>${requestScope.sbymco.tel}</td>
-															<td>${requestScope.sbymco.regDate}</td>
-															<td>${requestScope.sbymco.sex}</td>
-															<td>${requestScope.sbymco.birth}</td>
-														</tr>
+														</thead>
 														
+														<tbody>
+														<tr>
+															
+																<td><a href="${pageContext.request.contextPath}/front?command=getProfileDetail&id=${requestScope.sbymco.id}&avgstar=${requestScope.sbymco.star}">${requestScope.sbymco.id}</a></td>
+																<td>${requestScope.sbymco.address}</td>
+																<td>${requestScope.sbymco.name}</td>
+																<td>${requestScope.sbymco.tel}</td>
+																<td>${requestScope.sbymco.regDate}</td>
+																<td>${requestScope.sbymco.sex}</td>
+																<td>${requestScope.sbymco.birth}</td>
+																<td>${requestScope.sbymco.star}</td>
+														
+														</tr>
+														</tbody>
+															</a>
 													</c:otherwise>
 												</c:choose>
 										</tbody>
 										<%-- SH : 코드 끝 --%>
 									</table>
+								
+									</div>
 								</div>
 							</div>
 						</div>
@@ -74,7 +98,7 @@
 													 검색 결과가 존재하지 않습니다.
 											</c:if>
 											<c:forEach var="spvo" items="${requestScope.slvo.list}">
-												<font size=12px><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${spvo.bbs_no}">${spvo.title}</a></font>
+												<font size=12px><a href="${pageContext.request.contextPath}/front?command=listApplyer&bbs_no=${spvo.bbs_no}&mypage=NO">${spvo.title}</a></font>
 												<font size=2px><textarea name="context" rows="2" id="context" style="width: 100%; border: none" readonly>${spvo.createDate}&nbsp;${spvo.context}</textarea></font>
 												<br><br>
 											</c:forEach>
@@ -130,7 +154,7 @@
 											검색 결과가 존재하지 않습니다.
 										</c:if>
 										<c:forEach var="searchContext" items="${requestScope.sclvo.list }">
-											<font size=12px><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${searchContext.bbs_no}">${searchContext.title}</a></font>
+											<font size=12px><a href="${pageContext.request.contextPath}/front?command=listApplyer&bbs_no=${searchContext.bbs_no}&mypage=NO">${searchContext.title}</a></font>
 											<font size=3px><textarea name="context" rows="2" id="context" disabled="disabled" style="width: 100%; border: none" >${spvo.createDate}&nbsp;${searchContext.context}</textarea></font>
 											<br><br>
 										</c:forEach>
@@ -180,13 +204,16 @@
 							<tr>
 								<td colspan=1 class="btnArea" style="text-align: right;">
 									<button type="button" class="btn btn-secondary"
-										onclick="goHome()">홈으로</button>
+										onclick="goHome()">홈으로</button><br>
 								</td>
 							</tr>
 						</table>
 					</div>
 					<%-- 홈으로가는 버튼 ends --%>
 				</div>
+			<hr>
 			</div>
+				
 		</div>
+
 	</div>

@@ -38,10 +38,10 @@
 		<tr class="info">
 			<td>번호</td>
 			<td>채용분야</td>
-			<td>제목</td>
-			<td>등록일</td>
+			<td style="width:300px;">제목</td>
+			<td style="width:150px;"> 등록일</td>
 			<td>공고작성자</td>
-			<td>채용결과</td>
+			<td style="width:230px;">채용결과</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -52,7 +52,7 @@
 				<td><a href="${pageContext.request.contextPath}/front?command=DetailPost&bbs_no=${list.bbs_no}">${list.title}</a></td>
 				<td>${list.createDate}</td>
 				<td>${list.vo.id}</td>
-				<td>
+				<td >
 					<button type="button" class="btn recruitResultConfirm" value="${list.bbs_no}">채용결과 확인</button>
 					<span class="hiredResult"></span>
 				</td>

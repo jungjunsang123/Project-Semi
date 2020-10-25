@@ -17,7 +17,10 @@ public class searchByTextController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		int totalPostCount = BBSDAO.getInstance().getTotalPostCount();
+		String searchText = request.getParameter("searchText");
+		String searchById = request.getParameter("searchText");
+		int totalPostCount = BBSDAO.getInstance().getTotalTitleCount(searchText);
+		
 		String searchtitlepageNo = request.getParameter("searchtitlepageNo");
 		PagingBean searchTitlepagingBean = null;
 		if(searchtitlepageNo==null) 
@@ -26,14 +29,15 @@ public class searchByTextController implements Controller {
 			searchTitlepagingBean = new PagingBean(totalPostCount,Integer.parseInt(searchtitlepageNo));
 		//Paging for search_Context
 		String searchtextpageNo = request.getParameter("searchtextContext");
+		totalPostCount = BBSDAO.getInstance().getTotalContextCount(searchText);
 		PagingBean searchContextpagingBean = null;
+		
 		if(searchtextpageNo==null)
 			searchContextpagingBean = new PagingBean(totalPostCount);
 		else
 			searchContextpagingBean = new PagingBean(totalPostCount,Integer.parseInt(searchtextpageNo));
 		//텍스트로 회원검색하는 메서드
-		String searchText = request.getParameter("searchText");
-		String searchById = request.getParameter("searchText");
+		
 		MemberVO searchmvo=MemberDAO.getInstance().findMemberById(searchById);
 		request.setAttribute("sbymco", searchmvo);
 		

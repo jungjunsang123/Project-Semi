@@ -1,6 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script type="text/javascript">
+		$(document).ready(function(){
+			var applyText = $("#apply").text();
+			$("#apply").click(function(){
+				applyText = $("#apply").text();
+				if(applyText =='지원완료'){
+					alert("이미 지원완료하였습니다.");
+				}
+				else if(confirm("${requestScope.pvo.vo.id}에게 지원하시겠습니까?")){
+					$.ajax({	
+						type: "post",
+						url: "front",
+						data: "command=Apply&bbs_no="+${requestScope.pvo.bbs_no},
+						success:function(result){ // result변수로 응답정보가 전달된다.
+							if(result=="OK"){
+								alert("지원됐습니다.");
+								$("#apply").text("지원완료")
+							}
+								
+							else{
+								alert("로그인부탁드립니다.");
+								location.href="front?command=home";
+							}
+						}
+					})//ajax
+				}
+			})//지원하기
+			$("#scrap").click(function(){
+				var ment;
+				if($("#scrap").text()=='스크랩')
+					ment="스크랩 하시겠습니까?";
+				else
+					ment="스크랩 해제하시겠습니까?"
+				if(confirm(ment)){
+					$.ajax({	
+						type: "post",
+						url: "front",
+						data: "command=Scrap&bbs_no="+${requestScope.pvo.bbs_no}+"&isScarp="+$("#scrap").text(),
+						success:function(result){ // result변수로 응답정보가 전달된다.
+							if(result=="OK"){
+								if($("#scrap").text()=="스크랩완료")
+									$("#scrap").text("스크랩")
+								else
+									$("#scrap").text("스크랩완료")
+							}								
+							else{
+								alert("로그인부탁드립니다.");
+								location.href="front?command=home";
+							}
+						}
+					})//ajax
+				}
+			})//스크랩
+		})
+</script>
 <div class="container">
 	<div class="col-sm-12">
 		<div class="card">
@@ -12,7 +67,7 @@
 					<div class="col-sm-12">
 						<input type="hidden" name="command" value="addBBS">
 						<div class="col-sm-12">
-							<table class="table table-bordered">
+							<table class="table table-bordered" style="text-align:center;">
 								<tr>
 									<div class="col-md-1">
 										<td width="80">글번호 ${requestScope.pvo.bbs_no }</td>
@@ -93,10 +148,10 @@
 							<!-- 스크랩여부 확인  -->
 							<c:choose>
 								<c:when test="${!requestScope.IsScrap}">
-									<button type="button" class="btn btn-secondary" id="scrap">스크랩</button>
+									<button type="button" class="btn btn-secondary"  id="scrap">스크랩</button>
 								</c:when>
 								<c:otherwise>
-									<button type="button" class="btn btn-secondary" id="scrap">스크랩완료</button>
+									<button type="button" class="btn btn-secondary"  id="scrap">스크랩완료</button>
 								</c:otherwise>
 							</c:choose>
 							<!-- 지원한적이 있는지 여부 확인  -->
@@ -105,22 +160,38 @@
 									<button type="button" class="btn btn-secondary" id="apply">지원하기</button>
 								</c:when>
 								<c:otherwise>
-									<button type="button" class="btn btn-secondary">지원완료</button>
+									<button type="button" class="btn btn-secondary" >지원완료</button>
 								</c:otherwise>
 							</c:choose>
 						
 						</c:if>
 						<button type="button" class="btn btn-secondary" onclick="postBack()">뒤로</button>
 						</div>
-						<table class="table table-bordered">
+						
+					</div>
+				</div>
+			</div>
+		</div><!-- card끝 -->
+		<c:if test="${requestScope.pvo.vo.id==sessionScope.mvo.id}">
+		<!-- 지원자 현황 --><br><br>
+		<div class="card">
+		<div class="card-header">
+				<h4>지원자 리스트</h4>
+		</div>
+		<div class="card-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<table class="table table-bordered table-hover boardlist" style="text-align:center;">
+					<thead>
 							<tr>
-								<td>no</td>
+								<td>번호</td>
 								<td>지원자 ID</td>
 								<td>지원자 이름</td>
 								<td>지원자 평점</td>
 								<td>비고</td>
 							</tr>
-							
+					</thead>
+					<tbody>
 							<c:forEach items="${requestScope.ListApplyer}" var="list" varStatus="ApplyNumber">
 								<tr>
 									<td>${ApplyNumber.count}</td>
@@ -135,16 +206,13 @@
 									</td>
 								</tr>
 							</c:forEach>
+					</tbody>
 							<%-- 하단버튼 --%>
-							<tr>
-								<td colspan="5" class="btnArea">
-									<button type="button" class="btn" onclick="postBack()">뒤로</button>
-								</td>
-							</tr>
-						</table>
-					</div>
+							</table>
 				</div>
 			</div>
+			</div>
 		</div>
+		</c:if>
 	</div>
 </div>

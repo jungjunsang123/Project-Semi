@@ -5,7 +5,7 @@
 <table id="zero_config" class="table table-bordered table-hover boardlist" style="text-align:center;">
 	<thead>
 		<tr class="info">
-			<td>작성자</td>
+			<td style="width:120px;">후기 남긴 사용자</td>
 			<td>후기 내용</td>
 			<td>별점</td>
 			<td>작성일</td>
