@@ -50,7 +50,9 @@ public class HandlerMapping {
 		//아이디 확인
 		}else if(command.contentEquals("idcheck")) {
 			controller=new IdCheckController();
-		}else if(command.equals("getPostList")) {
+		}
+		//게시물 전체 리스트 가져오기
+		else if(command.equals("getPostList")) {
 			controller = new getPostListController();
 		}
 		//작성자를 통한 게시물 리스트 출력

@@ -25,8 +25,7 @@ public class ReviewListController implements Controller {
 			PagingBean PagingBean=null;
 			if(pageNo==null) {
 				PagingBean=new PagingBean(totalPostCount);
-			}
-				
+			}				
 			else
 				PagingBean=new PagingBean(totalPostCount, Integer.parseInt(pageNo));
 			
